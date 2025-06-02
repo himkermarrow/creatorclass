@@ -2,12 +2,12 @@
 import { Card, CardContent, CardDescription, CardFooter, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import type { Presentation } from '@/types';
-import { Eye, Download, FileText, FileSpreadsheetIcon } from 'lucide-react';
+import { Eye, FileText, FileSpreadsheetIcon } from 'lucide-react';
 import { formatDistanceToNow } from 'date-fns';
 
 interface PresentationCardProps {
   presentation: Presentation;
-  onView: (presentation: Presentation) => void;
+  onView: (presentation: Presentation) => void; // Retain for potential future use or other interactions
 }
 
 export function PresentationCard({ presentation, onView }: PresentationCardProps) {
@@ -15,32 +15,27 @@ export function PresentationCard({ presentation, onView }: PresentationCardProps
 
   const getIconForFileType = () => {
     if (fileType === 'pdf' || fileType === 'generated-pdf') {
-      return <FileText className="h-5 w-5 text-red-600" />;
+      return <FileText className="h-5 w-5 text-red-600" data-ai-hint="document paper" />;
     }
     if (fileType === 'ppt') {
-      return <FileSpreadsheetIcon className="h-5 w-5 text-orange-500" />;
+      return <FileSpreadsheetIcon className="h-5 w-5 text-orange-500" data-ai-hint="slides presentation" />;
     }
-    return <FileText className="h-5 w-5 text-gray-500" />; 
+    return <FileText className="h-5 w-5 text-gray-500" data-ai-hint="file document"/>; 
   };
 
-  const handleDownload = () => {
-    if (fileUrl) {
-      if (fileType === 'ppt') {
-        const link = document.createElement('a');
-        link.href = fileUrl;
-        link.download = fileName || 'presentation.pptx';
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-      } else if (fileType === 'pdf') {
-         window.open(fileUrl, '_blank');
-      } else {
-        onView(presentation);
-      }
-    } else if (fileType === 'generated-pdf') {
-        onView(presentation); 
+  const handlePreview = () => {
+    if (fileType === 'generated-pdf') {
+      // Open AI-generated content in a new dedicated viewer page
+      window.open(`/view-presentation/${presentation.id}`, '_blank');
+    } else if (fileUrl) { 
+      // For uploaded PDF or PPT files with a URL, open the URL in a new tab
+      window.open(fileUrl, '_blank');
     } else {
-        alert("No file available for download.");
+      // Fallback: if it's generated-pdf but somehow logic failed above, or if no fileUrl for pdf/ppt (should not happen)
+      // This could also be a case where we want to use the modal for some types, but user asked for new tab
+      // For now, we'll attempt to use the modal as a last resort if other conditions aren't met.
+      console.warn('Standard new tab preview not available, attempting modal for:', presentation);
+      onView(presentation);
     }
   };
 
@@ -66,14 +61,10 @@ export function PresentationCard({ presentation, onView }: PresentationCardProps
           Created {formatDistanceToNow(new Date(createdAt), { addSuffix: true })}
         </div>
       </CardContent>
-      <CardFooter className="p-4 border-t grid grid-cols-2 gap-2">
-        <Button onClick={() => onView(presentation)} variant="outline" size="sm" className="w-full">
+      <CardFooter className="p-4 border-t">
+        <Button onClick={handlePreview} variant="default" size="sm" className="w-full">
           <Eye className="mr-2 h-4 w-4" />
           Preview
-        </Button>
-        <Button onClick={handleDownload} variant="default" size="sm" className="w-full">
-          <Download className="mr-2 h-4 w-4" />
-          {fileType === 'ppt' ? 'Download' : (fileType === 'pdf' && fileUrl) ? 'Open PDF' : 'View Content'}
         </Button>
       </CardFooter>
     </Card>
