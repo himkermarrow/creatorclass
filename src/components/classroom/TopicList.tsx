@@ -14,24 +14,24 @@ interface TopicListProps {
 
 export function TopicList({ topics, selectedTopic, onSelectTopic, subject, topicDescriptions }: TopicListProps) {
   if (topics.length === 0) {
-    return <p className="text-xs text-muted-foreground px-4 py-2">No topics found for {subject}.</p>;
+    return <p className="text-xs text-muted-foreground py-2">No topics found for {subject}.</p>;
   }
 
   return (
-    <nav className="space-y-1 px-3"> {/* Overall padding for the list */}
+    <nav className={cn("space-y-1")}> {/* Removed px-3, parent div in ClassroomTab now has p-4 */}
       {topics.map(topic => (
         <Button
           key={topic}
-          variant={'ghost'} 
+          variant={'ghost'}
           className={cn(
-            "w-full justify-start text-left h-auto py-2.5 px-4 rounded-md text-foreground transition-colors duration-150 ease-in-out", // Internal button padding
-            selectedTopic === topic 
-              ? 'bg-primary/10 text-primary hover:bg-primary/20 dark:bg-primary/20 dark:text-primary-foreground dark:hover:bg-primary/30' 
+            "w-full justify-start text-left h-auto py-2.5 px-4 rounded-md text-foreground transition-colors duration-150 ease-in-out",
+            selectedTopic === topic
+              ? 'bg-primary/10 text-primary hover:bg-primary/20 dark:bg-primary/20 dark:text-primary-foreground dark:hover:bg-primary/30'
               : 'hover:bg-muted/80'
           )}
           onClick={() => onSelectTopic(topic)}
         >
-          <div className="overflow-hidden"> {/* Removed w-full */}
+          <div className="overflow-hidden"> {/* Removed w-full for better text flow with padding */}
             <span className="font-medium block truncate text-sm">{topic}</span>
             {topicDescriptions[topic] && (
               <span className={cn("text-xs block leading-tight line-clamp-2 mt-0.5", selectedTopic === topic ? 'opacity-80' : 'opacity-70')}>
@@ -44,3 +44,5 @@ export function TopicList({ topics, selectedTopic, onSelectTopic, subject, topic
     </nav>
   );
 }
+
+    

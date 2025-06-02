@@ -86,14 +86,14 @@ export function ClassroomTab({ presentations: initialPresentations }: ClassroomT
   useEffect(() => {
     setSelectedTopic('');
     setSelectedSubtopic('');
-    setCurrentPage(1); 
+    setCurrentPage(1);
   }, [selectedSubject]);
 
   useEffect(() => {
     setSelectedSubtopic('');
     setCurrentPage(1);
   }, [selectedTopic]);
-  
+
   useEffect(() => {
     setCurrentPage(1);
   }, [selectedSubtopic, searchTerm]);
@@ -114,7 +114,7 @@ export function ClassroomTab({ presentations: initialPresentations }: ClassroomT
       return subjectMatch && topicMatch && subtopicMatch && searchTermMatch;
     }).sort((a, b) => b.createdAt - a.createdAt);
   }, [presentations, selectedSubject, selectedTopic, selectedSubtopic, searchTerm]);
-  
+
   const indexOfLastCard = currentPage * CARDS_PER_PAGE;
   const indexOfFirstCard = indexOfLastCard - CARDS_PER_PAGE;
   const displayPresentations = filteredPresentations.slice(indexOfFirstCard, indexOfLastCard);
@@ -139,7 +139,7 @@ export function ClassroomTab({ presentations: initialPresentations }: ClassroomT
       setCurrentPage(newPage);
     }
   };
-  
+
   const resetFilters = () => {
     setSelectedSubject(uniqueSubjects.includes("Anatomy") ? "Anatomy" : uniqueSubjects[0] || "");
     setSelectedTopic('');
@@ -155,9 +155,9 @@ export function ClassroomTab({ presentations: initialPresentations }: ClassroomT
         <aside className="w-full md:w-1/3 lg:w-1/4 md:bg-card md:border-r border-border shadow-sm md:shadow-none mb-6 md:mb-0">
           <div className="sticky top-20 h-full">
             <ScrollArea className="flex-grow" style={{ maxHeight: 'calc(100vh - 8rem)' }}>
-              <div className="py-4">
-                <h3 className="text-xs font-medium text-muted-foreground px-4 mb-2">MEDICAL SUBJECTS</h3>
-                <div className="px-4 mb-4">
+              <div className="p-4 space-y-4"> {/* Consistent padding for all sidebar content */}
+                <div> {/* Group for Subject Dropdown */}
+                  <h3 className="text-xs font-medium text-muted-foreground mb-2">MEDICAL SUBJECTS</h3>
                   <Select value={selectedSubject} onValueChange={setSelectedSubject}>
                     <SelectTrigger className="w-full">
                       <SelectValue placeholder="Select a subject" />
@@ -169,19 +169,20 @@ export function ClassroomTab({ presentations: initialPresentations }: ClassroomT
                     </SelectContent>
                   </Select>
                 </div>
+
+                {selectedSubject && topicsForSelectedSubject.length > 0 && (
+                  <div> {/* Group for Topic List */}
+                    <h3 className="text-xs font-medium text-muted-foreground mb-2">TOPICS IN {selectedSubject.toUpperCase()}</h3>
+                    <TopicList
+                      topics={topicsForSelectedSubject}
+                      selectedTopic={selectedTopic}
+                      onSelectTopic={setSelectedTopic}
+                      subject={selectedSubject}
+                      topicDescriptions={topicDescriptions[selectedSubject] || {}}
+                    />
+                  </div>
+                )}
               </div>
-              {selectedSubject && topicsForSelectedSubject.length > 0 && (
-                <div className="mt-2 pb-4">
-                  <h3 className="text-xs font-medium text-muted-foreground px-4 mb-2">TOPICS IN {selectedSubject.toUpperCase()}</h3>
-                  <TopicList
-                    topics={topicsForSelectedSubject}
-                    selectedTopic={selectedTopic}
-                    onSelectTopic={setSelectedTopic}
-                    subject={selectedSubject}
-                    topicDescriptions={topicDescriptions[selectedSubject] || {}}
-                  />
-                </div>
-              )}
             </ScrollArea>
           </div>
         </aside>
@@ -224,7 +225,7 @@ export function ClassroomTab({ presentations: initialPresentations }: ClassroomT
               )}
             </div>
           </div>
-          
+
           {(selectedSubject !== (uniqueSubjects.includes("Anatomy") ? "Anatomy" : uniqueSubjects[0] || "") || selectedTopic || selectedSubtopic || searchTerm) && (
              <div className="px-4 md:px-0">
                 <Button
@@ -240,6 +241,9 @@ export function ClassroomTab({ presentations: initialPresentations }: ClassroomT
 
           <div className="px-4 md:px-0">
             <PresentationGrid presentations={displayPresentations} onViewPresentation={handleViewPresentation} />
+             {filteredPresentations.length === 0 && (
+              <p className="text-center text-muted-foreground py-8">No presentations found matching your criteria.</p>
+            )}
             {totalPages > 1 && (
               <div className="flex justify-center items-center space-x-4 mt-8 py-4">
                 <Button
@@ -263,9 +267,6 @@ export function ClassroomTab({ presentations: initialPresentations }: ClassroomT
                 </Button>
               </div>
             )}
-             {filteredPresentations.length === 0 && (
-              <p className="text-center text-muted-foreground py-8">No presentations found matching your criteria.</p>
-            )}
           </div>
         </main>
 
@@ -274,3 +275,5 @@ export function ClassroomTab({ presentations: initialPresentations }: ClassroomT
     </div>
   );
 }
+
+    
