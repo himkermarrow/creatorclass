@@ -5,7 +5,6 @@ import { useState, useMemo, useEffect } from 'react';
 import type { Presentation } from '@/types';
 import { PresentationGrid } from './PresentationGrid';
 import { PresentationViewer } from '@/components/PresentationViewer';
-import { SubjectList } from './SubjectList';
 import { TopicList } from './TopicList';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Input } from '@/components/ui/input';
@@ -153,16 +152,23 @@ export function ClassroomTab({ presentations: initialPresentations }: ClassroomT
     <div>
       <h1 className="font-headline text-2xl font-semibold mb-6 text-foreground px-4 md:px-0">Browse by Subject</h1>
       <div className="flex flex-col md:flex-row gap-0 md:gap-0 min-h-[calc(100vh-var(--header-height,12rem)-2rem)]">
-        <aside className="w-full md:w-1/3 lg:w-1/4 bg-card md:border-r border-border shadow-sm md:shadow-none mb-6 md:mb-0">
+        <aside className="w-full md:w-1/3 lg:w-1/4 md:bg-card md:border-r border-border shadow-sm md:shadow-none mb-6 md:mb-0">
           <div className="sticky top-20 h-full">
             <ScrollArea className="flex-grow" style={{ maxHeight: 'calc(100vh - 8rem)' }}>
               <div className="py-4">
                 <h3 className="text-xs font-medium text-muted-foreground px-4 mb-2">MEDICAL SUBJECTS</h3>
-                <SubjectList
-                  subjects={uniqueSubjects}
-                  selectedSubject={selectedSubject}
-                  onSelectSubject={setSelectedSubject}
-                />
+                <div className="px-4 mb-4">
+                  <Select value={selectedSubject} onValueChange={setSelectedSubject}>
+                    <SelectTrigger className="w-full">
+                      <SelectValue placeholder="Select a subject" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {uniqueSubjects.map(subject => (
+                        <SelectItem key={subject} value={subject}>{subject}</SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
               </div>
               {selectedSubject && topicsForSelectedSubject.length > 0 && (
                 <div className="mt-2 pb-4">
