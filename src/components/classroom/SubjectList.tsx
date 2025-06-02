@@ -12,7 +12,7 @@ interface SubjectListProps {
 
 export function SubjectList({ subjects, selectedSubject, onSelectSubject }: SubjectListProps) {
   return (
-    <nav className="space-y-1">
+    <nav className="space-y-1 pr-1"> {/* Added pr-1 to prevent highlight touching scrollbar if present */}
       {subjects.map(subject => (
         <Button
           key={subject}
@@ -28,12 +28,12 @@ export function SubjectList({ subjects, selectedSubject, onSelectSubject }: Subj
           <div className="overflow-hidden w-full">
             <span className="font-medium block truncate text-sm">{subject}</span>
             {subject === 'Anatomy' && (
-              <span className="text-xs opacity-80 block leading-tight line-clamp-1 mt-0.5">
+              <span className="text-xs opacity-70 block leading-tight line-clamp-1 mt-0.5">
                 Complete NEET PG Anatomy curriculum with detailed subtopics
               </span>
             )}
              {subject === 'Physiology' && (
-              <span className="text-xs opacity-80 block leading-tight line-clamp-1 mt-0.5">
+              <span className="text-xs opacity-70 block leading-tight line-clamp-1 mt-0.5">
                 Core concepts of human physiology
               </span>
             )}

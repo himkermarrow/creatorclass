@@ -18,7 +18,7 @@ export function TopicList({ topics, selectedTopic, onSelectTopic, subject, topic
   }
 
   return (
-    <nav className="space-y-1">
+    <nav className="space-y-1 pr-1"> {/* Added pr-1 */}
       {topics.map(topic => (
         <Button
           key={topic}
@@ -32,7 +32,7 @@ export function TopicList({ topics, selectedTopic, onSelectTopic, subject, topic
           onClick={() => onSelectTopic(topic)}
         >
           <div className="overflow-hidden w-full">
-            <span className="font-normal block truncate text-sm">{topic}</span>
+            <span className="font-medium block truncate text-sm">{topic}</span>
             {topicDescriptions[topic] && (
               <span className="text-xs opacity-70 block leading-tight line-clamp-2 mt-0.5">
                 {topicDescriptions[topic]}

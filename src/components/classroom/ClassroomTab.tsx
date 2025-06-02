@@ -104,6 +104,8 @@ export function ClassroomTab({ presentations: initialPresentations }: ClassroomT
   }, [presentations, selectedSubject, selectedTopic, selectedSubtopic, searchTerm]);
 
   const handleViewPresentation = (presentation: Presentation) => {
+    // For 'generated-pdf', we now open a new tab via PresentationCard.
+    // This viewer is for other types or if we reinstate modal previews.
     setViewingPresentation(presentation);
     setIsViewerOpen(true);
   };
@@ -121,11 +123,11 @@ export function ClassroomTab({ presentations: initialPresentations }: ClassroomT
     <div>
       <h1 className="font-headline text-2xl font-semibold mb-6 text-foreground">Browse by Subject</h1>
       <div className="flex flex-col md:flex-row gap-0 md:gap-8 min-h-[calc(100vh-var(--header-height,12rem)-2rem)]">
-        <aside className="w-full md:w-1/3 lg:w-1/4 p-4 md:p-0 bg-card md:bg-card rounded-lg md:rounded-none shadow-md md:shadow-none mb-6 md:mb-0 md:border-r border-border">
+        <aside className="w-full md:w-1/3 lg:w-1/4 p-0 md:p-0 bg-card rounded-lg md:rounded-none shadow-sm md:shadow-none mb-6 md:mb-0 md:border-r border-border">
           <div className="sticky top-24 h-full">
             <ScrollArea className="flex-grow pr-2" style={{ maxHeight: 'calc(100vh - 10rem)' }}>
               <div className="space-y-1">
-                <h3 className="text-xs font-medium text-muted-foreground mb-2 px-3 pt-1">MEDICAL SUBJECTS</h3>
+                <h3 className="text-xs font-medium text-muted-foreground px-3 pt-1 mb-2">MEDICAL SUBJECTS</h3>
                 <SubjectList
                   subjects={uniqueSubjects}
                   selectedSubject={selectedSubject}
@@ -134,7 +136,7 @@ export function ClassroomTab({ presentations: initialPresentations }: ClassroomT
               </div>
               {selectedSubject && topicsForSelectedSubject.length > 0 && (
                 <div className="mt-6 space-y-1">
-                  <h3 className="text-xs font-medium text-muted-foreground mb-2 px-3">TOPICS IN {selectedSubject.toUpperCase()}</h3>
+                  <h3 className="text-xs font-medium text-muted-foreground px-3 pt-1 mb-2">TOPICS IN {selectedSubject.toUpperCase()}</h3>
                   <TopicList
                     topics={topicsForSelectedSubject}
                     selectedTopic={selectedTopic}
@@ -148,7 +150,7 @@ export function ClassroomTab({ presentations: initialPresentations }: ClassroomT
           </div>
         </aside>
 
-        <main className="flex-grow w-full md:w-2/3 lg:w-3/4 p-4 md:p-0">
+        <main className="flex-grow w-full md:w-2/3 lg:w-3/4 p-4 md:pl-8 md:p-0">
           <div className="flex flex-col sm:flex-row justify-between items-start mb-6 gap-4">
             <div>
               <h1 className="font-headline text-3xl font-bold text-foreground">
