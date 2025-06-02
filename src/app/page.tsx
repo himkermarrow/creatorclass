@@ -21,7 +21,7 @@ const initialPresentationsData: Presentation[] = [
     generatedTextContent: 'This presentation covers the fundamental principles of gamete formation (spermatogenesis and oogenesis), meiosis, and the clinical application of in-vitro fertilization techniques. Includes diagrams of meiotic stages and IVF procedures.',
     generatedImages: ['https://placehold.co/600x400.png', 'https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
-    createdAt: Date.now() - 1000 * 60 * 60 * 24 * 2, // 2 days ago
+    createdAt: Date.now() - 1000 * 60 * 60 * 24 * 2, 
   },
   {
     id: 'anat-neuro-001',
@@ -33,7 +33,7 @@ const initialPresentationsData: Presentation[] = [
     fileName: 'brainstem_cranial_nerves_guide.pdf',
     fileUrl: 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
     thumbnailUrl: 'https://placehold.co/300x200.png',
-    createdAt: Date.now() - 1000 * 60 * 60 * 24, // 1 day ago
+    createdAt: Date.now() - 1000 * 60 * 60 * 24, 
   },
   {
     id: 'anat-thorax-001',
@@ -43,9 +43,9 @@ const initialPresentationsData: Presentation[] = [
     subtopic: 'Development of Cardiovascular System',
     fileType: 'ppt',
     fileName: 'cardiac_embryology_overview.pptx',
-    fileUrl: '#', // Placeholder URL for PPT
+    fileUrl: '#', 
     thumbnailUrl: 'https://placehold.co/300x200.png',
-    createdAt: Date.now() - 1000 * 60 * 60 * 24 * 3, // 3 days ago
+    createdAt: Date.now() - 1000 * 60 * 60 * 24 * 3,
   },
   {
     id: 'anat-headneck-001',
@@ -58,7 +58,7 @@ const initialPresentationsData: Presentation[] = [
     generatedTextContent: 'A detailed review of the six pharyngeal arches, their associated cranial nerves, and the muscular, skeletal, and arterial derivatives. Clinical correlations of common arch anomalies are also discussed.',
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
-    createdAt: Date.now() - 1000 * 60 * 60 * 24 * 4, // 4 days ago
+    createdAt: Date.now() - 1000 * 60 * 60 * 24 * 4, 
   },
   {
     id: 'anat-histology-001',
@@ -70,7 +70,32 @@ const initialPresentationsData: Presentation[] = [
     fileName: 'epithelial_tissue_basics.pdf',
     fileUrl: 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
     thumbnailUrl: 'https://placehold.co/300x200.png',
-    createdAt: Date.now() - 1000 * 60 * 60 * 24 * 5, // 5 days ago
+    createdAt: Date.now() - 1000 * 60 * 60 * 24 * 5,
+  },
+  {
+    id: 'anat-osteology-001',
+    title: 'Overview of Human Osteology',
+    subject: 'Anatomy',
+    topic: 'Osteology and Arthrology',
+    subtopic: 'Osteology',
+    fileType: 'ppt',
+    fileName: 'human_osteology.pptx',
+    fileUrl: '#',
+    thumbnailUrl: 'https://placehold.co/300x200.png',
+    createdAt: Date.now() - 1000 * 60 * 60 * 24 * 6,
+  },
+  {
+    id: 'anat-upperlimb-001',
+    title: 'Brachial Plexus Anatomy',
+    subject: 'Anatomy',
+    topic: 'Upper Limb',
+    subtopic: 'Brachial Plexus: Trunks and Cords',
+    fileType: 'generated-pdf',
+    fileName: 'brachial_plexus.pdf',
+    generatedTextContent: 'Detailed explanation of the brachial plexus, including its roots, trunks, divisions, cords, and branches. Clinical significance of injuries discussed.',
+    generatedImages: ['https://placehold.co/600x400.png', 'https://placehold.co/600x400.png'],
+    thumbnailUrl: 'https://placehold.co/300x200.png',
+    createdAt: Date.now() - 1000 * 60 * 60 * 24 * 7,
   }
 ];
 
@@ -82,31 +107,26 @@ export default function HomePage() {
 
   useEffect(() => {
     // This code runs only on the client, after initial hydration
-    const storedPresentations = localStorage.getItem('courseDeckPresentations');
-    if (storedPresentations) {
-      try {
-        const parsed = JSON.parse(storedPresentations);
-        // Basic validation to ensure it's an array
-        if (Array.isArray(parsed)) {
-            // Further check if items have expected structure (e.g. id and title)
-            if (parsed.every(item => typeof item.id === 'string' && typeof item.title === 'string')) {
-                 setPresentations(parsed);
-            } else {
-                // Data is malformed, fallback to initial
-                setPresentations(initialPresentationsData);
-            }
-        } else {
-            // Data is not an array, fallback to initial
-             setPresentations(initialPresentationsData);
-        }
-      } catch (e) {
-        // Parsing failed, fallback to initial
-        console.error("Failed to parse presentations from localStorage", e);
-        setPresentations(initialPresentationsData);
-      }
-    } else {
-      setPresentations(initialPresentationsData);
-    }
+    // For now, always load initialPresentationsData to ensure medical content is shown
+    setPresentations(initialPresentationsData);
+    
+    // The localStorage loading logic can be re-introduced or refined later if needed
+    // const storedPresentations = localStorage.getItem('courseDeckPresentations');
+    // if (storedPresentations) {
+    //   try {
+    //     const parsed = JSON.parse(storedPresentations);
+    //     if (Array.isArray(parsed) && parsed.every(item => typeof item.id === 'string' && typeof item.title === 'string')) {
+    //          setPresentations(parsed);
+    //     } else {
+    //         setPresentations(initialPresentationsData);
+    //     }
+    //   } catch (e) {
+    //     console.error("Failed to parse presentations from localStorage", e);
+    //     setPresentations(initialPresentationsData);
+    //   }
+    // } else {
+    //   setPresentations(initialPresentationsData);
+    // }
     setCurrentYear(new Date().getFullYear());
     setIsMounted(true);
   }, []);
@@ -164,3 +184,4 @@ export default function HomePage() {
     </div>
   );
 }
+
