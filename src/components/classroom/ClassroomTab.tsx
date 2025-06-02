@@ -33,7 +33,8 @@ const topicDescriptions: Record<string, Record<string, string>> = {
   },
   Physiology: {
     'Respiratory System': 'Functions of the lungs and airways.',
-    // Add more physiology topics here
+    'Cardiovascular System': 'Heart and blood vessel functions.',
+    'Nervous System': 'Physiology of nerve impulses and brain function.',
   }
 };
 
@@ -118,7 +119,7 @@ export function ClassroomTab({ presentations: initialPresentations }: ClassroomT
 
   return (
     <div className="flex flex-col md:flex-row gap-0 md:gap-8 min-h-[calc(100vh-var(--header-height,10rem))]">
-      <aside className="w-full md:w-1/4 lg:w-1/5 p-4 md:p-0 bg-card md:bg-transparent rounded-lg md:rounded-none shadow-md md:shadow-none mb-6 md:mb-0">
+      <aside className="w-full md:w-1/3 lg:w-1/4 p-4 md:p-0 bg-card md:bg-transparent rounded-lg md:rounded-none shadow-md md:shadow-none mb-6 md:mb-0">
         <div className="sticky top-24 h-full"> {/* Header height (4rem) + sticky offset (6rem) = 10rem */}
           <div className="flex flex-col h-full">
             <h2 className="text-lg font-headline font-semibold mb-3 text-primary flex items-center px-0 md:px-0">
@@ -153,7 +154,7 @@ export function ClassroomTab({ presentations: initialPresentations }: ClassroomT
         </div>
       </aside>
 
-      <main className="flex-grow w-full md:w-3/4 lg:w-4/5 p-4 md:p-0">
+      <main className="flex-grow w-full md:w-2/3 lg:w-3/4 p-4 md:p-0">
         <div className="mb-6">
           <h1 className="font-headline text-3xl font-bold text-foreground">
             {selectedTopic || selectedSubject || 'All Presentations'}
@@ -212,3 +213,4 @@ export function ClassroomTab({ presentations: initialPresentations }: ClassroomT
     </div>
   );
 }
+
