@@ -1,9 +1,8 @@
 
-import Image from 'next/image';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardFooter, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import type { Presentation } from '@/types';
-import { Eye, Download, FileText, FileSpreadsheet } from 'lucide-react'; // FileSpreadsheet for PPT as FilePresentation isn't ideal
+import { Eye, Download, FileText, FileSpreadsheetIcon } from 'lucide-react';
 import { formatDistanceToNow } from 'date-fns';
 
 interface PresentationCardProps {
@@ -12,28 +11,17 @@ interface PresentationCardProps {
 }
 
 export function PresentationCard({ presentation, onView }: PresentationCardProps) {
-  const { title, subject, topic, subtopic, thumbnailUrl, fileType, fileName, generatedTextContent, createdAt, fileUrl } = presentation;
+  const { title, subject, topic, subtopic, fileType, fileName, generatedTextContent, createdAt, fileUrl } = presentation;
 
   const getIconForFileType = () => {
     if (fileType === 'pdf' || fileType === 'generated-pdf') {
       return <FileText className="h-5 w-5 text-red-600" />;
     }
     if (fileType === 'ppt') {
-      // Using FileSpreadsheet as a stand-in for PPT, or consider a generic file icon
-      return <FileSpreadsheet className="h-5 w-5 text-orange-500" />;
+      return <FileSpreadsheetIcon className="h-5 w-5 text-orange-500" />;
     }
-    return <FileText className="h-5 w-5 text-gray-500" />; // Default icon
+    return <FileText className="h-5 w-5 text-gray-500" />; 
   };
-  
-  let hintKeywords = '';
-  if (subtopic) {
-    hintKeywords = subtopic.split(' ').slice(0, 2).join(' ');
-  } else if (topic) {
-    hintKeywords = topic.split(' ').slice(0, 2).join(' ');
-  } else if (subject) {
-    hintKeywords = subject.split(' ').slice(0, 2).join(' ');
-  }
-  const dataAiHint = hintKeywords.toLowerCase() || "medical illustration";
 
   const handleDownload = () => {
     if (fileUrl) {
@@ -47,12 +35,10 @@ export function PresentationCard({ presentation, onView }: PresentationCardProps
       } else if (fileType === 'pdf') {
          window.open(fileUrl, '_blank');
       } else {
-        // For generated-pdf, direct download isn't straightforward.
-        // We can open the viewer which displays the content.
         onView(presentation);
       }
     } else if (fileType === 'generated-pdf') {
-        onView(presentation); // Open viewer for generated content as no direct fileUrl
+        onView(presentation); 
     } else {
         alert("No file available for download.");
     }
@@ -60,34 +46,23 @@ export function PresentationCard({ presentation, onView }: PresentationCardProps
 
   return (
     <Card className="flex flex-col overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 h-full">
-      <CardHeader className="p-4">
-        <div className="aspect-[3/2] w-full relative overflow-hidden rounded-md bg-muted">
-          <Image
-            src={thumbnailUrl || `https://placehold.co/300x200.png`}
-            alt={`Thumbnail for ${title}`}
-            layout="fill"
-            objectFit="cover"
-            data-ai-hint={dataAiHint}
-          />
-        </div>
-      </CardHeader>
-      <CardContent className="flex-grow p-4 space-y-2 flex flex-col">
-        <CardTitle className="font-headline text-lg leading-tight">{title}</CardTitle>
-        <CardDescription className="text-xs text-muted-foreground">
+      <CardContent className="flex-grow p-6 space-y-3 flex flex-col">
+        <CardTitle className="font-headline text-xl leading-tight">{title}</CardTitle>
+        <CardDescription className="text-sm text-muted-foreground">
           {subject} &gt; {topic} {subtopic && `> ${subtopic}`}
         </CardDescription>
-        <div className="flex items-center space-x-2 pt-1 text-xs text-muted-foreground">
+        <div className="flex items-center space-x-2 pt-1 text-sm text-muted-foreground">
           {getIconForFileType()}
           <span className="truncate" title={fileName}>{fileName || 'Generated Presentation'}</span>
         </div>
         {generatedTextContent && (
           <div className="pt-2">
-            <p className="text-xs text-muted-foreground line-clamp-3 prose prose-sm max-w-none dark:prose-invert">
+            <p className="text-sm text-muted-foreground line-clamp-3 prose prose-sm max-w-none dark:prose-invert">
               {generatedTextContent}
             </p>
           </div>
         )}
-         <div className="text-xs text-muted-foreground mt-auto pt-2">
+         <div className="text-xs text-muted-foreground mt-auto pt-3">
           Created {formatDistanceToNow(new Date(createdAt), { addSuffix: true })}
         </div>
       </CardContent>
