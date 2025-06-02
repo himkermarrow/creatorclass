@@ -14,7 +14,7 @@ interface TopicListProps {
 
 export function TopicList({ topics, selectedTopic, onSelectTopic, subject, topicDescriptions }: TopicListProps) {
   if (topics.length === 0) {
-    return <p className="text-xs text-muted-foreground px-3">No topics found for {subject}.</p>;
+    return <p className="text-xs text-muted-foreground px-4">No topics found for {subject}.</p>;
   }
 
   return (
@@ -22,11 +22,11 @@ export function TopicList({ topics, selectedTopic, onSelectTopic, subject, topic
       {topics.map(topic => (
         <Button
           key={topic}
-          variant={'ghost'} // Always ghost, selected state handled by custom classes
+          variant={'ghost'} 
           className={cn(
-            "w-full justify-start text-left h-auto py-2.5 px-3 rounded-md text-foreground", // Increased padding
+            "w-full justify-start text-left h-auto py-2.5 px-4 rounded-md text-foreground", 
             selectedTopic === topic 
-              ? 'bg-blue-100 text-primary dark:bg-primary/20 dark:text-primary-foreground hover:bg-blue-200 dark:hover:bg-primary/30' // Light blue for selected topic
+              ? 'bg-blue-100 text-primary dark:bg-primary/20 dark:text-primary-foreground hover:bg-blue-200 dark:hover:bg-primary/30' 
               : 'hover:bg-muted'
           )}
           onClick={() => onSelectTopic(topic)}

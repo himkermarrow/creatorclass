@@ -104,8 +104,6 @@ export function ClassroomTab({ presentations: initialPresentations }: ClassroomT
   }, [presentations, selectedSubject, selectedTopic, selectedSubtopic, searchTerm]);
 
   const handleViewPresentation = (presentation: Presentation) => {
-    // This function might be used by card actions if we re-introduce modal previews for some types
-    // For now, direct link opening is handled by PresentationCard itself
     setViewingPresentation(presentation);
     setIsViewerOpen(true);
   };
@@ -122,10 +120,10 @@ export function ClassroomTab({ presentations: initialPresentations }: ClassroomT
   return (
     <div>
       <h1 className="font-headline text-2xl font-semibold mb-6 text-foreground">Browse by Subject</h1>
-      <div className="flex flex-col md:flex-row gap-0 md:gap-8 min-h-[calc(100vh-var(--header-height,12rem)-2rem)]"> {/* Adjusted min-height */}
-        <aside className="w-full md:w-1/3 lg:w-1/4 p-4 md:p-0 bg-card md:bg-transparent rounded-lg md:rounded-none shadow-md md:shadow-none mb-6 md:mb-0">
+      <div className="flex flex-col md:flex-row gap-0 md:gap-8 min-h-[calc(100vh-var(--header-height,12rem)-2rem)]">
+        <aside className="w-full md:w-1/3 lg:w-1/4 p-4 md:p-0 bg-card md:bg-card rounded-lg md:rounded-none shadow-md md:shadow-none mb-6 md:mb-0 md:border-r border-border">
           <div className="sticky top-24 h-full">
-            <ScrollArea className="flex-grow pr-2" style={{ maxHeight: 'calc(100vh - 10rem)' }}> {/* Approx Header (4rem) + Sticky (6rem) */}
+            <ScrollArea className="flex-grow pr-2" style={{ maxHeight: 'calc(100vh - 10rem)' }}>
               <div className="space-y-1">
                 <h3 className="text-xs font-medium text-muted-foreground mb-2 px-3 pt-1">MEDICAL SUBJECTS</h3>
                 <SubjectList

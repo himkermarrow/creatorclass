@@ -18,7 +18,7 @@ export function SubjectList({ subjects, selectedSubject, onSelectSubject }: Subj
           key={subject}
           variant={selectedSubject === subject ? 'default' : 'ghost'}
           className={cn(
-            "w-full justify-start text-left h-auto py-2.5 px-3 rounded-md", // Increased padding
+            "w-full justify-start text-left h-auto py-2.5 px-4 rounded-md", 
             selectedSubject === subject 
               ? 'bg-primary text-primary-foreground hover:bg-primary/90' 
               : 'hover:bg-muted text-foreground'
@@ -28,17 +28,17 @@ export function SubjectList({ subjects, selectedSubject, onSelectSubject }: Subj
           <div className="overflow-hidden w-full">
             <span className="font-medium block truncate text-sm">{subject}</span>
             {subject === 'Anatomy' && (
-              <span className="text-xs opacity-80 block leading-tight line-clamp-2 mt-0.5">
+              <span className="text-xs opacity-80 block leading-tight line-clamp-1 mt-0.5">
                 Complete NEET PG Anatomy curriculum with detailed subtopics
               </span>
             )}
              {subject === 'Physiology' && (
-              <span className="text-xs opacity-80 block leading-tight line-clamp-2 mt-0.5">
+              <span className="text-xs opacity-80 block leading-tight line-clamp-1 mt-0.5">
                 Core concepts of human physiology
               </span>
             )}
              {!(subject === 'Anatomy' || subject === 'Physiology') && (
-                <span className="text-xs opacity-70 block leading-tight line-clamp-2 mt-0.5">
+                <span className="text-xs opacity-70 block leading-tight line-clamp-1 mt-0.5">
                     Presentations related to {subject}
                 </span>
              )}
