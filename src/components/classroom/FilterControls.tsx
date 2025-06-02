@@ -1,3 +1,4 @@
+
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
@@ -33,12 +34,12 @@ export function FilterControls({
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 items-end">
         <div>
           <Label htmlFor="filter-subject" className="font-medium text-sm">Filter by Subject</Label>
-          <Select value={selectedSubject} onValueChange={setSelectedSubject}>
+          <Select value={selectedSubject} onValueChange={(value) => setSelectedSubject(value === "all-subjects" ? "" : value)}>
             <SelectTrigger id="filter-subject">
               <SelectValue placeholder="All Subjects" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="">All Subjects</SelectItem>
+              <SelectItem value="all-subjects">All Subjects</SelectItem>
               {subjects.map((subject) => (
                 <SelectItem key={subject} value={subject}>
                   {subject}
@@ -50,12 +51,12 @@ export function FilterControls({
 
         <div>
           <Label htmlFor="filter-topic" className="font-medium text-sm">Filter by Topic</Label>
-          <Select value={selectedTopic} onValueChange={setSelectedTopic} disabled={!selectedSubject && topics.length === 0}>
+          <Select value={selectedTopic} onValueChange={(value) => setSelectedTopic(value === "all-topics" ? "" : value)} disabled={!selectedSubject && topics.length === 0}>
             <SelectTrigger id="filter-topic">
               <SelectValue placeholder="All Topics" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="">All Topics</SelectItem>
+              <SelectItem value="all-topics">All Topics</SelectItem>
               {topics.map((topic) => (
                 <SelectItem key={topic} value={topic}>
                   {topic}
@@ -67,12 +68,12 @@ export function FilterControls({
 
         <div>
           <Label htmlFor="filter-subtopic" className="font-medium text-sm">Filter by Subtopic</Label>
-          <Select value={selectedSubtopic} onValueChange={setSelectedSubtopic} disabled={!selectedTopic && subtopics.length === 0}>
+          <Select value={selectedSubtopic} onValueChange={(value) => setSelectedSubtopic(value === "all-subtopics" ? "" : value)} disabled={!selectedTopic && subtopics.length === 0}>
             <SelectTrigger id="filter-subtopic">
               <SelectValue placeholder="All Subtopics" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="">All Subtopics</SelectItem>
+              <SelectItem value="all-subtopics">All Subtopics</SelectItem>
               {subtopics.map((subtopic) => (
                 <SelectItem key={subtopic} value={subtopic}>
                   {subtopic}
