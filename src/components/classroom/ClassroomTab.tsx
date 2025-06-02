@@ -216,7 +216,9 @@ export function ClassroomTab({ presentations: initialPresentations }: ClassroomT
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value="all-subtopics">All Subtopics</SelectItem>
-                      {subtopicsForSelectedTopic.map(subtopic => (
+                      {subtopicsForSelectedTopic
+                        .filter(st => st !== "") // Ensures no SelectItem gets value=""
+                        .map(subtopic => (
                         <SelectItem key={subtopic} value={subtopic}>{subtopic}</SelectItem>
                       ))}
                     </SelectContent>
