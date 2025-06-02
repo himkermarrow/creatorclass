@@ -149,15 +149,15 @@ export function ClassroomTab({ presentations: initialPresentations }: ClassroomT
   };
 
   return (
-    <div>
-      <h1 className="font-headline text-2xl font-semibold mb-6 text-foreground px-4 md:px-0">Browse by Subject</h1>
+    <div className="px-4 md:px-0">
+      <h1 className="font-headline text-2xl font-semibold mb-6 text-foreground">Browse by Subject</h1>
       <div className="flex flex-col md:flex-row gap-0 md:gap-0 min-h-[calc(100vh-var(--header-height,12rem)-2rem)]">
         <aside className="w-full md:w-1/3 lg:w-1/4 md:bg-card md:border-r border-border shadow-sm md:shadow-none mb-6 md:mb-0">
           <div className="sticky top-20 h-full">
             <ScrollArea className="flex-grow" style={{ maxHeight: 'calc(100vh - 8rem)' }}>
-              <div className="p-4 space-y-4"> {/* Consistent padding for all sidebar content */}
-                <div> {/* Group for Subject Dropdown */}
-                  <h3 className="text-xs font-medium text-muted-foreground mb-2">MEDICAL SUBJECTS</h3>
+              <div className="p-4 space-y-4">
+                <div>
+                  <h3 className="text-xs font-medium text-muted-foreground px-0 pt-1 mb-2">MEDICAL SUBJECTS</h3>
                   <Select value={selectedSubject} onValueChange={setSelectedSubject}>
                     <SelectTrigger className="w-full">
                       <SelectValue placeholder="Select a subject" />
@@ -171,8 +171,8 @@ export function ClassroomTab({ presentations: initialPresentations }: ClassroomT
                 </div>
 
                 {selectedSubject && topicsForSelectedSubject.length > 0 && (
-                  <div> {/* Group for Topic List */}
-                    <h3 className="text-xs font-medium text-muted-foreground mb-2">TOPICS IN {selectedSubject.toUpperCase()}</h3>
+                  <div className="mt-2">
+                    <h3 className="text-xs font-medium text-muted-foreground px-0 pt-1 mb-2">TOPICS IN {selectedSubject.toUpperCase()}</h3>
                     <TopicList
                       topics={topicsForSelectedSubject}
                       selectedTopic={selectedTopic}
@@ -240,10 +240,12 @@ export function ClassroomTab({ presentations: initialPresentations }: ClassroomT
           )}
 
           <div className="px-4 md:px-0">
-            <PresentationGrid presentations={displayPresentations} onViewPresentation={handleViewPresentation} />
-             {filteredPresentations.length === 0 && (
-              <p className="text-center text-muted-foreground py-8">No presentations found matching your criteria.</p>
+            {displayPresentations.length > 0 ? (
+                 <PresentationGrid presentations={displayPresentations} onViewPresentation={handleViewPresentation} />
+            ) : (
+                 <p className="text-center text-muted-foreground py-8">No presentations found matching your criteria.</p>
             )}
+           
             {totalPages > 1 && (
               <div className="flex justify-center items-center space-x-4 mt-8 py-4">
                 <Button
@@ -275,5 +277,3 @@ export function ClassroomTab({ presentations: initialPresentations }: ClassroomT
     </div>
   );
 }
-
-    
