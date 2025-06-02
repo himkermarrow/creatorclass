@@ -152,39 +152,39 @@ export function ClassroomTab({ presentations: initialPresentations }: ClassroomT
     <div className="px-4 md:px-0">
       <h1 className="font-headline text-2xl font-semibold mb-6 text-foreground">Browse by Subject</h1>
       <div className="flex flex-col md:flex-row gap-0 md:gap-0 min-h-[calc(100vh-var(--header-height,12rem)-2rem)]">
-        <aside className="w-full md:w-72 md:bg-card md:border-r border-border shadow-sm md:shadow-none mb-6 md:mb-0 flex flex-col">
-          <div className="sticky top-20 h-full flex flex-col">
-            <ScrollArea className="flex-grow" style={{ maxHeight: 'calc(100vh - 8rem)' }}>
-              <div className="p-4 space-y-4">
-                <div>
-                  <h3 className="text-xs font-medium text-muted-foreground mb-2">MEDICAL SUBJECTS</h3>
-                  <Select value={selectedSubject} onValueChange={setSelectedSubject}>
-                    <SelectTrigger className="w-full">
-                      <SelectValue placeholder="Select a subject" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {uniqueSubjects.map(subject => (
-                        <SelectItem key={subject} value={subject}>{subject}</SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
-
-                {selectedSubject && topicsForSelectedSubject.length > 0 && (
-                  <div className="mt-2">
-                    <h3 className="text-xs font-medium text-muted-foreground mb-2">TOPICS IN {selectedSubject.toUpperCase()}</h3>
-                    <TopicList
-                      topics={topicsForSelectedSubject}
-                      selectedTopic={selectedTopic}
-                      onSelectTopic={setSelectedTopic}
-                      subject={selectedSubject}
-                      topicDescriptions={topicDescriptions[selectedSubject] || {}}
-                    />
-                  </div>
-                )}
+        <aside className="w-full md:w-64 bg-card border-r border-border shadow-sm md:shadow-none mb-6 md:mb-0 flex flex-col">
+           <ScrollArea className="flex-1" style={{ maxHeight: 'calc(100vh - 10rem)' }}> {/* Adjusted maxHeight slightly for robustness */}
+            <div className="p-4 space-y-4">
+              <div>
+                <h3 className="text-xs font-medium text-muted-foreground mb-2">MEDICAL SUBJECTS</h3>
+                <Select value={selectedSubject} onValueChange={setSelectedSubject}>
+                  <SelectTrigger className="w-full">
+                    <SelectValue placeholder="Select a subject" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {uniqueSubjects.map(subject => (
+                      <SelectItem key={subject} value={subject}>{subject}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </div>
-            </ScrollArea>
-          </div>
+
+              {selectedSubject && topicsForSelectedSubject.length > 0 && (
+                <div className="mt-4">
+                  <h3 className="text-xs font-medium text-muted-foreground mb-2">
+                    TOPICS IN {selectedSubject.toUpperCase()}
+                  </h3>
+                  <TopicList
+                    topics={topicsForSelectedSubject}
+                    selectedTopic={selectedTopic}
+                    onSelectTopic={setSelectedTopic}
+                    subject={selectedSubject}
+                    topicDescriptions={topicDescriptions[selectedSubject] || {}}
+                  />
+                </div>
+              )}
+            </div>
+          </ScrollArea>
         </aside>
 
         <main className="flex-grow w-full md:w-auto md:pl-8 pt-4 md:pt-0">
@@ -277,4 +277,3 @@ export function ClassroomTab({ presentations: initialPresentations }: ClassroomT
     </div>
   );
 }
- 
