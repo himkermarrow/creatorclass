@@ -157,7 +157,7 @@ export function ClassroomTab({ presentations: initialPresentations }: ClassroomT
             <ScrollArea className="flex-grow" style={{ maxHeight: 'calc(100vh - 8rem)' }}>
               <div className="p-4 space-y-4">
                 <div>
-                  <h3 className="text-xs font-medium text-muted-foreground px-0 pt-1 mb-2">MEDICAL SUBJECTS</h3>
+                  <h3 className="text-xs font-medium text-muted-foreground px-0 mb-2">MEDICAL SUBJECTS</h3>
                   <Select value={selectedSubject} onValueChange={setSelectedSubject}>
                     <SelectTrigger className="w-full">
                       <SelectValue placeholder="Select a subject" />
@@ -172,7 +172,7 @@ export function ClassroomTab({ presentations: initialPresentations }: ClassroomT
 
                 {selectedSubject && topicsForSelectedSubject.length > 0 && (
                   <div className="mt-2">
-                    <h3 className="text-xs font-medium text-muted-foreground px-0 pt-1 mb-2">TOPICS IN {selectedSubject.toUpperCase()}</h3>
+                    <h3 className="text-xs font-medium text-muted-foreground px-0 mb-2">TOPICS IN {selectedSubject.toUpperCase()}</h3>
                     <TopicList
                       topics={topicsForSelectedSubject}
                       selectedTopic={selectedTopic}
@@ -189,7 +189,7 @@ export function ClassroomTab({ presentations: initialPresentations }: ClassroomT
 
         <main className="flex-grow w-full md:w-2/3 lg:w-3/4 md:pl-8 pt-4 md:pt-0">
           <div className="flex flex-col sm:flex-row justify-between items-start mb-6 gap-4 px-4 md:px-0">
-            <div>
+            <div className="flex-grow overflow-hidden">
               <h1 className="font-headline text-3xl font-bold text-foreground">
                 {selectedTopic || selectedSubject || 'All Presentations'}
               </h1>
@@ -240,7 +240,7 @@ export function ClassroomTab({ presentations: initialPresentations }: ClassroomT
           )}
 
           <div className="px-4 md:px-0">
-            {displayPresentations.length > 0 ? (
+            {filteredPresentations.length > 0 ? (
                  <PresentationGrid presentations={displayPresentations} onViewPresentation={handleViewPresentation} />
             ) : (
                  <p className="text-center text-muted-foreground py-8">No presentations found matching your criteria.</p>
@@ -277,3 +277,4 @@ export function ClassroomTab({ presentations: initialPresentations }: ClassroomT
     </div>
   );
 }
+ 
