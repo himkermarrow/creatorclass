@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import type { Presentation } from '@/types';
-import { Eye, FileText, FileTypeIcon } from 'lucide-react'; // Changed FileType to FileTypeIcon to avoid name collision
+import { Eye, FileText, FileTypeIcon } from 'lucide-react';
 
 interface PresentationCardProps {
   presentation: Presentation;
@@ -11,20 +11,18 @@ interface PresentationCardProps {
 }
 
 export function PresentationCard({ presentation, onView }: PresentationCardProps) {
-  const { title, subject, topic, subtopic, thumbnailUrl, fileType, fileName } = presentation;
+  const { title, subject, topic, subtopic, thumbnailUrl, fileType, fileName, generatedTextContent } = presentation;
 
   const getIconForFileType = () => {
     if (fileType === 'pdf' || fileType === 'generated-pdf') {
       return <FileText className="h-5 w-5 text-red-600" />;
     }
     if (fileType === 'ppt') {
-      return <FileTypeIcon className="h-5 w-5 text-orange-500" />; // Changed FileType to FileTypeIcon
+      return <FileTypeIcon className="h-5 w-5 text-orange-500" />;
     }
-    return <FileTypeIcon className="h-5 w-5 text-gray-500" />; // Changed FileType to FileTypeIcon
+    return <FileTypeIcon className="h-5 w-5 text-gray-500" />;
   };
   
-  // Construct a hint from subject and topic, ensure it's not too long and is lowercased
-  // Prioritize subtopic if available, then topic. Max 2 words.
   let hintKeywords = '';
   if (subtopic) {
     hintKeywords = subtopic.split(' ').slice(0, 2).join(' ');
@@ -33,7 +31,7 @@ export function PresentationCard({ presentation, onView }: PresentationCardProps
   } else if (subject) {
     hintKeywords = subject.split(' ').slice(0, 2).join(' ');
   }
-  const dataAiHint = hintKeywords.toLowerCase() || "medical slide"; // Fallback hint
+  const dataAiHint = hintKeywords.toLowerCase() || "medical slide";
 
   return (
     <Card className="flex flex-col overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
@@ -57,6 +55,13 @@ export function PresentationCard({ presentation, onView }: PresentationCardProps
           {getIconForFileType()}
           <span className="text-xs text-muted-foreground truncate" title={fileName}>{fileName || 'Generated Presentation'}</span>
         </div>
+        {generatedTextContent && (
+          <div className="pt-2">
+            <p className="text-xs text-muted-foreground line-clamp-3 prose prose-sm max-w-none dark:prose-invert">
+              {generatedTextContent}
+            </p>
+          </div>
+        )}
       </CardContent>
       <CardFooter className="p-4 border-t">
         <Button onClick={() => onView(presentation)} variant="outline" size="sm" className="w-full">
