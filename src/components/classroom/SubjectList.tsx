@@ -12,13 +12,13 @@ interface SubjectListProps {
 
 export function SubjectList({ subjects, selectedSubject, onSelectSubject }: SubjectListProps) {
   return (
-    <nav className="space-y-1 px-3"> {/* px-3 for list container */}
+    <nav className="space-y-1"> {/* Removed px-3 from nav */}
       {subjects.map(subject => (
         <Button
           key={subject}
           variant={selectedSubject === subject ? 'default' : 'ghost'}
           className={cn(
-            "w-full justify-start text-left h-auto py-2.5 px-3 rounded-md transition-colors duration-150 ease-in-out", // px-3 for button internal padding
+            "w-full justify-start text-left h-auto py-2.5 px-4 rounded-md transition-colors duration-150 ease-in-out", // Changed px-3 to px-4 for button
             selectedSubject === subject 
               ? 'bg-primary text-primary-foreground hover:bg-primary/90' 
               : 'hover:bg-muted/80 text-foreground'
@@ -48,3 +48,4 @@ export function SubjectList({ subjects, selectedSubject, onSelectSubject }: Subj
     </nav>
   );
 }
+
