@@ -12,28 +12,41 @@ import { BookOpen, LayoutGrid } from 'lucide-react';
 const initialPresentationsData: Presentation[] = [
   {
     id: '1',
-    title: 'Introduction to Astrophysics',
-    subject: 'Physics',
-    topic: 'Astrophysics',
-    subtopic: 'Stellar Evolution',
+    title: 'Cardiac Cycle and ECG Basics',
+    subject: 'Physiology',
+    topic: 'Cardiovascular System',
+    subtopic: 'ECG Interpretation',
     fileType: 'pdf',
-    fileName: 'astro_intro.pdf',
+    fileName: 'cardiac_cycle_ecg.pdf',
     thumbnailUrl: 'https://placehold.co/300x200.png',
-    fileUrl: 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf', // Sample PDF for testing
+    fileUrl: 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 2, // 2 days ago
   },
   {
     id: '2',
-    title: 'Fundamentals of Machine Learning',
-    subject: 'Computer Science',
-    topic: 'Artificial Intelligence',
-    subtopic: 'Supervised Learning',
+    title: 'Introduction to Antimicrobial Resistance',
+    subject: 'Pharmacology',
+    topic: 'Antimicrobial Drugs',
+    subtopic: 'Mechanisms of Resistance',
     fileType: 'ppt',
-    fileName: 'ml_fundamentals.pptx',
+    fileName: 'antimicrobial_resistance_intro.pptx',
     thumbnailUrl: 'https://placehold.co/300x200.png',
-    fileUrl: '#', // Placeholder for PPT
+    fileUrl: '#', 
     createdAt: Date.now() - 1000 * 60 * 60 * 24, // 1 day ago
   },
+  {
+    id: '3',
+    title: 'Brachial Plexus Anatomy',
+    subject: 'Anatomy',
+    topic: 'Upper Limb',
+    subtopic: 'Nerve Plexuses',
+    fileType: 'generated-pdf',
+    fileName: 'brachial_plexus_notes.pdf',
+    generatedTextContent: 'Detailed notes on the formation, branches, and clinical significance of the brachial plexus...',
+    generatedImages: ['https://placehold.co/600x400.png', 'https://placehold.co/600x400.png'],
+    thumbnailUrl: 'https://placehold.co/300x200.png',
+    createdAt: Date.now() - 1000 * 60 * 60 * 24 * 3, // 3 days ago
+  }
 ];
 
 export default function HomePage() {
@@ -42,19 +55,17 @@ export default function HomePage() {
   const [currentYear, setCurrentYear] = useState<number | null>(null);
 
   useEffect(() => {
-    // Load presentations from localStorage on mount
     const storedPresentations = localStorage.getItem('courseDeckPresentations');
     if (storedPresentations) {
       setPresentations(JSON.parse(storedPresentations));
     } else {
-      setPresentations(initialPresentationsData); // Load initial data if nothing in localStorage
+      setPresentations(initialPresentationsData);
     }
     setCurrentYear(new Date().getFullYear());
     setIsMounted(true);
   }, []);
 
   useEffect(() => {
-    // Save presentations to localStorage whenever they change
     if (isMounted) {
       localStorage.setItem('courseDeckPresentations', JSON.stringify(presentations));
     }
@@ -65,8 +76,6 @@ export default function HomePage() {
   };
 
   if (!isMounted) {
-    // Optional: Render a loading state or null until client-side hydration completes
-    // This helps avoid hydration mismatches if localStorage is used immediately for rendering
     return (
       <div className="flex flex-col min-h-screen">
         <Header />

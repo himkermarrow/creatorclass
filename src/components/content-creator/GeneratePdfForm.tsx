@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState, type FormEvent } from 'react';
@@ -20,7 +21,8 @@ const formSchema = z.object({
   subject: z.string().min(2, { message: 'Subject is required.' }),
   topic: z.string().min(2, { message: 'Topic is required.' }),
   subtopic: z.string().optional(),
-  pdfFile: z.any().refine((files) => files?.length > 0, 'PDF file is required.'),
+  pdfFile: z.any().refine((files) => files?.length > 0, 'PDF file is required.')
+                   .refine((files) => files?.[0]?.type === 'application/pdf', 'Please upload a valid PDF file.'),
 });
 
 type FormData = z.infer<typeof formSchema>;
@@ -58,6 +60,7 @@ export function GeneratePdfForm({ addPresentation }: GeneratePdfFormProps) {
 
     try {
       const file = data.pdfFile[0];
+      // Client-side check is still useful though Zod handles it
       if (file.type !== 'application/pdf') {
         toast({ title: 'Error', description: 'Please upload a valid PDF file.', variant: 'destructive' });
         setIsLoading(false);
@@ -104,26 +107,26 @@ export function GeneratePdfForm({ addPresentation }: GeneratePdfFormProps) {
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
           <div className="space-y-2">
             <Label htmlFor="gen-title" className="font-medium">Presentation Title</Label>
-            <Input id="gen-title" {...register('title')} placeholder="e.g., Introduction to Quantum Physics" />
+            <Input id="gen-title" {...register('title')} placeholder="e.g., Overview of Diabetes Mellitus" />
             {errors.title && <p className="text-sm text-destructive">{errors.title.message}</p>}
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
               <Label htmlFor="gen-subject" className="font-medium">Subject</Label>
-              <Input id="gen-subject" {...register('subject')} placeholder="e.g., Physics" />
+              <Input id="gen-subject" {...register('subject')} placeholder="e.g., Medicine" />
               {errors.subject && <p className="text-sm text-destructive">{errors.subject.message}</p>}
             </div>
             <div className="space-y-2">
               <Label htmlFor="gen-topic" className="font-medium">Topic</Label>
-              <Input id="gen-topic" {...register('topic')} placeholder="e.g., Quantum Mechanics" />
+              <Input id="gen-topic" {...register('topic')} placeholder="e.g., Endocrinology" />
               {errors.topic && <p className="text-sm text-destructive">{errors.topic.message}</p>}
             </div>
           </div>
 
           <div className="space-y-2">
             <Label htmlFor="gen-subtopic" className="font-medium">Subtopic (Optional)</Label>
-            <Input id="gen-subtopic" {...register('subtopic')} placeholder="e.g., Wave-particle duality" />
+            <Input id="gen-subtopic" {...register('subtopic')} placeholder="e.g., Insulin Therapy" />
           </div>
 
           <div className="space-y-2">

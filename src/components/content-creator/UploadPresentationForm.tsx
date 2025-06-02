@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState, type FormEvent } from 'react';
@@ -20,8 +21,11 @@ const formSchema = z.object({
   subtopic: z.string().optional(),
   presentationFile: z.any()
     .refine((files) => files?.length > 0, 'File is required.')
-    .refine((files) => files?.length === 0 || ['application/pdf', 'application/vnd.ms-powerpoint', 'application/vnd.openxmlformats-officedocument.presentationml.presentation'].includes(files?.[0]?.type), 
-      'Only PDF or PPT files are allowed.'),
+    .refine((files) => {
+        if (files?.length === 0) return true; // Let previous rule handle empty
+        const fileType = files?.[0]?.type;
+        return ['application/pdf', 'application/vnd.ms-powerpoint', 'application/vnd.openxmlformats-officedocument.presentationml.presentation'].includes(fileType);
+      }, 'Only PDF or PPT/PPTX files are allowed.'),
 });
 
 type FormData = z.infer<typeof formSchema>;
@@ -31,7 +35,7 @@ interface UploadPresentationFormProps {
 }
 
 export function UploadPresentationForm({ addPresentation }: UploadPresentationFormProps) {
-  const [isLoading, setIsLoading] = useState(false); // For potential future async operations
+  const [isLoading, setIsLoading] = useState(false); 
   const { toast } = useToast();
   const { register, handleSubmit, formState: { errors }, reset } = useForm<FormData>({
     resolver: zodResolver(formSchema),
@@ -47,7 +51,6 @@ export function UploadPresentationForm({ addPresentation }: UploadPresentationFo
 
     const file = data.presentationFile[0];
     
-    // Simulate upload
     try {
       const newPresentation: Presentation = {
         id: crypto.randomUUID(),
@@ -57,7 +60,7 @@ export function UploadPresentationForm({ addPresentation }: UploadPresentationFo
         subtopic: data.subtopic,
         fileType: file.type === 'application/pdf' ? 'pdf' : 'ppt',
         fileName: file.name,
-        fileUrl: URL.createObjectURL(file), // Temporary URL for client-side demo
+        fileUrl: URL.createObjectURL(file), 
         thumbnailUrl: `https://placehold.co/300x200.png?text=${encodeURIComponent(data.title)}`,
         createdAt: Date.now(),
       };
@@ -79,36 +82,36 @@ export function UploadPresentationForm({ addPresentation }: UploadPresentationFo
           <FileUp className="mr-2 h-6 w-6 text-primary" />
           Upload Existing Presentation
         </CardTitle>
-        <CardDescription>Upload your PPT or PDF files and tag them for easy organization.</CardDescription>
+        <CardDescription>Upload your PPT/PPTX or PDF files and tag them for easy organization.</CardDescription>
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
           <div className="space-y-2">
             <Label htmlFor="upload-title" className="font-medium">Presentation Title</Label>
-            <Input id="upload-title" {...register('title')} placeholder="e.g., Advanced Calculus Lecture 1" />
+            <Input id="upload-title" {...register('title')} placeholder="e.g., Surgical Suturing Techniques" />
             {errors.title && <p className="text-sm text-destructive">{errors.title.message}</p>}
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
               <Label htmlFor="upload-subject" className="font-medium">Subject</Label>
-              <Input id="upload-subject" {...register('subject')} placeholder="e.g., Mathematics" />
+              <Input id="upload-subject" {...register('subject')} placeholder="e.g., Surgery" />
               {errors.subject && <p className="text-sm text-destructive">{errors.subject.message}</p>}
             </div>
             <div className="space-y-2">
               <Label htmlFor="upload-topic" className="font-medium">Topic</Label>
-              <Input id="upload-topic" {...register('topic')} placeholder="e.g., Calculus" />
+              <Input id="upload-topic" {...register('topic')} placeholder="e.g., General Surgery" />
               {errors.topic && <p className="text-sm text-destructive">{errors.topic.message}</p>}
             </div>
           </div>
 
           <div className="space-y-2">
             <Label htmlFor="upload-subtopic" className="font-medium">Subtopic (Optional)</Label>
-            <Input id="upload-subtopic" {...register('subtopic')} placeholder="e.g., Derivatives" />
+            <Input id="upload-subtopic" {...register('subtopic')} placeholder="e.g., Wound Closure" />
           </div>
           
           <div className="space-y-2">
-            <Label htmlFor="upload-presentationFile" className="font-medium">Upload File (PDF/PPT)</Label>
+            <Label htmlFor="upload-presentationFile" className="font-medium">Upload File (PDF/PPT/PPTX)</Label>
             <Input id="upload-presentationFile" type="file" accept=".pdf,.ppt,.pptx" {...register('presentationFile')} className="file:text-primary file:font-medium" />
             {errors.presentationFile && <p className="text-sm text-destructive">{(errors.presentationFile as any).message}</p>}
           </div>
