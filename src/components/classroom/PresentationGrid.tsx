@@ -8,8 +8,10 @@ interface PresentationGridProps {
 }
 
 export function PresentationGrid({ presentations, onViewPresentation }: PresentationGridProps) {
+  // This component now just renders the presentations it's given.
+  // The "no presentations found" message is handled in ClassroomTab.
   if (presentations.length === 0) {
-    return <p className="text-center text-muted-foreground py-8">No presentations found matching your criteria.</p>;
+    return null; 
   }
 
   return (
