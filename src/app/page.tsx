@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -38,6 +39,7 @@ const initialPresentationsData: Presentation[] = [
 export default function HomePage() {
   const [presentations, setPresentations] = useState<Presentation[]>([]);
   const [isMounted, setIsMounted] = useState(false);
+  const [currentYear, setCurrentYear] = useState<number | null>(null);
 
   useEffect(() => {
     // Load presentations from localStorage on mount
@@ -47,6 +49,7 @@ export default function HomePage() {
     } else {
       setPresentations(initialPresentationsData); // Load initial data if nothing in localStorage
     }
+    setCurrentYear(new Date().getFullYear());
     setIsMounted(true);
   }, []);
 
@@ -72,6 +75,9 @@ export default function HomePage() {
              <p className="text-muted-foreground">Loading CourseDeck AI...</p>
            </div>
         </main>
+        <footer className="py-6 text-center text-sm text-muted-foreground border-t">
+          © CourseDeck AI. All rights reserved.
+        </footer>
       </div>
     );
   }
@@ -98,7 +104,7 @@ export default function HomePage() {
         </Tabs>
       </main>
       <footer className="py-6 text-center text-sm text-muted-foreground border-t">
-        © {new Date().getFullYear()} CourseDeck AI. All rights reserved.
+        {currentYear ? `© ${currentYear} CourseDeck AI. All rights reserved.` : '© CourseDeck AI. All rights reserved.'}
       </footer>
     </div>
   );
