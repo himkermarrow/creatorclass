@@ -1,3 +1,4 @@
+
 'use client';
 
 import Image from 'next/image';
@@ -23,7 +24,16 @@ export function PresentationViewer({ presentation, isOpen, onClose }: Presentati
   };
 
   return (
-    <Dialog open={isOpen} onOpenChange={onClose}>
+    <Dialog
+      open={isOpen}
+      onOpenChange={(shouldBeOpen) => {
+        if (!shouldBeOpen) {
+          onClose(); // Call the passed onClose handler only when the dialog is meant to close.
+        }
+        // If shouldBeOpen is true, the 'isOpen' prop is already true,
+        // so no state change is needed from here to keep it open.
+      }}
+    >
       <DialogContent className="max-w-3xl w-full max-h-[90vh] flex flex-col p-0">
         <DialogHeader className="p-6 pb-0">
           <DialogTitle className="font-headline text-2xl">{presentation.title}</DialogTitle>
