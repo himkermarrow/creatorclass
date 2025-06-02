@@ -11,43 +11,69 @@ import { BookOpen, LayoutGrid } from 'lucide-react';
 
 const initialPresentationsData: Presentation[] = [
   {
-    id: '1',
-    title: 'Cardiac Cycle and ECG Basics',
-    subject: 'Physiology',
-    topic: 'Cardiovascular System',
-    subtopic: 'ECG Interpretation',
-    fileType: 'pdf',
-    fileName: 'cardiac_cycle_ecg.pdf',
+    id: 'anat-embryo-001',
+    title: 'Principles of Gametogenesis & IVF',
+    subject: 'Anatomy',
+    topic: 'General Embryology',
+    subtopic: 'Gametogenesis and In-Vitro Fertilization',
+    fileType: 'generated-pdf',
+    fileName: 'gametogenesis_ivf_notes.pdf',
+    generatedTextContent: 'This presentation covers the fundamental principles of gamete formation (spermatogenesis and oogenesis), meiosis, and the clinical application of in-vitro fertilization techniques. Includes diagrams of meiotic stages and IVF procedures.',
+    generatedImages: ['https://placehold.co/600x400.png', 'https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
-    fileUrl: 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 2, // 2 days ago
   },
   {
-    id: '2',
-    title: 'Introduction to Antimicrobial Resistance',
-    subject: 'Pharmacology',
-    topic: 'Antimicrobial Drugs',
-    subtopic: 'Mechanisms of Resistance',
-    fileType: 'ppt',
-    fileName: 'antimicrobial_resistance_intro.pptx',
+    id: 'anat-neuro-001',
+    title: 'Comprehensive Guide to Brainstem & Cranial Nerves',
+    subject: 'Anatomy',
+    topic: 'Neuroanatomy',
+    subtopic: 'Brainstem and Cranial Nerves',
+    fileType: 'pdf',
+    fileName: 'brainstem_cranial_nerves_guide.pdf',
+    fileUrl: 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
     thumbnailUrl: 'https://placehold.co/300x200.png',
-    fileUrl: '#', 
     createdAt: Date.now() - 1000 * 60 * 60 * 24, // 1 day ago
   },
   {
-    id: '3',
-    title: 'Brachial Plexus Anatomy',
+    id: 'anat-thorax-001',
+    title: 'Embryonic Development of the Heart',
     subject: 'Anatomy',
-    topic: 'Upper Limb',
-    subtopic: 'Nerve Plexuses',
-    fileType: 'generated-pdf',
-    fileName: 'brachial_plexus_notes.pdf',
-    generatedTextContent: 'Detailed notes on the formation, branches, and clinical significance of the brachial plexus...',
-    generatedImages: ['https://placehold.co/600x400.png', 'https://placehold.co/600x400.png'],
+    topic: 'Thorax',
+    subtopic: 'Development of Cardiovascular System',
+    fileType: 'ppt',
+    fileName: 'cardiac_embryology_overview.pptx',
+    fileUrl: '#', // Placeholder URL for PPT
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 3, // 3 days ago
+  },
+  {
+    id: 'anat-headneck-001',
+    title: 'Pharyngeal Arch Derivatives',
+    subject: 'Anatomy',
+    topic: 'Head and Neck',
+    subtopic: 'Pharyngeal Arches',
+    fileType: 'generated-pdf',
+    fileName: 'pharyngeal_arches_explained.pdf',
+    generatedTextContent: 'A detailed review of the six pharyngeal arches, their associated cranial nerves, and the muscular, skeletal, and arterial derivatives. Clinical correlations of common arch anomalies are also discussed.',
+    generatedImages: ['https://placehold.co/600x400.png'],
+    thumbnailUrl: 'https://placehold.co/300x200.png',
+    createdAt: Date.now() - 1000 * 60 * 60 * 24 * 4, // 4 days ago
+  },
+  {
+    id: 'anat-histology-001',
+    title: 'Introduction to Epithelial Tissues',
+    subject: 'Anatomy',
+    topic: 'Histology',
+    subtopic: 'Epithelial Tissue',
+    fileType: 'pdf',
+    fileName: 'epithelial_tissue_basics.pdf',
+    fileUrl: 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
+    thumbnailUrl: 'https://placehold.co/300x200.png',
+    createdAt: Date.now() - 1000 * 60 * 60 * 24 * 5, // 5 days ago
   }
 ];
+
 
 export default function HomePage() {
   const [presentations, setPresentations] = useState<Presentation[]>([]);
@@ -55,9 +81,29 @@ export default function HomePage() {
   const [currentYear, setCurrentYear] = useState<number | null>(null);
 
   useEffect(() => {
+    // This code runs only on the client, after initial hydration
     const storedPresentations = localStorage.getItem('courseDeckPresentations');
     if (storedPresentations) {
-      setPresentations(JSON.parse(storedPresentations));
+      try {
+        const parsed = JSON.parse(storedPresentations);
+        // Basic validation to ensure it's an array
+        if (Array.isArray(parsed)) {
+            // Further check if items have expected structure (e.g. id and title)
+            if (parsed.every(item => typeof item.id === 'string' && typeof item.title === 'string')) {
+                 setPresentations(parsed);
+            } else {
+                // Data is malformed, fallback to initial
+                setPresentations(initialPresentationsData);
+            }
+        } else {
+            // Data is not an array, fallback to initial
+             setPresentations(initialPresentationsData);
+        }
+      } catch (e) {
+        // Parsing failed, fallback to initial
+        console.error("Failed to parse presentations from localStorage", e);
+        setPresentations(initialPresentationsData);
+      }
     } else {
       setPresentations(initialPresentationsData);
     }

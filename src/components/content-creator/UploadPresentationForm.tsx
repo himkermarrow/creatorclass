@@ -22,7 +22,7 @@ const formSchema = z.object({
   presentationFile: z.any()
     .refine((files) => files?.length > 0, 'File is required.')
     .refine((files) => {
-        if (files?.length === 0) return true; // Let previous rule handle empty
+        if (!files || files?.length === 0) return true; // Let previous rule handle empty
         const fileType = files?.[0]?.type;
         return ['application/pdf', 'application/vnd.ms-powerpoint', 'application/vnd.openxmlformats-officedocument.presentationml.presentation'].includes(fileType);
       }, 'Only PDF or PPT/PPTX files are allowed.'),
@@ -88,26 +88,26 @@ export function UploadPresentationForm({ addPresentation }: UploadPresentationFo
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
           <div className="space-y-2">
             <Label htmlFor="upload-title" className="font-medium">Presentation Title</Label>
-            <Input id="upload-title" {...register('title')} placeholder="e.g., Surgical Suturing Techniques" />
+            <Input id="upload-title" {...register('title')} placeholder="e.g., Histology of Connective Tissues" />
             {errors.title && <p className="text-sm text-destructive">{errors.title.message}</p>}
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
               <Label htmlFor="upload-subject" className="font-medium">Subject</Label>
-              <Input id="upload-subject" {...register('subject')} placeholder="e.g., Surgery" />
+              <Input id="upload-subject" {...register('subject')} placeholder="e.g., Anatomy" />
               {errors.subject && <p className="text-sm text-destructive">{errors.subject.message}</p>}
             </div>
             <div className="space-y-2">
               <Label htmlFor="upload-topic" className="font-medium">Topic</Label>
-              <Input id="upload-topic" {...register('topic')} placeholder="e.g., General Surgery" />
+              <Input id="upload-topic" {...register('topic')} placeholder="e.g., Histology" />
               {errors.topic && <p className="text-sm text-destructive">{errors.topic.message}</p>}
             </div>
           </div>
 
           <div className="space-y-2">
             <Label htmlFor="upload-subtopic" className="font-medium">Subtopic (Optional)</Label>
-            <Input id="upload-subtopic" {...register('subtopic')} placeholder="e.g., Wound Closure" />
+            <Input id="upload-subtopic" {...register('subtopic')} placeholder="e.g., Epithelial Tissue" />
           </div>
           
           <div className="space-y-2">
