@@ -24,7 +24,7 @@ export function TopicList({ topics, selectedTopic, onSelectTopic, subject, topic
           key={topic}
           variant={'ghost'}
           className={cn(
-            "w-full justify-start text-left h-auto py-2.5 px-3 rounded-md text-foreground transition-colors duration-150 ease-in-out", // Changed to px-3
+            "w-full justify-start text-left h-auto py-2.5 px-3 rounded-md text-foreground transition-colors duration-150 ease-in-out",
             selectedTopic === topic
               ? 'bg-primary/10 text-primary hover:bg-primary/20 dark:bg-primary/20 dark:text-primary-foreground dark:hover:bg-primary/30'
               : 'hover:bg-muted/80'
@@ -44,3 +44,4 @@ export function TopicList({ topics, selectedTopic, onSelectTopic, subject, topic
     </nav>
   );
 }
+
