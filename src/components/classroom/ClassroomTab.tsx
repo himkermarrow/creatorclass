@@ -9,7 +9,7 @@ import { SubjectList } from './SubjectList';
 import { TopicList } from './TopicList';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Input } from '@/components/ui/input';
-import { Search, ListFilter } from 'lucide-react';
+import { Search } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { ScrollArea } from '@/components/ui/scroll-area';
 
@@ -40,21 +40,21 @@ const topicDescriptions: Record<string, Record<string, string>> = {
 
 export function ClassroomTab({ presentations: initialPresentations }: ClassroomTabProps) {
   const [presentations, setPresentations] = useState<Presentation[]>(initialPresentations);
-  const [selectedSubject, setSelectedSubject] = useState<string>(''); 
+  const [selectedSubject, setSelectedSubject] = useState<string>('');
   const [selectedTopic, setSelectedTopic] = useState<string>('');
   const [selectedSubtopic, setSelectedSubtopic] = useState<string>('');
   const [searchTerm, setSearchTerm] = useState<string>('');
 
   const [isViewerOpen, setIsViewerOpen] = useState(false);
   const [viewingPresentation, setViewingPresentation] = useState<Presentation | null>(null);
-  
+
   useEffect(() => {
     setPresentations(initialPresentations);
     if (initialPresentations.length > 0 && !selectedSubject) {
-        const defaultSubject = initialPresentations.find(p => p.subject === "Anatomy")?.subject || initialPresentations[0].subject;
-        setSelectedSubject(defaultSubject);
+      const defaultSubject = initialPresentations.find(p => p.subject === "Anatomy")?.subject || initialPresentations[0].subject;
+      setSelectedSubject(defaultSubject);
     } else if (initialPresentations.length === 0) {
-        setSelectedSubject(''); 
+      setSelectedSubject('');
     }
   }, [initialPresentations, selectedSubject]);
 
@@ -95,8 +95,8 @@ export function ClassroomTab({ presentations: initialPresentations }: ClassroomT
       const subjectMatch = selectedSubject ? p.subject === selectedSubject : true;
       const topicMatch = selectedTopic ? p.topic === selectedTopic : true;
       const subtopicMatch = selectedSubtopic ? p.subtopic === selectedSubtopic : true;
-      const searchTermMatch = searchTerm 
-        ? p.title.toLowerCase().includes(searchTerm.toLowerCase()) || 
+      const searchTermMatch = searchTerm
+        ? p.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
           (p.generatedTextContent && p.generatedTextContent.toLowerCase().includes(searchTerm.toLowerCase()))
         : true;
       return subjectMatch && topicMatch && subtopicMatch && searchTermMatch;
@@ -104,6 +104,8 @@ export function ClassroomTab({ presentations: initialPresentations }: ClassroomT
   }, [presentations, selectedSubject, selectedTopic, selectedSubtopic, searchTerm]);
 
   const handleViewPresentation = (presentation: Presentation) => {
+    // This function might be used by card actions if we re-introduce modal previews for some types
+    // For now, direct link opening is handled by PresentationCard itself
     setViewingPresentation(presentation);
     setIsViewerOpen(true);
   };
@@ -113,104 +115,101 @@ export function ClassroomTab({ presentations: initialPresentations }: ClassroomT
     setViewingPresentation(null);
   };
 
-  const currentTopicDescription = selectedSubject && selectedTopic && topicDescriptions[selectedSubject]?.[selectedTopic] 
-    ? topicDescriptions[selectedSubject]?.[selectedTopic] 
+  const currentTopicDescription = selectedSubject && selectedTopic && topicDescriptions[selectedSubject]?.[selectedTopic]
+    ? topicDescriptions[selectedSubject]?.[selectedTopic]
     : selectedTopic ? `Content related to ${selectedTopic}.` : selectedSubject ? `Select a topic in ${selectedSubject}.` : 'Select a subject and topic to see presentations.';
 
   return (
-    <div className="flex flex-col md:flex-row gap-0 md:gap-8 min-h-[calc(100vh-var(--header-height,10rem))]">
-      <aside className="w-full md:w-1/3 lg:w-1/4 p-4 md:p-0 bg-card md:bg-transparent rounded-lg md:rounded-none shadow-md md:shadow-none mb-6 md:mb-0">
-        <div className="sticky top-24 h-full"> {/* Header height (4rem) + sticky offset (6rem) = 10rem */}
-          <div className="flex flex-col h-full">
-            <h2 className="text-lg font-headline font-semibold mb-3 text-primary flex items-center px-0 md:px-0">
-              <ListFilter className="mr-2 h-5 w-5" />
-              Browse Content
-            </h2>
-            <ScrollArea className="flex-grow pr-2" style={{ maxHeight: 'calc(100vh - 12rem)' }}> {/* 10rem sticky offset + 2rem for header above */}
-              <div className="space-y-6">
-                <div>
-                  <h3 className="text-sm font-medium text-muted-foreground mb-2">Medical Subjects</h3>
-                  <SubjectList
-                    subjects={uniqueSubjects}
-                    selectedSubject={selectedSubject}
-                    onSelectSubject={setSelectedSubject}
+    <div>
+      <h1 className="font-headline text-2xl font-semibold mb-6 text-foreground">Browse by Subject</h1>
+      <div className="flex flex-col md:flex-row gap-0 md:gap-8 min-h-[calc(100vh-var(--header-height,12rem)-2rem)]"> {/* Adjusted min-height */}
+        <aside className="w-full md:w-1/3 lg:w-1/4 p-4 md:p-0 bg-card md:bg-transparent rounded-lg md:rounded-none shadow-md md:shadow-none mb-6 md:mb-0">
+          <div className="sticky top-24 h-full">
+            <ScrollArea className="flex-grow pr-2" style={{ maxHeight: 'calc(100vh - 10rem)' }}> {/* Approx Header (4rem) + Sticky (6rem) */}
+              <div className="space-y-1">
+                <h3 className="text-xs font-medium text-muted-foreground mb-2 px-3 pt-1">MEDICAL SUBJECTS</h3>
+                <SubjectList
+                  subjects={uniqueSubjects}
+                  selectedSubject={selectedSubject}
+                  onSelectSubject={setSelectedSubject}
+                />
+              </div>
+              {selectedSubject && topicsForSelectedSubject.length > 0 && (
+                <div className="mt-6 space-y-1">
+                  <h3 className="text-xs font-medium text-muted-foreground mb-2 px-3">TOPICS IN {selectedSubject.toUpperCase()}</h3>
+                  <TopicList
+                    topics={topicsForSelectedSubject}
+                    selectedTopic={selectedTopic}
+                    onSelectTopic={setSelectedTopic}
+                    subject={selectedSubject}
+                    topicDescriptions={topicDescriptions[selectedSubject] || {}}
                   />
                 </div>
-                {selectedSubject && topicsForSelectedSubject.length > 0 && (
-                  <div>
-                    <h3 className="text-sm font-medium text-muted-foreground mb-2">Topics in {selectedSubject}</h3>
-                    <TopicList
-                      topics={topicsForSelectedSubject}
-                      selectedTopic={selectedTopic}
-                      onSelectTopic={setSelectedTopic}
-                      subject={selectedSubject}
-                      topicDescriptions={topicDescriptions[selectedSubject] || {}}
-                    />
-                  </div>
-                )}
-              </div>
+              )}
             </ScrollArea>
           </div>
-        </div>
-      </aside>
+        </aside>
 
-      <main className="flex-grow w-full md:w-2/3 lg:w-3/4 p-4 md:p-0">
-        <div className="mb-6">
-          <h1 className="font-headline text-3xl font-bold text-foreground">
-            {selectedTopic || selectedSubject || 'All Presentations'}
-          </h1>
-          <p className="text-muted-foreground mt-1">
-            {currentTopicDescription}
-          </p>
-        </div>
-
-        <div className="flex flex-col sm:flex-row gap-4 mb-8 items-center">
-          <div className="relative w-full sm:flex-grow">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
-            <Input 
-              type="search"
-              placeholder="Search presentations by title or content..."
-              className="pl-10 w-full"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-            />
-          </div>
-          {selectedTopic && subtopicsForSelectedTopic.length > 0 && (
-            <div className="w-full sm:w-auto sm:min-w-[200px]">
-              <Select value={selectedSubtopic} onValueChange={(value) => setSelectedSubtopic(value === "all-subtopics" ? "" : value)}>
-                <SelectTrigger>
-                  <SelectValue placeholder="Filter by Subtopic" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all-subtopics">All Subtopics</SelectItem>
-                  {subtopicsForSelectedTopic.map(subtopic => (
-                    <SelectItem key={subtopic} value={subtopic}>{subtopic}</SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+        <main className="flex-grow w-full md:w-2/3 lg:w-3/4 p-4 md:p-0">
+          <div className="flex flex-col sm:flex-row justify-between items-start mb-6 gap-4">
+            <div>
+              <h1 className="font-headline text-3xl font-bold text-foreground">
+                {selectedTopic || selectedSubject || 'All Presentations'}
+              </h1>
+              <p className="text-muted-foreground mt-1">
+                {currentTopicDescription}
+              </p>
             </div>
-          )}
-           {(selectedSubject || selectedTopic || selectedSubtopic || searchTerm) && (
-            <Button 
-              variant="outline" 
+            <div className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto">
+              <div className="relative w-full sm:w-auto sm:min-w-[250px]">
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                <Input
+                  type="search"
+                  placeholder="Search presentations..."
+                  className="pl-10 w-full"
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                />
+              </div>
+              {selectedTopic && subtopicsForSelectedTopic.length > 0 && (
+                <div className="w-full sm:w-auto sm:min-w-[200px]">
+                  <Select value={selectedSubtopic} onValueChange={(value) => setSelectedSubtopic(value === "all-subtopics" ? "" : value)}>
+                    <SelectTrigger>
+                      <SelectValue placeholder="All Subtopics" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="all-subtopics">All Subtopics</SelectItem>
+                      {subtopicsForSelectedTopic.map(subtopic => (
+                        <SelectItem key={subtopic} value={subtopic}>{subtopic}</SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+              )}
+            </div>
+          </div>
+
+          {(selectedSubject || selectedTopic || selectedSubtopic || searchTerm) && (
+            <Button
+              variant="outline"
+              size="sm"
               onClick={() => {
-                setSelectedSubject(uniqueSubjects.includes("Anatomy") ? "Anatomy" : uniqueSubjects[0] || ""); 
+                setSelectedSubject(uniqueSubjects.includes("Anatomy") ? "Anatomy" : uniqueSubjects[0] || "");
                 setSelectedTopic('');
                 setSelectedSubtopic('');
                 setSearchTerm('');
               }}
-              className="w-full sm:w-auto"
+              className="mb-6"
             >
               Clear Filters
             </Button>
           )}
-        </div>
-        
-        <PresentationGrid presentations={filteredPresentations} onViewPresentation={handleViewPresentation} />
-      </main>
 
-      <PresentationViewer presentation={viewingPresentation} isOpen={isViewerOpen} onClose={handleCloseViewer} />
+          <PresentationGrid presentations={filteredPresentations} onViewPresentation={handleViewPresentation} />
+        </main>
+
+        <PresentationViewer presentation={viewingPresentation} isOpen={isViewerOpen} onClose={handleCloseViewer} />
+      </div>
     </div>
   );
 }
-

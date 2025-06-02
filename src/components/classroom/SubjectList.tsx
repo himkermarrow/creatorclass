@@ -18,23 +18,30 @@ export function SubjectList({ subjects, selectedSubject, onSelectSubject }: Subj
           key={subject}
           variant={selectedSubject === subject ? 'default' : 'ghost'}
           className={cn(
-            "w-full justify-start text-left h-auto py-2 px-3",
-            selectedSubject === subject ? 'bg-primary text-primary-foreground' : 'hover:bg-accent/50'
+            "w-full justify-start text-left h-auto py-2.5 px-3 rounded-md", // Increased padding
+            selectedSubject === subject 
+              ? 'bg-primary text-primary-foreground hover:bg-primary/90' 
+              : 'hover:bg-muted text-foreground'
           )}
           onClick={() => onSelectSubject(subject)}
         >
           <div className="overflow-hidden w-full">
-            <span className="font-medium block truncate">{subject}</span>
+            <span className="font-medium block truncate text-sm">{subject}</span>
             {subject === 'Anatomy' && (
-              <span className="text-xs opacity-80 block leading-tight line-clamp-1">
-                Complete NEET PG Anatomy curriculum
+              <span className="text-xs opacity-80 block leading-tight line-clamp-2 mt-0.5">
+                Complete NEET PG Anatomy curriculum with detailed subtopics
               </span>
             )}
              {subject === 'Physiology' && (
-              <span className="text-xs opacity-80 block leading-tight line-clamp-1">
+              <span className="text-xs opacity-80 block leading-tight line-clamp-2 mt-0.5">
                 Core concepts of human physiology
               </span>
             )}
+             {!(subject === 'Anatomy' || subject === 'Physiology') && (
+                <span className="text-xs opacity-70 block leading-tight line-clamp-2 mt-0.5">
+                    Presentations related to {subject}
+                </span>
+             )}
           </div>
         </Button>
       ))}
