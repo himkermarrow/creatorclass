@@ -51,7 +51,7 @@ export function ClassroomTab({ presentations: initialPresentations }: ClassroomT
   useEffect(() => {
     setPresentations(initialPresentations);
     if (initialPresentations.length > 0 && !selectedSubject) {
-      const defaultSubject = initialPresentations.find(p => p.subject === "Anatomy")?.subject || initialPresentations[0].subject;
+      const defaultSubject = initialPresentations.find(p => p.subject === "Anatomy")?.subject || initialPresentations[0]?.subject || "";
       setSelectedSubject(defaultSubject);
     } else if (initialPresentations.length === 0) {
       setSelectedSubject('');
@@ -102,10 +102,11 @@ export function ClassroomTab({ presentations: initialPresentations }: ClassroomT
       return subjectMatch && topicMatch && subtopicMatch && searchTermMatch;
     }).sort((a, b) => b.createdAt - a.createdAt);
   }, [presentations, selectedSubject, selectedTopic, selectedSubtopic, searchTerm]);
+  
+  const displayPresentations = filteredPresentations.slice(0, 8);
+
 
   const handleViewPresentation = (presentation: Presentation) => {
-    // For 'generated-pdf', we now open a new tab via PresentationCard.
-    // This viewer is for other types or if we reinstate modal previews.
     setViewingPresentation(presentation);
     setIsViewerOpen(true);
   };
@@ -122,12 +123,12 @@ export function ClassroomTab({ presentations: initialPresentations }: ClassroomT
   return (
     <div>
       <h1 className="font-headline text-2xl font-semibold mb-6 text-foreground">Browse by Subject</h1>
-      <div className="flex flex-col md:flex-row gap-0 md:gap-8 min-h-[calc(100vh-var(--header-height,12rem)-2rem)]">
-        <aside className="w-full md:w-1/3 lg:w-1/4 p-0 md:p-0 bg-card rounded-lg md:rounded-none shadow-sm md:shadow-none mb-6 md:mb-0 md:border-r border-border">
-          <div className="sticky top-24 h-full">
-            <ScrollArea className="flex-grow pr-2" style={{ maxHeight: 'calc(100vh - 10rem)' }}>
-              <div className="space-y-1">
-                <h3 className="text-xs font-medium text-muted-foreground px-3 pt-1 mb-2">MEDICAL SUBJECTS</h3>
+      <div className="flex flex-col md:flex-row gap-0 md:gap-0 min-h-[calc(100vh-var(--header-height,12rem)-2rem)]">
+        <aside className="w-full md:w-1/3 lg:w-1/4 p-0 md:p-0 bg-card md:border-r border-border shadow-sm md:shadow-none mb-6 md:mb-0">
+          <div className="sticky top-20 h-full"> {/* Adjusted top for sticky positioning */}
+            <ScrollArea className="flex-grow" style={{ maxHeight: 'calc(100vh - 8rem)' }}> {/* Adjusted maxHeight */}
+              <div className="space-y-1 py-4"> {/* Added py-4 for overall padding */}
+                <h3 className="text-xs font-medium text-muted-foreground px-3 mb-1">MEDICAL SUBJECTS</h3>
                 <SubjectList
                   subjects={uniqueSubjects}
                   selectedSubject={selectedSubject}
@@ -135,8 +136,8 @@ export function ClassroomTab({ presentations: initialPresentations }: ClassroomT
                 />
               </div>
               {selectedSubject && topicsForSelectedSubject.length > 0 && (
-                <div className="mt-6 space-y-1">
-                  <h3 className="text-xs font-medium text-muted-foreground px-3 pt-1 mb-2">TOPICS IN {selectedSubject.toUpperCase()}</h3>
+                <div className="mt-4 space-y-1 pb-4"> {/* Adjusted mt, added pb-4 */}
+                  <h3 className="text-xs font-medium text-muted-foreground px-3 mb-1">TOPICS IN {selectedSubject.toUpperCase()}</h3>
                   <TopicList
                     topics={topicsForSelectedSubject}
                     selectedTopic={selectedTopic}
@@ -150,8 +151,8 @@ export function ClassroomTab({ presentations: initialPresentations }: ClassroomT
           </div>
         </aside>
 
-        <main className="flex-grow w-full md:w-2/3 lg:w-3/4 p-4 md:pl-8 md:p-0">
-          <div className="flex flex-col sm:flex-row justify-between items-start mb-6 gap-4">
+        <main className="flex-grow w-full md:w-2/3 lg:w-3/4 p-4 md:pl-8 md:p-0 md:pt-4"> {/* Added md:pt-4 */}
+          <div className="flex flex-col sm:flex-row justify-between items-start mb-6 gap-4 px-4 md:px-0"> {/* Added px-4 for mobile */}
             <div>
               <h1 className="font-headline text-3xl font-bold text-foreground">
                 {selectedTopic || selectedSubject || 'All Presentations'}
@@ -190,22 +191,25 @@ export function ClassroomTab({ presentations: initialPresentations }: ClassroomT
           </div>
 
           {(selectedSubject || selectedTopic || selectedSubtopic || searchTerm) && (
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => {
-                setSelectedSubject(uniqueSubjects.includes("Anatomy") ? "Anatomy" : uniqueSubjects[0] || "");
-                setSelectedTopic('');
-                setSelectedSubtopic('');
-                setSearchTerm('');
-              }}
-              className="mb-6"
-            >
-              Clear Filters
-            </Button>
+            <div className="px-4 md:px-0"> {/* Added px-4 for mobile */}
+                <Button
+                variant="outline"
+                size="sm"
+                onClick={() => {
+                    setSelectedSubject(uniqueSubjects.includes("Anatomy") ? "Anatomy" : uniqueSubjects[0] || "");
+                    setSelectedTopic('');
+                    setSelectedSubtopic('');
+                    setSearchTerm('');
+                }}
+                className="mb-6"
+                >
+                Clear Filters
+                </Button>
+            </div>
           )}
-
-          <PresentationGrid presentations={filteredPresentations} onViewPresentation={handleViewPresentation} />
+          <div className="px-4 md:px-0"> {/* Added px-4 for mobile */}
+            <PresentationGrid presentations={displayPresentations} onViewPresentation={handleViewPresentation} />
+          </div>
         </main>
 
         <PresentationViewer presentation={viewingPresentation} isOpen={isViewerOpen} onClose={handleCloseViewer} />

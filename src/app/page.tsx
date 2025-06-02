@@ -23,6 +23,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 15,
+    dataAiHint: "embryo development"
   },
   {
     id: 'anat-general-embryology-gametogenesis-ivf-1',
@@ -36,6 +37,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png', 'https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 14.9,
+    dataAiHint: "gametes fertilization"
   },
   {
     id: 'anat-general-embryology-dev-week-1-2-2',
@@ -49,6 +51,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 14.8,
+    dataAiHint: "embryonic development"
   },
   {
     id: 'anat-general-embryology-dev-week-3-4-3',
@@ -62,6 +65,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 14.7,
+    dataAiHint: "embryonic period"
   },
   {
     id: 'anat-general-embryology-primitive-streak-4',
@@ -75,6 +79,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 14.6,
+    dataAiHint: "gastrulation germ"
   },
   {
     id: 'anat-general-embryology-ectoderm-neural-crest-5',
@@ -88,6 +93,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 14.5,
+    dataAiHint: "ectoderm neural"
   },
   {
     id: 'anat-general-embryology-mesoderm-derivatives-6',
@@ -101,6 +107,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 14.4,
+    dataAiHint: "mesoderm development"
   },
   {
     id: 'anat-general-embryology-endoderm-derivatives-7',
@@ -114,6 +121,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 14.3,
+    dataAiHint: "endoderm development"
   },
   {
     id: 'anat-general-embryology-placenta-development-8',
@@ -127,6 +135,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 2.5,
+    dataAiHint: "placenta fetal"
   },
 
   // Anatomy - Histology
@@ -142,6 +151,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 14.2,
+    dataAiHint: "histology body"
   },
   {
     id: 'anat-histology-epithelial-tissue-1',
@@ -155,32 +165,35 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png', 'https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 5,
+    dataAiHint: "epithelium histology"
   },
   {
     id: 'anat-histology-glandular-tissue-2',
-    title: 'Glandular Tissue',
+    title: 'Glands', // Changed from Glandular Tissue to Glands
     subject: 'Anatomy',
     topic: 'Histology',
-    subtopic: 'Glandular Tissue',
+    subtopic: 'Glands', // Changed from Glandular Tissue to Glands
     fileType: 'generated-pdf',
-    fileName: 'histo_glandular_tissue_notes.pdf',
-    generatedTextContent: 'This presentation covers key aspects of Glandular Tissue within Histology.',
+    fileName: 'histo_glands_notes.pdf',
+    generatedTextContent: 'This presentation covers key aspects of Glandular Tissue (Glands) within Histology.',
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 14.0,
+    dataAiHint: "glands histology"
   },
   {
     id: 'anat-histology-connective-tissue-3',
-    title: 'Connective Tissue (Histology)',
+    title: 'Connective Tissue', // Removed (Histology)
     subject: 'Anatomy',
     topic: 'Histology',
-    subtopic: 'Connective Tissue (Histology)',
+    subtopic: 'Connective Tissue', // Removed (Histology)
     fileType: 'ppt', 
     fileName: 'connective_tissue_histo.pptx',
     fileUrl: '#', 
     thumbnailUrl: 'https://placehold.co/300x200.png',
     generatedTextContent: 'Overview of different types of connective tissues, their cells, fibers, and ground substance.',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 5.5,
+    dataAiHint: "connective tissue"
   },
   {
     id: 'anat-histology-cartilage-tissue-4',
@@ -194,6 +207,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 13.8,
+    dataAiHint: "cartilage histology"
   },
   {
     id: 'anat-histology-lymphoid-tissue-5',
@@ -207,19 +221,21 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 13.7,
+    dataAiHint: "lymphoid tissue"
   },
   {
     id: 'anat-histology-integumentary-system-6',
     title: 'Integumentary System (Histology)',
     subject: 'Anatomy',
     topic: 'Histology',
-    subtopic: 'Integumentary System (Histology)',
+    subtopic: 'Integumentary System', // Corrected subtopic name
     fileType: 'generated-pdf',
     fileName: 'histo_integumentary_system_notes.pdf',
     generatedTextContent: 'This presentation covers key aspects of the Integumentary System within Histology.',
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 13.6,
+    dataAiHint: "skin histology"
   },
   {
     id: 'anat-histology-cell-junctions-7',
@@ -233,84 +249,77 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 13.5,
+    dataAiHint: "cell junctions"
   },
-  {
-    id: 'anat-histology-muscle-tissue-8',
-    title: 'Muscle Tissue (Histology)',
+    {
+    id: 'anat-histology-muscular-system-8', // Renamed from muscle-tissue for clarity with syllabus
+    title: 'Muscular System (Histology)', // Renamed
     subject: 'Anatomy',
     topic: 'Histology',
-    subtopic: 'Muscle Tissue (Histology)',
+    subtopic: 'Muscular System', // Matched to syllabus
     fileType: 'generated-pdf',
-    fileName: 'histo_muscle_tissue_notes.pdf',
-    generatedTextContent: 'This presentation covers key aspects of Muscle Tissue within Histology.',
+    fileName: 'histo_muscular_system_notes.pdf',
+    generatedTextContent: 'This presentation covers key aspects of the Muscular System within Histology.',
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 13.4,
+    dataAiHint: "muscle histology"
   },
   {
     id: 'anat-histology-respiratory-system-9',
     title: 'Respiratory System (Histology)',
     subject: 'Anatomy',
     topic: 'Histology',
-    subtopic: 'Respiratory System (Histology)',
+    subtopic: 'Respiratory System', // Corrected subtopic name
     fileType: 'generated-pdf',
     fileName: 'histo_respiratory_system_notes.pdf',
     generatedTextContent: 'This presentation covers key aspects of the Respiratory System within Histology.',
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 13.3,
+    dataAiHint: "lung histology"
   },
   {
     id: 'anat-histology-digestive-system-10',
     title: 'Digestive System (Histology)',
     subject: 'Anatomy',
     topic: 'Histology',
-    subtopic: 'Digestive System (Histology)',
+    subtopic: 'Digestive System', // Corrected subtopic name
     fileType: 'generated-pdf',
     fileName: 'histo_digestive_system_notes.pdf',
     generatedTextContent: 'This presentation covers key aspects of the Digestive System within Histology.',
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 13.2,
+    dataAiHint: "gut histology"
   },
   {
     id: 'anat-histology-urinary-system-11',
     title: 'Urinary System (Histology)',
     subject: 'Anatomy',
     topic: 'Histology',
-    subtopic: 'Urinary System (Histology)',
+    subtopic: 'Urinary System', // Corrected subtopic name
     fileType: 'generated-pdf',
     fileName: 'histo_urinary_system_notes.pdf',
     generatedTextContent: 'This presentation covers key aspects of the Urinary System within Histology.',
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 13.1,
+    dataAiHint: "kidney histology"
   },
   {
-    id: 'anat-histology-male-genital-system-12',
-    title: 'Male Genital System (Histology)',
+    id: 'anat-histology-genital-system-12', // Combined Male and Female for 'Genital System'
+    title: 'Genital System (Histology)',
     subject: 'Anatomy',
     topic: 'Histology',
-    subtopic: 'Male Genital System (Histology)',
+    subtopic: 'Genital System', // Matched to syllabus
     fileType: 'generated-pdf',
-    fileName: 'histo_male_genital_system_notes.pdf',
-    generatedTextContent: 'This presentation covers key aspects of the Male Genital System within Histology.',
+    fileName: 'histo_genital_system_notes.pdf',
+    generatedTextContent: 'This presentation covers key aspects of the Genital System (Male and Female) within Histology.',
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 13.0,
-  },
-  {
-    id: 'anat-histology-female-genital-system-13',
-    title: 'Female Genital System (Histology)',
-    subject: 'Anatomy',
-    topic: 'Histology',
-    subtopic: 'Female Genital System (Histology)',
-    fileType: 'generated-pdf',
-    fileName: 'histo_female_genital_system_notes.pdf',
-    generatedTextContent: 'This presentation covers key aspects of the Female Genital System within Histology.',
-    generatedImages: ['https://placehold.co/600x400.png'],
-    thumbnailUrl: 'https://placehold.co/300x200.png',
-    createdAt: Date.now() - 1000 * 60 * 60 * 24 * 12.9,
+    dataAiHint: "reproductive histology"
   },
 
   // Anatomy - Osteology and Arthrology
@@ -326,6 +335,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 6,
+    dataAiHint: "bones skeleton"
   },
   {
     id: 'anat-osteo-arthro-arthrology-1',
@@ -339,6 +349,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 12.8,
+    dataAiHint: "joints articulation"
   },
 
   // Anatomy - Neuroanatomy
@@ -354,6 +365,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 12.7,
+    dataAiHint: "nervous system"
   },
   {
     id: 'anat-neuro-development-nervous-system-1',
@@ -367,6 +379,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 12.6,
+    dataAiHint: "neurodevelopment brain"
   },
   {
     id: 'anat-neuro-third-ventricle-2',
@@ -380,6 +393,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 12.5,
+    dataAiHint: "brain ventricle"
   },
   {
     id: 'anat-neuro-fourth-ventricle-3',
@@ -393,6 +407,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 12.4,
+    dataAiHint: "brain csf"
   },
   {
     id: 'anat-neuro-white-matter-fibers-4',
@@ -406,6 +421,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 12.3,
+    dataAiHint: "brain white matter"
   },
   {
     id: 'anat-neuro-neural-columns-5',
@@ -419,6 +435,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 12.2,
+    dataAiHint: "spinal cord"
   },
   {
     id: 'anat-neuro-cerebrum-6',
@@ -432,6 +449,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 12.1,
+    dataAiHint: "brain cerebrum"
   },
   {
     id: 'anat-neuro-basal-ganglia-7',
@@ -445,6 +463,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 12.0,
+    dataAiHint: "brain motor"
   },
   {
     id: 'anat-neuro-internal-capsule-8',
@@ -458,6 +477,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 11.9,
+    dataAiHint: "brain white matter"
   },
   {
     id: 'anat-neuro-thalamus-hypothalamus-9',
@@ -471,6 +491,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 11.8,
+    dataAiHint: "brain diencephalon"
   },
   {
     id: 'anat-neuro-brainstem-cranial-nerves-10',
@@ -484,6 +505,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png', 'https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 1,
+    dataAiHint: "brainstem nerves"
   },
   {
     id: 'anat-neuro-neural-column-brainstem-nuclei-11',
@@ -497,6 +519,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 11.6,
+    dataAiHint: "brainstem nuclei"
   },
   {
     id: 'anat-neuro-cerebellum-12',
@@ -510,6 +533,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 1.5,
+    dataAiHint: "brain cerebellum"
   },
   {
     id: 'anat-neuro-spinal-cord-13',
@@ -523,6 +547,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 11.4,
+    dataAiHint: "spinal cord"
   },
   {
     id: 'anat-neuro-autonomic-nervous-system-14',
@@ -536,6 +561,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 11.3,
+    dataAiHint: "ans sympathetic"
   },
   {
     id: 'anat-neuro-arterial-supply-nervous-system-15',
@@ -549,6 +575,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 11.2,
+    dataAiHint: "brain blood"
   },
   {
     id: 'anat-neuro-brainstem-lesions-16',
@@ -562,6 +589,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 11.1,
+    dataAiHint: "brainstem stroke"
   },
   {
     id: 'anat-neuro-venous-drainage-cranial-cavity-17',
@@ -575,6 +603,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 11.0,
+    dataAiHint: "brain veins"
   },
 
   // Anatomy - Head and Neck
@@ -590,6 +619,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 4,
+    dataAiHint: "embryo neck"
   },
   {
     id: 'anat-headneck-pharyngeal-pouches-clefts-1',
@@ -603,6 +633,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 10.8,
+    dataAiHint: "embryo development"
   },
   {
     id: 'anat-headneck-tongue-development-2',
@@ -616,6 +647,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 10.7,
+    dataAiHint: "tongue embryo"
   },
   {
     id: 'anat-headneck-pharyngeal-arch-arteries-3',
@@ -629,6 +661,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 10.6,
+    dataAiHint: "embryo arteries"
   },
   {
     id: 'anat-headneck-development-skull-4',
@@ -642,6 +675,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 10.5,
+    dataAiHint: "skull development"
   },
   {
     id: 'anat-headneck-cranial-cavity-intro-5',
@@ -655,6 +689,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 10.4,
+    dataAiHint: "skull anatomy"
   },
   {
     id: 'anat-headneck-cranial-fossae-foramina-6',
@@ -668,6 +703,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 10.3,
+    dataAiHint: "skull foramina"
   },
   {
     id: 'anat-headneck-trigeminal-nerve-7',
@@ -681,6 +717,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 10.2,
+    dataAiHint: "cranial nerve"
   },
   {
     id: 'anat-headneck-middle-cranial-fossa-8',
@@ -694,6 +731,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 10.1,
+    dataAiHint: "skull anatomy"
   },
   {
     id: 'anat-headneck-cavernous-sinus-9',
@@ -707,6 +745,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 10.0,
+    dataAiHint: "brain sinus"
   },
   {
     id: 'anat-headneck-posterior-cranial-fossa-10',
@@ -720,6 +759,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 9.9,
+    dataAiHint: "skull anatomy"
   },
   {
     id: 'anat-headneck-facial-nerve-11',
@@ -733,6 +773,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 9.8,
+    dataAiHint: "cranial nerve"
   },
   {
     id: 'anat-headneck-glossopharyngeal-nerve-12',
@@ -746,6 +787,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 9.7,
+    dataAiHint: "cranial nerve"
   },
   {
     id: 'anat-headneck-vagus-nerve-13',
@@ -759,6 +801,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 9.6,
+    dataAiHint: "cranial nerve"
   },
   {
     id: 'anat-headneck-hypoglossal-nerve-14',
@@ -772,6 +815,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 9.5,
+    dataAiHint: "cranial nerve"
   },
   {
     id: 'anat-headneck-cervical-plexus-15',
@@ -785,6 +829,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 9.4,
+    dataAiHint: "nerve plexus"
   },
   {
     id: 'anat-headneck-scalenus-anterior-relations-16',
@@ -798,45 +843,49 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 9.3,
+    dataAiHint: "neck muscle"
   },
   {
     id: 'anat-headneck-arterial-supply-17',
     title: 'Arterial Supply (Head and Neck)',
     subject: 'Anatomy',
     topic: 'Head and Neck',
-    subtopic: 'Arterial Supply (Head and Neck)',
+    subtopic: 'Arterial Supply', // Simplified from syllabus for consistency
     fileType: 'generated-pdf',
     fileName: 'headneck_arterial_supply_notes.pdf',
     generatedTextContent: 'This presentation covers key aspects of Arterial Supply of the Head and Neck.',
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 9.2,
+    dataAiHint: "head arteries"
   },
   {
     id: 'anat-headneck-venous-drainage-18',
     title: 'Venous Drainage (Head and Neck)',
     subject: 'Anatomy',
     topic: 'Head and Neck',
-    subtopic: 'Venous Drainage (Head and Neck)',
+    subtopic: 'Venous Drainage', // Simplified
     fileType: 'generated-pdf',
     fileName: 'headneck_venous_drainage_notes.pdf',
     generatedTextContent: 'This presentation covers key aspects of Venous Drainage of the Head and Neck.',
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 9.1,
+    dataAiHint: "head veins"
   },
   {
     id: 'anat-headneck-lymphatic-drainage-19',
     title: 'Lymphatic Drainage (Head and Neck)',
     subject: 'Anatomy',
     topic: 'Head and Neck',
-    subtopic: 'Lymphatic Drainage (Head and Neck)',
+    subtopic: 'Lymphatic Drainage', // Simplified
     fileType: 'generated-pdf',
     fileName: 'headneck_lymphatic_drainage_notes.pdf',
     generatedTextContent: 'This presentation covers key aspects of Lymphatic Drainage of the Head and Neck.',
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 9.0,
+    dataAiHint: "lymph nodes"
   },
   {
     id: 'anat-headneck-scalp-20',
@@ -850,6 +899,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 8.9,
+    dataAiHint: "scalp anatomy"
   },
   {
     id: 'anat-headneck-neck-triangles-21',
@@ -863,6 +913,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 8.8,
+    dataAiHint: "neck anatomy"
   },
   {
     id: 'anat-headneck-neck-fascia-spaces-22',
@@ -876,6 +927,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 8.7,
+    dataAiHint: "neck fascia"
   },
   {
     id: 'anat-headneck-parotid-gland-23',
@@ -889,6 +941,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 8.6,
+    dataAiHint: "salivary gland"
   },
   {
     id: 'anat-headneck-pharynx-24',
@@ -902,6 +955,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 8.5,
+    dataAiHint: "throat anatomy"
   },
   {
     id: 'anat-headneck-oesophagus-25',
@@ -915,6 +969,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 8.4,
+    dataAiHint: "esophagus anatomy"
   },
   {
     id: 'anat-headneck-larynx-26',
@@ -928,6 +983,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 8.3,
+    dataAiHint: "voice box"
   },
   {
     id: 'anat-headneck-vertebral-landmarks-trachea-27',
@@ -941,6 +997,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 8.2,
+    dataAiHint: "neck vertebrae"
   },
   {
     id: 'anat-headneck-ear-28',
@@ -954,6 +1011,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 8.1,
+    dataAiHint: "ear anatomy"
   },
   {
     id: 'anat-headneck-nose-29',
@@ -967,6 +1025,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 8.0,
+    dataAiHint: "nose anatomy"
   },
   {
     id: 'anat-headneck-eyeball-30',
@@ -980,6 +1039,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 7.9,
+    dataAiHint: "eye anatomy"
   },
   {
     id: 'anat-headneck-cranial-nerves-3-4-6-31',
@@ -993,6 +1053,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 7.8,
+    dataAiHint: "eye movement nerves"
   },
 
   // Anatomy - Back Region
@@ -1008,6 +1069,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 8,
+    dataAiHint: "spinal cord"
   },
   {
     id: 'anat-back-spinal-cord-enlargements-spaces-1',
@@ -1021,6 +1083,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 7.7,
+    dataAiHint: "spinal anatomy"
   },
   {
     id: 'anat-back-vertebrae-2',
@@ -1034,6 +1097,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 7.6,
+    dataAiHint: "spine bones"
   },
   {
     id: 'anat-back-lumbar-puncture-3',
@@ -1047,6 +1111,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 7.5,
+    dataAiHint: "spinal tap"
   },
   {
     id: 'anat-back-vertebral-curvatures-slip-disc-4',
@@ -1060,6 +1125,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 7.4,
+    dataAiHint: "spine disc"
   },
   {
     id: 'anat-back-cranio-vertebral-joints-5',
@@ -1073,6 +1139,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 7.3,
+    dataAiHint: "neck joints"
   },
   {
     id: 'anat-back-vertebral-landmarks-triangles-6',
@@ -1086,6 +1153,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 7.2,
+    dataAiHint: "back anatomy"
   },
 
   // Anatomy - Thorax
@@ -1101,6 +1169,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png', 'https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 3,
+    dataAiHint: "heart embryo"
   },
   {
     id: 'anat-thorax-dev-embryonic-veins-1',
@@ -1114,6 +1183,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 7.1,
+    dataAiHint: "embryo veins"
   },
   {
     id: 'anat-thorax-dev-heart-tube-2',
@@ -1127,6 +1197,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 7.0,
+    dataAiHint: "heart development"
   },
   {
     id: 'anat-thorax-transverse-pericardial-sinus-3',
@@ -1140,6 +1211,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 6.9,
+    dataAiHint: "heart anatomy"
   },
   {
     id: 'anat-thorax-interatrial-septum-dev-4',
@@ -1153,6 +1225,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 6.8,
+    dataAiHint: "heart septum"
   },
   {
     id: 'anat-thorax-ap-septum-formation-anomalies-5',
@@ -1166,6 +1239,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 6.7,
+    dataAiHint: "heart defect"
   },
   {
     id: 'anat-thorax-fetoplacental-circulation-6',
@@ -1179,6 +1253,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 6.6,
+    dataAiHint: "fetal circulation"
   },
   {
     id: 'anat-thorax-heart-surfaces-grooves-7',
@@ -1192,6 +1267,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 6.5,
+    dataAiHint: "heart anatomy"
   },
   {
     id: 'anat-thorax-heart-venous-drainage-8',
@@ -1205,6 +1281,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 6.4,
+    dataAiHint: "heart veins"
   },
   {
     id: 'anat-thorax-heart-interior-features-9',
@@ -1218,6 +1295,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 6.3,
+    dataAiHint: "heart chambers"
   },
   {
     id: 'anat-thorax-heart-arterial-supply-10',
@@ -1231,6 +1309,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 6.2,
+    dataAiHint: "coronary arteries"
   },
   {
     id: 'anat-thorax-sternal-angle-mediastinum-11',
@@ -1244,6 +1323,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 6.1,
+    dataAiHint: "chest anatomy"
   },
   {
     id: 'anat-thorax-lungs-hilum-12',
@@ -1257,6 +1337,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 6.0,
+    dataAiHint: "lung anatomy"
   },
   {
     id: 'anat-thorax-lungs-bronchopulmonary-segments-13',
@@ -1270,6 +1351,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 5.9,
+    dataAiHint: "lung segments"
   },
   {
     id: 'anat-thorax-lungs-pleura-surface-markings-14',
@@ -1283,19 +1365,21 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 5.8,
+    dataAiHint: "lung pleura"
   },
   {
     id: 'anat-thorax-joints-thorax-15',
-    title: 'Joints (Thorax)',
+    title: 'Joints (Thorax)', // Matched to syllabus "Joints" under Thorax
     subject: 'Anatomy',
     topic: 'Thorax',
-    subtopic: 'Joints (Thorax)',
+    subtopic: 'Joints', // Matched to syllabus
     fileType: 'generated-pdf',
-    fileName: 'thorax_joints_thorax_notes.pdf',
+    fileName: 'thorax_joints_notes.pdf',
     generatedTextContent: 'This presentation covers key aspects of Joints of the Thorax.',
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 5.7,
+    dataAiHint: "rib cage joints"
   },
   {
     id: 'anat-thorax-respiratory-movements-16',
@@ -1309,6 +1393,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 5.6,
+    dataAiHint: "breathing mechanics"
   },
   {
     id: 'anat-thorax-intercostal-drainage-block-17',
@@ -1322,6 +1407,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 5.5,
+    dataAiHint: "chest tube"
   },
   {
     id: 'anat-thorax-phrenic-nerve-18',
@@ -1335,32 +1421,35 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 5.4,
+    dataAiHint: "diaphragm nerve"
   },
   {
     id: 'anat-thorax-venous-drainage-thorax-19',
-    title: 'Venous Drainage (Thorax)',
+    title: 'Venous Drainage (Thorax)', // Matched to syllabus "Venous Drainage" under Thorax
     subject: 'Anatomy',
     topic: 'Thorax',
-    subtopic: 'Venous Drainage (Thorax)',
+    subtopic: 'Venous Drainage', // Matched to syllabus
     fileType: 'generated-pdf',
-    fileName: 'thorax_venous_drainage_thorax_notes.pdf',
+    fileName: 'thorax_venous_drainage_notes.pdf',
     generatedTextContent: 'This presentation covers key aspects of Venous Drainage of the Thorax.',
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 5.3,
+    dataAiHint: "chest veins"
   },
   {
     id: 'anat-thorax-lymphatic-drainage-thorax-20',
-    title: 'Lymphatic Drainage (Thorax)',
+    title: 'Lymphatic Drainage (Thorax)', // Matched to syllabus "Lymphatic Drainage" under Thorax
     subject: 'Anatomy',
     topic: 'Thorax',
-    subtopic: 'Lymphatic Drainage (Thorax)',
+    subtopic: 'Lymphatic Drainage', // Matched to syllabus
     fileType: 'generated-pdf',
-    fileName: 'thorax_lymphatic_drainage_thorax_notes.pdf',
+    fileName: 'thorax_lymphatic_drainage_notes.pdf',
     generatedTextContent: 'This presentation covers key aspects of Lymphatic Drainage of the Thorax.',
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 5.2,
+    dataAiHint: "chest lymph"
   },
 
   // Anatomy - Upper Limb
@@ -1369,39 +1458,42 @@ const initialPresentationsData: Presentation[] = [
     title: 'Embryology (Upper Limb)',
     subject: 'Anatomy',
     topic: 'Upper Limb',
-    subtopic: 'Embryology (Upper Limb)',
+    subtopic: 'Embryology', // Matched to syllabus
     fileType: 'generated-pdf',
     fileName: 'upperlimb_embryology_notes.pdf',
     generatedTextContent: 'This presentation covers key aspects of Embryology of the Upper Limb.',
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 5.1,
+    dataAiHint: "arm development"
   },
   {
     id: 'anat-upperlimb-nerve-supply-overview-1',
     title: 'Nerve Supply Overview (Upper Limb)',
     subject: 'Anatomy',
     topic: 'Upper Limb',
-    subtopic: 'Nerve Supply Overview (Upper Limb)',
+    subtopic: 'Nerve Supply Overview', // Matched to syllabus
     fileType: 'generated-pdf',
     fileName: 'upperlimb_nerve_supply_overview_notes.pdf',
     generatedTextContent: 'This presentation covers key aspects of Nerve Supply Overview of the Upper Limb.',
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 5.0,
+    dataAiHint: "arm nerves"
   },
   {
     id: 'anat-upperlimb-dermatomes-myotomes-2',
     title: 'Dermatomes and Myotomes (Upper Limb)',
     subject: 'Anatomy',
     topic: 'Upper Limb',
-    subtopic: 'Dermatomes and Myotomes (Upper Limb)',
+    subtopic: 'Dermatomes and Myotomes', // Matched to syllabus
     fileType: 'generated-pdf',
     fileName: 'upperlimb_dermatomes_myotomes_notes.pdf',
     generatedTextContent: 'This presentation covers key aspects of Dermatomes and Myotomes of the Upper Limb.',
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 4.9,
+    dataAiHint: "skin innervation"
   },
   {
     id: 'anat-upperlimb-brachial-plexus-3',
@@ -1415,6 +1507,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png', 'https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 7,
+    dataAiHint: "brachial plexus"
   },
   {
     id: 'anat-upperlimb-bones-muscles-proximal-4',
@@ -1428,6 +1521,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 4.7,
+    dataAiHint: "shoulder arm"
   },
   {
     id: 'anat-upperlimb-axilla-5',
@@ -1441,6 +1535,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 4.6,
+    dataAiHint: "armpit anatomy"
   },
   {
     id: 'anat-upperlimb-scapular-movements-6',
@@ -1454,6 +1549,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 4.5,
+    dataAiHint: "shoulder blade"
   },
   {
     id: 'anat-upperlimb-clavipectoral-fascia-7',
@@ -1467,6 +1563,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 4.4,
+    dataAiHint: "chest fascia"
   },
   {
     id: 'anat-upperlimb-muscles-anterior-arm-8',
@@ -1480,6 +1577,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 4.3,
+    dataAiHint: "biceps arm"
   },
   {
     id: 'anat-upperlimb-muscles-anterior-forearm-9',
@@ -1493,6 +1591,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 4.2,
+    dataAiHint: "forearm muscles"
   },
   {
     id: 'anat-upperlimb-cubital-fossa-10',
@@ -1506,6 +1605,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 4.1,
+    dataAiHint: "elbow anatomy"
   },
   {
     id: 'anat-upperlimb-carpal-metacarpal-bones-11',
@@ -1519,6 +1619,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 4.0,
+    dataAiHint: "hand bones"
   },
   {
     id: 'anat-upperlimb-muscles-hand-12',
@@ -1532,6 +1633,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 3.9,
+    dataAiHint: "hand muscles"
   },
   {
     id: 'anat-upperlimb-posterior-forearm-muscles-13',
@@ -1545,6 +1647,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 3.8,
+    dataAiHint: "forearm extensors"
   },
   {
     id: 'anat-upperlimb-anatomical-snuff-box-14',
@@ -1558,6 +1661,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 3.7,
+    dataAiHint: "wrist anatomy"
   },
   {
     id: 'anat-upperlimb-nerve-supply-ant-forearm-hand-15',
@@ -1571,6 +1675,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 3.6,
+    dataAiHint: "median ulnar nerve"
   },
   {
     id: 'anat-upperlimb-median-ulnar-radial-lesions-16',
@@ -1584,6 +1689,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 3.5,
+    dataAiHint: "nerve injury"
   },
   {
     id: 'anat-upperlimb-comparative-nerve-lesions-17',
@@ -1597,45 +1703,49 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 3.4,
+    dataAiHint: "nerve palsy"
   },
   {
     id: 'anat-upperlimb-arterial-supply-18',
-    title: 'Arterial Supply (Upper Limb)',
+    title: 'Arterial Supply (Upper Limb)', // Simplified to match syllabus "Arterial Supply"
     subject: 'Anatomy',
     topic: 'Upper Limb',
-    subtopic: 'Arterial Supply (Upper Limb)',
+    subtopic: 'Arterial Supply', // Simplified
     fileType: 'generated-pdf',
     fileName: 'upperlimb_arterial_supply_notes.pdf',
     generatedTextContent: 'This presentation covers key aspects of Arterial Supply of the Upper Limb.',
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 3.3,
+    dataAiHint: "arm arteries"
   },
   {
     id: 'anat-upperlimb-venous-drainage-19',
-    title: 'Venous Drainage (Upper Limb)',
+    title: 'Venous Drainage (Upper Limb)', // Simplified
     subject: 'Anatomy',
     topic: 'Upper Limb',
-    subtopic: 'Venous Drainage (Upper Limb)',
+    subtopic: 'Venous Drainage', // Simplified
     fileType: 'generated-pdf',
     fileName: 'upperlimb_venous_drainage_notes.pdf',
     generatedTextContent: 'This presentation covers key aspects of Venous Drainage of the Upper Limb.',
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 3.2,
+    dataAiHint: "arm veins"
   },
   {
     id: 'anat-upperlimb-lymphatic-drainage-20',
-    title: 'Lymphatic Drainage (Upper Limb)',
+    title: 'Lymphatic Drainage (Upper Limb)', // Simplified
     subject: 'Anatomy',
     topic: 'Upper Limb',
-    subtopic: 'Lymphatic Drainage (Upper Limb)',
+    subtopic: 'Lymphatic Drainage', // Simplified
     fileType: 'generated-pdf',
     fileName: 'upperlimb_lymphatic_drainage_notes.pdf',
     generatedTextContent: 'This presentation covers key aspects of Lymphatic Drainage of the Upper Limb.',
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 3.1,
+    dataAiHint: "arm lymph"
   },
   {
     id: 'anat-upperlimb-hand-spaces-21',
@@ -1649,6 +1759,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 3.0,
+    dataAiHint: "hand infection"
   },
 
   // Anatomy - Abdomen
@@ -1664,6 +1775,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 2.9,
+    dataAiHint: "umbilical cord"
   },
   {
     id: 'anat-abdomen-diaphragm-dev-openings-1',
@@ -1677,6 +1789,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 2.8,
+    dataAiHint: "diaphragm anatomy"
   },
   {
     id: 'anat-abdomen-dev-mesentery-pancreas-2',
@@ -1690,6 +1803,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 2.7,
+    dataAiHint: "gut development"
   },
   {
     id: 'anat-abdomen-gut-rotation-3',
@@ -1703,6 +1817,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png', 'https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 9,
+    dataAiHint: "embryo gut"
   },
   {
     id: 'anat-abdomen-abdominal-planes-4',
@@ -1716,19 +1831,21 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 2.5,
+    dataAiHint: "abdomen regions"
   },
   {
     id: 'anat-abdomen-neurovascular-bundles-5',
     title: 'Neurovascular Bundles (Abdomen)',
     subject: 'Anatomy',
     topic: 'Abdomen',
-    subtopic: 'Neurovascular Bundles (Abdomen)',
+    subtopic: 'Neurovascular Bundles', // Simplified
     fileType: 'generated-pdf',
     fileName: 'abdomen_neurovascular_bundles_notes.pdf',
     generatedTextContent: 'This presentation covers key aspects of Neurovascular Bundles of the Abdomen.',
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 2.4,
+    dataAiHint: "abdomen nerves"
   },
   {
     id: 'anat-abdomen-liver-6',
@@ -1742,6 +1859,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 2.3,
+    dataAiHint: "liver anatomy"
   },
   {
     id: 'anat-abdomen-inguinal-femoral-herniae-7',
@@ -1755,6 +1873,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 2.2,
+    dataAiHint: "hernia anatomy"
   },
   {
     id: 'anat-abdomen-peritoneal-cavity-sacs-spaces-8',
@@ -1768,19 +1887,21 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 2.1,
+    dataAiHint: "peritoneum anatomy"
   },
   {
     id: 'anat-abdomen-arterial-supply-9',
-    title: 'Arterial Supply (Abdomen)',
+    title: 'Arterial Supply (Abdomen)', // Simplified
     subject: 'Anatomy',
     topic: 'Abdomen',
-    subtopic: 'Arterial Supply (Abdomen)',
+    subtopic: 'Arterial Supply', // Simplified
     fileType: 'generated-pdf',
     fileName: 'abdomen_arterial_supply_notes.pdf',
     generatedTextContent: 'This presentation covers key aspects of Arterial Supply of the Abdomen.',
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 2.0,
+    dataAiHint: "abdomen arteries"
   },
   {
     id: 'anat-abdomen-stomach-10',
@@ -1794,6 +1915,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 1.9,
+    dataAiHint: "stomach anatomy"
   },
   {
     id: 'anat-abdomen-small-intestine-11',
@@ -1807,6 +1929,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 1.8,
+    dataAiHint: "small bowel"
   },
   {
     id: 'anat-abdomen-biliary-apparatus-12',
@@ -1820,6 +1943,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 1.7,
+    dataAiHint: "gallbladder bile"
   },
   {
     id: 'anat-abdomen-large-intestine-13',
@@ -1833,6 +1957,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 1.6,
+    dataAiHint: "colon anatomy"
   },
   {
     id: 'anat-abdomen-pancreas-14',
@@ -1846,6 +1971,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 1.5,
+    dataAiHint: "pancreas anatomy"
   },
   {
     id: 'anat-abdomen-kidney-15',
@@ -1859,6 +1985,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 1.4,
+    dataAiHint: "kidney anatomy"
   },
   {
     id: 'anat-abdomen-ureter-16',
@@ -1872,6 +1999,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 1.3,
+    dataAiHint: "ureter anatomy"
   },
   {
     id: 'anat-abdomen-venous-drainage-abdo-thorax-17',
@@ -1885,6 +2013,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 1.2,
+    dataAiHint: "portal vein"
   },
 
   // Anatomy - Pelvis and Perineum
@@ -1900,19 +2029,21 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 1.1,
+    dataAiHint: "urogenital development"
   },
   {
     id: 'anat-pelvis-pelvis-perineum-overview-1',
-    title: 'Pelvis and Perineum (Overview)',
+    title: 'Pelvis and Perineum (Overview)', // Matched to syllabus
     subject: 'Anatomy',
     topic: 'Pelvis and Perineum',
-    subtopic: 'Pelvis and Perineum (Overview)',
+    subtopic: 'Pelvis and Perineum', // Matched to syllabus
     fileType: 'generated-pdf',
     fileName: 'pelvis_pelvis_perineum_overview_notes.pdf',
     generatedTextContent: 'This presentation covers key aspects of Pelvis and Perineum (Overview).',
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 1.0,
+    dataAiHint: "pelvic anatomy"
   },
   {
     id: 'anat-pelvis-prostate-male-urethra-2',
@@ -1926,6 +2057,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 0.9,
+    dataAiHint: "prostate urethra"
   },
   {
     id: 'anat-pelvis-perineal-pouches-ischiorectal-fossa-3',
@@ -1939,6 +2071,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 0.8,
+    dataAiHint: "perineum anatomy"
   },
   {
     id: 'anat-pelvis-pelvic-diaphragm-4',
@@ -1952,6 +2085,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 10,
+    dataAiHint: "pelvic floor"
   },
   {
     id: 'anat-pelvis-extravasation-urine-5',
@@ -1965,6 +2099,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 0.6,
+    dataAiHint: "urethral injury"
   },
   {
     id: 'anat-pelvis-pudendal-nerve-6',
@@ -1978,32 +2113,35 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 0.5,
+    dataAiHint: "pelvic nerve"
   },
   {
     id: 'anat-pelvis-nerve-supply-7',
-    title: 'Nerve Supply (Pelvis and Perineum)',
+    title: 'Nerve Supply (Pelvis and Perineum)', // Simplified
     subject: 'Anatomy',
     topic: 'Pelvis and Perineum',
-    subtopic: 'Nerve Supply (Pelvis and Perineum)',
+    subtopic: 'Nerve Supply', // Simplified
     fileType: 'generated-pdf',
     fileName: 'pelvis_nerve_supply_notes.pdf',
     generatedTextContent: 'This presentation covers key aspects of Nerve Supply of the Pelvis and Perineum.',
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 0.4,
+    dataAiHint: "pelvic nerves"
   },
   {
     id: 'anat-pelvis-arterial-supply-8',
-    title: 'Arterial Supply (Pelvis and Perineum)',
+    title: 'Arterial Supply (Pelvis and Perineum)', // Simplified
     subject: 'Anatomy',
     topic: 'Pelvis and Perineum',
-    subtopic: 'Arterial Supply (Pelvis and Perineum)',
+    subtopic: 'Arterial Supply', // Simplified
     fileType: 'generated-pdf',
     fileName: 'pelvis_arterial_supply_notes.pdf',
     generatedTextContent: 'This presentation covers key aspects of Arterial Supply of the Pelvis and Perineum.',
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 0.3,
+    dataAiHint: "pelvic arteries"
   },
   {
     id: 'anat-pelvis-female-reproductive-system-9',
@@ -2017,6 +2155,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 0.2,
+    dataAiHint: "uterus ovary"
   },
   {
     id: 'anat-pelvis-rectum-anal-canal-10',
@@ -2030,6 +2169,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 0.1,
+    dataAiHint: "rectum anatomy"
   },
 
   // Anatomy - Lower Limb
@@ -2038,13 +2178,14 @@ const initialPresentationsData: Presentation[] = [
     title: 'Nerve Supply Overview (Lower Limb)',
     subject: 'Anatomy',
     topic: 'Lower Limb',
-    subtopic: 'Nerve Supply Overview (Lower Limb)',
+    subtopic: 'Nerve Supply Overview', // Matched syllabus
     fileType: 'generated-pdf',
     fileName: 'lowerlimb_nerve_supply_overview_notes.pdf',
     generatedTextContent: 'This presentation covers key aspects of Nerve Supply Overview of the Lower Limb.',
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 0.0,
+    dataAiHint: "leg nerves"
   },
   {
     id: 'anat-lowerlimb-muscles-proximal-region-1',
@@ -2058,6 +2199,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() + 1000 * 60 * 60 * 24 * 0.1,
+    dataAiHint: "hip knee muscles"
   },
   {
     id: 'anat-lowerlimb-nerve-supply-thigh-muscles-2',
@@ -2071,6 +2213,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 11,
+    dataAiHint: "thigh nerves"
   },
   {
     id: 'anat-lowerlimb-muscles-gluteal-region-3',
@@ -2084,6 +2227,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() + 1000 * 60 * 60 * 24 * 0.3,
+    dataAiHint: "glutes muscles"
   },
   {
     id: 'anat-lowerlimb-muscles-anterior-thigh-4',
@@ -2097,6 +2241,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() + 1000 * 60 * 60 * 24 * 0.4,
+    dataAiHint: "quadriceps muscles"
   },
   {
     id: 'anat-lowerlimb-muscles-medial-thigh-5',
@@ -2110,6 +2255,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() + 1000 * 60 * 60 * 24 * 0.5,
+    dataAiHint: "adductor muscles"
   },
   {
     id: 'anat-lowerlimb-muscles-posterior-thigh-6',
@@ -2123,6 +2269,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() + 1000 * 60 * 60 * 24 * 0.6,
+    dataAiHint: "hamstring muscles"
   },
   {
     id: 'anat-lowerlimb-muscles-anterior-leg-7',
@@ -2136,6 +2283,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() + 1000 * 60 * 60 * 24 * 0.7,
+    dataAiHint: "leg muscles"
   },
   {
     id: 'anat-lowerlimb-muscles-lateral-leg-8',
@@ -2149,6 +2297,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() + 1000 * 60 * 60 * 24 * 0.8,
+    dataAiHint: "leg muscles"
   },
   {
     id: 'anat-lowerlimb-muscles-posterior-leg-9',
@@ -2162,6 +2311,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() + 1000 * 60 * 60 * 24 * 0.9,
+    dataAiHint: "calf muscles"
   },
   {
     id: 'anat-lowerlimb-muscles-foot-10',
@@ -2175,6 +2325,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() + 1000 * 60 * 60 * 24 * 1.0,
+    dataAiHint: "foot muscles"
   },
   {
     id: 'anat-lowerlimb-femoral-triangle-11',
@@ -2188,6 +2339,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() + 1000 * 60 * 60 * 24 * 1.1,
+    dataAiHint: "thigh anatomy"
   },
   {
     id: 'anat-lowerlimb-popliteal-fossa-12',
@@ -2201,6 +2353,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() + 1000 * 60 * 60 * 24 * 1.2,
+    dataAiHint: "knee anatomy"
   },
   {
     id: 'anat-lowerlimb-arches-foot-13',
@@ -2214,6 +2367,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() + 1000 * 60 * 60 * 24 * 1.3,
+    dataAiHint: "foot arches"
   },
   {
     id: 'anat-lowerlimb-major-nerves-14',
@@ -2227,6 +2381,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() + 1000 * 60 * 60 * 24 * 1.4,
+    dataAiHint: "leg nerves"
   },
   {
     id: 'anat-lowerlimb-major-arteries-15',
@@ -2240,19 +2395,21 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() + 1000 * 60 * 60 * 24 * 1.5,
+    dataAiHint: "leg arteries"
   },
    {
     id: 'anat-lowerlimb-major-veins-lymphatics-16',
     title: 'Major Veins and Lymphatics (Lower Limb)',
     subject: 'Anatomy',
     topic: 'Lower Limb',
-    subtopic: 'Major Veins and Lymphatics (Lower Limb)',
+    subtopic: 'Major Veins and Lymphatics', // Corrected from syllabus
     fileType: 'generated-pdf',
     fileName: 'lowerlimb_major_veins_lymphatics_notes.pdf',
     generatedTextContent: 'This presentation covers key aspects of Major Veins and Lymphatics of the Lower Limb.',
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() + 1000 * 60 * 60 * 24 * 1.6,
+    dataAiHint: "leg veins"
   },
   {
     id: 'anat-lowerlimb-hip-joint-17',
@@ -2266,6 +2423,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() + 1000 * 60 * 60 * 24 * 1.7,
+    dataAiHint: "hip joint"
   },
   {
     id: 'anat-lowerlimb-knee-joint-18',
@@ -2279,6 +2437,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() + 1000 * 60 * 60 * 24 * 1.8,
+    dataAiHint: "knee joint"
   },
   {
     id: 'anat-lowerlimb-ankle-foot-joints-19',
@@ -2292,6 +2451,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() + 1000 * 60 * 60 * 24 * 1.9,
+    dataAiHint: "ankle foot"
   },
 
 
@@ -2308,6 +2468,7 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 12,
+    dataAiHint: "lung physiology"
   }
 ];
 
@@ -2319,14 +2480,18 @@ export default function HomePage() {
 
   useEffect(() => {
     // This code runs only on the client, after initial hydration
-    // For now, always load initialPresentationsData to ensure medical content is shown
+    // Always load initialPresentationsData to ensure medical content is shown
+    // and to bypass any potentially stale or incomplete data in localStorage for now.
     setPresentations(initialPresentationsData);
     
     // The localStorage loading logic can be re-introduced or refined later if needed
+    // For example, to persist user-added presentations.
+    // If you want to re-enable localStorage loading:
     // const storedPresentations = localStorage.getItem('courseDeckPresentations');
     // if (storedPresentations) {
     //   try {
     //     const parsed = JSON.parse(storedPresentations);
+    //     // Add validation to ensure parsed data is an array of presentations
     //     if (Array.isArray(parsed) && parsed.every(item => typeof item.id === 'string' && typeof item.title === 'string')) {
     //          setPresentations(parsed);
     //     } else {
@@ -2351,6 +2516,10 @@ export default function HomePage() {
 
   useEffect(() => {
     if (isMounted && presentations.length > 0) { // Only save if presentations is not empty
+      // This will save the (potentially modified by user actions) presentations list to localStorage.
+      // If initial load always comes from initialPresentationsData, this ensures newly added ones
+      // would also be saved, though they'd be overwritten on next full page load unless the
+      // localStorage loading logic in the first useEffect is re-enabled and prioritized.
       localStorage.setItem('courseDeckPresentations', JSON.stringify(presentations));
     }
   }, [presentations, isMounted]);
@@ -2402,4 +2571,3 @@ export default function HomePage() {
     </div>
   );
 }
-

@@ -12,20 +12,20 @@ interface SubjectListProps {
 
 export function SubjectList({ subjects, selectedSubject, onSelectSubject }: SubjectListProps) {
   return (
-    <nav className="space-y-1 pr-1"> {/* Added pr-1 to prevent highlight touching scrollbar if present */}
+    <nav className="space-y-1 px-2"> {/* Added px-2 for overall list padding, removed pr-1 */}
       {subjects.map(subject => (
         <Button
           key={subject}
           variant={selectedSubject === subject ? 'default' : 'ghost'}
           className={cn(
-            "w-full justify-start text-left h-auto py-2.5 px-4 rounded-md", 
+            "w-full justify-start text-left h-auto py-2.5 px-4 rounded-md", // Ensured px-4 for internal padding
             selectedSubject === subject 
               ? 'bg-primary text-primary-foreground hover:bg-primary/90' 
               : 'hover:bg-muted text-foreground'
           )}
           onClick={() => onSelectSubject(subject)}
         >
-          <div className="overflow-hidden w-full">
+          <div className="overflow-hidden w-full"> {/* This div helps manage text overflow */}
             <span className="font-medium block truncate text-sm">{subject}</span>
             {subject === 'Anatomy' && (
               <span className="text-xs opacity-70 block leading-tight line-clamp-1 mt-0.5">
