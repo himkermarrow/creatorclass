@@ -46,7 +46,6 @@ export function ClassroomTab({ presentations: initialPresentations }: ClassroomT
   const [selectedSubtopic, setSelectedSubtopic] = useState<string>('');
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [currentPage, setCurrentPage] = useState(1);
-
   const [isViewerOpen, setIsViewerOpen] = useState(false);
   const [viewingPresentation, setViewingPresentation] = useState<Presentation | null>(null);
 
@@ -58,6 +57,9 @@ export function ClassroomTab({ presentations: initialPresentations }: ClassroomT
     } else if (initialPresentations.length === 0) {
       setSelectedSubject('');
     }
+
+    // Force layout reflow in case sidebar is broken on load
+    setTimeout(() => window.dispatchEvent(new Event('resize')), 100);
   }, [initialPresentations, selectedSubject]);
 
   const uniqueSubjects = useMemo(() => {
@@ -97,7 +99,6 @@ export function ClassroomTab({ presentations: initialPresentations }: ClassroomT
   useEffect(() => {
     setCurrentPage(1);
   }, [selectedSubtopic, searchTerm]);
-
 
   const filteredPresentations = useMemo(() => {
     return presentations.filter(p => {
@@ -152,8 +153,9 @@ export function ClassroomTab({ presentations: initialPresentations }: ClassroomT
     <div className="px-4 md:px-0">
       <h1 className="font-headline text-2xl font-semibold mb-6 text-foreground">Browse by Subject</h1>
       <div className="flex flex-col md:flex-row gap-0 md:gap-0 min-h-[calc(100vh-var(--header-height,12rem)-2rem)]">
-        <aside className="w-full md:w-64 bg-card border-r border-border shadow-sm md:shadow-none mb-6 md:mb-0 flex flex-col">
-           <ScrollArea className="flex-1" style={{ maxHeight: 'calc(100vh - 10rem)' }}> {/* Adjusted maxHeight slightly for robustness */}
+        
+        <aside className="md:w-64 w-full md:max-w-[16rem] shrink-0 bg-card border-r border-border shadow-sm md:shadow-none mb-6 md:mb-0 flex flex-col overflow-hidden">
+          <ScrollArea className="flex-1 overflow-y-auto" style={{ maxHeight: 'calc(100vh - 6rem)' }}>
             <div className="p-4 space-y-4">
               <div>
                 <h3 className="text-xs font-medium text-muted-foreground mb-2">MEDICAL SUBJECTS</h3>
@@ -193,9 +195,7 @@ export function ClassroomTab({ presentations: initialPresentations }: ClassroomT
               <h1 className="font-headline text-3xl font-bold text-foreground">
                 {selectedTopic || selectedSubject || 'All Presentations'}
               </h1>
-              <p className="text-muted-foreground mt-1 text-sm">
-                {currentTopicDescription}
-              </p>
+              <p className="text-muted-foreground mt-1 text-sm">{currentTopicDescription}</p>
             </div>
             <div className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto">
               <div className="relative w-full sm:w-auto sm:min-w-[250px]">
@@ -227,44 +227,27 @@ export function ClassroomTab({ presentations: initialPresentations }: ClassroomT
           </div>
 
           {(selectedSubject !== (uniqueSubjects.includes("Anatomy") ? "Anatomy" : uniqueSubjects[0] || "") || selectedTopic || selectedSubtopic || searchTerm) && (
-             <div className="px-4 md:px-0">
-                <Button
-                variant="outline"
-                size="sm"
-                onClick={resetFilters}
-                className="mb-6"
-                >
+            <div className="px-4 md:px-0">
+              <Button variant="outline" size="sm" onClick={resetFilters} className="mb-6">
                 Clear All Filters
-                </Button>
+              </Button>
             </div>
           )}
 
           <div className="px-4 md:px-0">
             {filteredPresentations.length > 0 ? (
-                 <PresentationGrid presentations={displayPresentations} onViewPresentation={handleViewPresentation} />
+              <PresentationGrid presentations={displayPresentations} onViewPresentation={handleViewPresentation} />
             ) : (
-                 <p className="text-center text-muted-foreground py-8">No presentations found matching your criteria.</p>
+              <p className="text-center text-muted-foreground py-8">No presentations found matching your criteria.</p>
             )}
-           
+
             {totalPages > 1 && (
               <div className="flex justify-center items-center space-x-4 mt-8 py-4">
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => handlePageChange(currentPage - 1)}
-                  disabled={currentPage === 1}
-                >
+                <Button variant="outline" size="sm" onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1}>
                   <ChevronLeft className="mr-2 h-4 w-4" /> Previous
                 </Button>
-                <span className="text-sm text-muted-foreground">
-                  Page {currentPage} of {totalPages}
-                </span>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => handlePageChange(currentPage + 1)}
-                  disabled={currentPage === totalPages}
-                >
+                <span className="text-sm text-muted-foreground">Page {currentPage} of {totalPages}</span>
+                <Button variant="outline" size="sm" onClick={() => handlePageChange(currentPage + 1)} disabled={currentPage === totalPages}>
                   Next <ChevronRight className="ml-2 h-4 w-4" />
                 </Button>
               </div>
