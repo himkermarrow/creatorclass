@@ -8,7 +8,7 @@ interface TopicListProps {
   topics: string[];
   selectedTopic: string;
   onSelectTopic: (topic: string) => void;
-  subject: string; // To potentially fetch descriptions or specific styles
+  subject: string; 
   topicDescriptions: Record<string, string>;
 }
 
@@ -29,9 +29,13 @@ export function TopicList({ topics, selectedTopic, onSelectTopic, subject, topic
           )}
           onClick={() => onSelectTopic(topic)}
         >
-          <div>
-            <span className="font-normal block">{topic}</span>
-            {topicDescriptions[topic] && <span className="text-xs opacity-70 block">{topicDescriptions[topic]}</span>}
+          <div className="overflow-hidden w-full">
+            <span className="font-normal block truncate">{topic}</span>
+            {topicDescriptions[topic] && (
+              <span className="text-xs opacity-70 block leading-tight line-clamp-2">
+                {topicDescriptions[topic]}
+              </span>
+            )}
           </div>
         </Button>
       ))}

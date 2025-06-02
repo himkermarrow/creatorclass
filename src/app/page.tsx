@@ -10,8 +10,9 @@ import type { Presentation } from "@/types";
 import { BookOpen, LayoutGrid } from 'lucide-react';
 
 const initialPresentationsData: Presentation[] = [
+  // General Embryology
   {
-    id: 'anat-embryo-001',
+    id: 'anat-gen-embryo-001',
     title: 'Principles of Gametogenesis & IVF',
     subject: 'Anatomy',
     topic: 'General Embryology',
@@ -21,45 +22,21 @@ const initialPresentationsData: Presentation[] = [
     generatedTextContent: 'This presentation covers the fundamental principles of gamete formation (spermatogenesis and oogenesis), meiosis, and the clinical application of in-vitro fertilization techniques. Includes diagrams of meiotic stages and IVF procedures.',
     generatedImages: ['https://placehold.co/600x400.png', 'https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
-    createdAt: Date.now() - 1000 * 60 * 60 * 24 * 2, 
+    createdAt: Date.now() - 1000 * 60 * 60 * 24 * 2,
   },
   {
-    id: 'anat-neuro-001',
-    title: 'Comprehensive Guide to Brainstem & Cranial Nerves',
+    id: 'anat-gen-embryo-002',
+    title: 'Placenta Development and Anomalies',
     subject: 'Anatomy',
-    topic: 'Neuroanatomy',
-    subtopic: 'Brainstem and Cranial Nerves',
+    topic: 'General Embryology',
+    subtopic: 'Placenta Development',
     fileType: 'pdf',
-    fileName: 'brainstem_cranial_nerves_guide.pdf',
+    fileName: 'placenta_development.pdf',
     fileUrl: 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
     thumbnailUrl: 'https://placehold.co/300x200.png',
-    createdAt: Date.now() - 1000 * 60 * 60 * 24, 
+    createdAt: Date.now() - 1000 * 60 * 60 * 24 * 2.5,
   },
-  {
-    id: 'anat-thorax-001',
-    title: 'Embryonic Development of the Heart',
-    subject: 'Anatomy',
-    topic: 'Thorax',
-    subtopic: 'Development of Cardiovascular System',
-    fileType: 'ppt',
-    fileName: 'cardiac_embryology_overview.pptx',
-    fileUrl: '#', 
-    thumbnailUrl: 'https://placehold.co/300x200.png',
-    createdAt: Date.now() - 1000 * 60 * 60 * 24 * 3,
-  },
-  {
-    id: 'anat-headneck-001',
-    title: 'Pharyngeal Arch Derivatives',
-    subject: 'Anatomy',
-    topic: 'Head and Neck',
-    subtopic: 'Pharyngeal Arches',
-    fileType: 'generated-pdf',
-    fileName: 'pharyngeal_arches_explained.pdf',
-    generatedTextContent: 'A detailed review of the six pharyngeal arches, their associated cranial nerves, and the muscular, skeletal, and arterial derivatives. Clinical correlations of common arch anomalies are also discussed.',
-    generatedImages: ['https://placehold.co/600x400.png'],
-    thumbnailUrl: 'https://placehold.co/300x200.png',
-    createdAt: Date.now() - 1000 * 60 * 60 * 24 * 4, 
-  },
+  // Histology
   {
     id: 'anat-histology-001',
     title: 'Introduction to Epithelial Tissues',
@@ -73,7 +50,20 @@ const initialPresentationsData: Presentation[] = [
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 5,
   },
   {
-    id: 'anat-osteology-001',
+    id: 'anat-histology-002',
+    title: 'Connective Tissue Proper',
+    subject: 'Anatomy',
+    topic: 'Histology',
+    subtopic: 'Connective Tissue',
+    fileType: 'ppt',
+    fileName: 'connective_tissue.pptx',
+    fileUrl: '#',
+    thumbnailUrl: 'https://placehold.co/300x200.png',
+    createdAt: Date.now() - 1000 * 60 * 60 * 24 * 5.5,
+  },
+  // Osteology and Arthrology
+  {
+    id: 'anat-osteo-arthro-001',
     title: 'Overview of Human Osteology',
     subject: 'Anatomy',
     topic: 'Osteology and Arthrology',
@@ -84,6 +74,73 @@ const initialPresentationsData: Presentation[] = [
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 6,
   },
+  // Neuroanatomy
+  {
+    id: 'anat-neuro-001',
+    title: 'Comprehensive Guide to Brainstem & Cranial Nerves',
+    subject: 'Anatomy',
+    topic: 'Neuroanatomy',
+    subtopic: 'Brainstem and Cranial Nerves',
+    fileType: 'pdf',
+    fileName: 'brainstem_cranial_nerves_guide.pdf',
+    fileUrl: 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
+    thumbnailUrl: 'https://placehold.co/300x200.png',
+    createdAt: Date.now() - 1000 * 60 * 60 * 24 * 1,
+  },
+  {
+    id: 'anat-neuro-002',
+    title: 'Cerebellum: Structure and Functions',
+    subject: 'Anatomy',
+    topic: 'Neuroanatomy',
+    subtopic: 'Cerebellum',
+    fileType: 'generated-pdf',
+    fileName: 'cerebellum_overview.pdf',
+    generatedTextContent: 'An overview of the cerebellum, its lobes, peduncles, and functional divisions. Discusses clinical correlations of cerebellar lesions.',
+    generatedImages: ['https://placehold.co/600x400.png'],
+    thumbnailUrl: 'https://placehold.co/300x200.png',
+    createdAt: Date.now() - 1000 * 60 * 60 * 24 * 1.5,
+  },
+  // Head and Neck
+  {
+    id: 'anat-headneck-001',
+    title: 'Pharyngeal Arch Derivatives',
+    subject: 'Anatomy',
+    topic: 'Head and Neck',
+    subtopic: 'Pharyngeal Arches',
+    fileType: 'generated-pdf',
+    fileName: 'pharyngeal_arches_explained.pdf',
+    generatedTextContent: 'A detailed review of the six pharyngeal arches, their associated cranial nerves, and the muscular, skeletal, and arterial derivatives. Clinical correlations of common arch anomalies are also discussed.',
+    generatedImages: ['https://placehold.co/600x400.png'],
+    thumbnailUrl: 'https://placehold.co/300x200.png',
+    createdAt: Date.now() - 1000 * 60 * 60 * 24 * 4,
+  },
+  // Back Region
+  {
+    id: 'anat-back-001',
+    title: 'Vertebral Column and Spinal Cord Termination',
+    subject: 'Anatomy',
+    topic: 'Back Region',
+    subtopic: 'Spinal Cord Termination',
+    fileType: 'pdf',
+    fileName: 'vertebral_column_spinal_cord.pdf',
+    fileUrl: 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
+    thumbnailUrl: 'https://placehold.co/300x200.png',
+    createdAt: Date.now() - 1000 * 60 * 60 * 24 * 8,
+  },
+  // Thorax
+  {
+    id: 'anat-thorax-001',
+    title: 'Embryonic Development of the Heart',
+    subject: 'Anatomy',
+    topic: 'Thorax',
+    subtopic: 'Development of Cardiovascular System',
+    fileType: 'ppt',
+    fileName: 'cardiac_embryology_overview.pptx',
+    fileUrl: '#',
+    thumbnailUrl: 'https://placehold.co/300x200.png',
+    createdAt: Date.now() - 1000 * 60 * 60 * 24 * 3,
+  },
+  // Upper Limb
   {
     id: 'anat-upperlimb-001',
     title: 'Brachial Plexus Anatomy',
@@ -96,6 +153,59 @@ const initialPresentationsData: Presentation[] = [
     generatedImages: ['https://placehold.co/600x400.png', 'https://placehold.co/600x400.png'],
     thumbnailUrl: 'https://placehold.co/300x200.png',
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 7,
+  },
+  // Abdomen
+  {
+    id: 'anat-abdomen-001',
+    title: 'Gut Rotation and Mesentery Development',
+    subject: 'Anatomy',
+    topic: 'Abdomen',
+    subtopic: 'Gut Rotation',
+    fileType: 'pdf',
+    fileName: 'gut_rotation.pdf',
+    fileUrl: 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
+    thumbnailUrl: 'https://placehold.co/300x200.png',
+    createdAt: Date.now() - 1000 * 60 * 60 * 24 * 9,
+  },
+  // Pelvis and Perineum
+  {
+    id: 'anat-pelvis-001',
+    title: 'Pelvic Diaphragm and Perineal Pouches',
+    subject: 'Anatomy',
+    topic: 'Pelvis and Perineum',
+    subtopic: 'Pelvic Diaphragm',
+    fileType: 'generated-pdf',
+    fileName: 'pelvic_diaphragm.pdf',
+    generatedTextContent: 'Anatomical overview of the pelvic diaphragm muscles (levator ani and coccygeus) and the structure of perineal pouches.',
+    generatedImages: ['https://placehold.co/600x400.png'],
+    thumbnailUrl: 'https://placehold.co/300x200.png',
+    createdAt: Date.now() - 1000 * 60 * 60 * 24 * 10,
+  },
+  // Lower Limb
+  {
+    id: 'anat-lowerlimb-001',
+    title: 'Nerve Supply to Thigh Muscles',
+    subject: 'Anatomy',
+    topic: 'Lower Limb',
+    subtopic: 'Nerve Supply to Thigh Muscles',
+    fileType: 'ppt',
+    fileName: 'thigh_nerve_supply.pptx',
+    fileUrl: '#',
+    thumbnailUrl: 'https://placehold.co/300x200.png',
+    createdAt: Date.now() - 1000 * 60 * 60 * 24 * 11,
+  },
+  // Example of a different subject (placeholder)
+  {
+    id: 'physio-resp-001',
+    title: 'Physiology of Respiration',
+    subject: 'Physiology',
+    topic: 'Respiratory System',
+    subtopic: 'Lung Volumes and Capacities',
+    fileType: 'pdf',
+    fileName: 'resp_physiology.pdf',
+    fileUrl: 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
+    thumbnailUrl: 'https://placehold.co/300x200.png',
+    createdAt: Date.now() - 1000 * 60 * 60 * 24 * 12,
   }
 ];
 
@@ -118,13 +228,19 @@ export default function HomePage() {
     //     if (Array.isArray(parsed) && parsed.every(item => typeof item.id === 'string' && typeof item.title === 'string')) {
     //          setPresentations(parsed);
     //     } else {
+    //         // Fallback to initialData if localStorage is invalid
+    //         localStorage.setItem('courseDeckPresentations', JSON.stringify(initialPresentationsData));
     //         setPresentations(initialPresentationsData);
     //     }
     //   } catch (e) {
     //     console.error("Failed to parse presentations from localStorage", e);
+    //     // Fallback to initialData on error
+    //     localStorage.setItem('courseDeckPresentations', JSON.stringify(initialPresentationsData));
     //     setPresentations(initialPresentationsData);
     //   }
     // } else {
+    //   // No data in localStorage, use initialData and store it
+    //   localStorage.setItem('courseDeckPresentations', JSON.stringify(initialPresentationsData));
     //   setPresentations(initialPresentationsData);
     // }
     setCurrentYear(new Date().getFullYear());
@@ -132,7 +248,7 @@ export default function HomePage() {
   }, []);
 
   useEffect(() => {
-    if (isMounted) {
+    if (isMounted && presentations.length > 0) { // Only save if presentations is not empty
       localStorage.setItem('courseDeckPresentations', JSON.stringify(presentations));
     }
   }, [presentations, isMounted]);
@@ -184,4 +300,3 @@ export default function HomePage() {
     </div>
   );
 }
-

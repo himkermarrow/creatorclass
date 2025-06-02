@@ -23,9 +23,18 @@ export function SubjectList({ subjects, selectedSubject, onSelectSubject }: Subj
           )}
           onClick={() => onSelectSubject(subject)}
         >
-          <div>
-            <span className="font-medium block">{subject}</span>
-            {subject === 'Anatomy' && <span className="text-xs opacity-80 block">Complete NEET PG Anatomy curriculum</span>}
+          <div className="overflow-hidden w-full">
+            <span className="font-medium block truncate">{subject}</span>
+            {subject === 'Anatomy' && (
+              <span className="text-xs opacity-80 block leading-tight line-clamp-1">
+                Complete NEET PG Anatomy curriculum
+              </span>
+            )}
+             {subject === 'Physiology' && (
+              <span className="text-xs opacity-80 block leading-tight line-clamp-1">
+                Core concepts of human physiology
+              </span>
+            )}
           </div>
         </Button>
       ))}

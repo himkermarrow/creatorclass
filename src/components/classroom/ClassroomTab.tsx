@@ -16,7 +16,6 @@ interface ClassroomTabProps {
   presentations: Presentation[];
 }
 
-// Placeholder descriptions for topics - in a real app, this might come from a CMS or config
 const topicDescriptions: Record<string, Record<string, string>> = {
   Anatomy: {
     'General Embryology': 'Developmental processes and embryonic structures.',
@@ -30,12 +29,16 @@ const topicDescriptions: Record<string, Record<string, string>> = {
     'Abdomen': 'Abdominal cavity organs and structures.',
     'Pelvis and Perineum': 'Structures of the pelvic girdle and perineal region.',
     'Lower Limb': 'Hip, thigh, leg and foot anatomy.',
+  },
+  Physiology: {
+    'Respiratory System': 'Functions of the lungs and airways.',
+    // Add more physiology topics here
   }
 };
 
 export function ClassroomTab({ presentations: initialPresentations }: ClassroomTabProps) {
   const [presentations, setPresentations] = useState<Presentation[]>(initialPresentations);
-  const [selectedSubject, setSelectedSubject] = useState<string>('Anatomy'); // Default to Anatomy
+  const [selectedSubject, setSelectedSubject] = useState<string>(''); 
   const [selectedTopic, setSelectedTopic] = useState<string>('');
   const [selectedSubtopic, setSelectedSubtopic] = useState<string>('');
   const [searchTerm, setSearchTerm] = useState<string>('');
@@ -46,8 +49,11 @@ export function ClassroomTab({ presentations: initialPresentations }: ClassroomT
   useEffect(() => {
     setPresentations(initialPresentations);
     if (initialPresentations.length > 0 && !selectedSubject) {
-        const defaultSubject = initialPresentations[0].subject;
+        // Default to the first subject if none is selected, e.g., "Anatomy"
+        const defaultSubject = initialPresentations.find(p => p.subject === "Anatomy")?.subject || initialPresentations[0].subject;
         setSelectedSubject(defaultSubject);
+    } else if (initialPresentations.length === 0) {
+        setSelectedSubject(''); // Clear subject if no presentations
     }
   }, [initialPresentations, selectedSubject]);
 
@@ -106,9 +112,9 @@ export function ClassroomTab({ presentations: initialPresentations }: ClassroomT
     setViewingPresentation(null);
   };
 
-  const currentTopicDescription = selectedTopic && topicDescriptions[selectedSubject]?.[selectedTopic] 
+  const currentTopicDescription = selectedSubject && selectedTopic && topicDescriptions[selectedSubject]?.[selectedTopic] 
     ? topicDescriptions[selectedSubject]?.[selectedTopic] 
-    : selectedTopic ? `Content related to ${selectedTopic}.` : 'Select a topic to see presentations.';
+    : selectedTopic ? `Content related to ${selectedTopic}.` : selectedSubject ? `Select a topic in ${selectedSubject}.` : 'Select a subject and topic to see presentations.';
 
   return (
     <div className="flex flex-col md:flex-row gap-0 md:gap-8 min-h-[calc(100vh-var(--header-height,10rem))]"> {/* Adjust header height as needed */}
@@ -181,10 +187,11 @@ export function ClassroomTab({ presentations: initialPresentations }: ClassroomT
               </Select>
             </div>
           )}
-           {(selectedTopic || selectedSubtopic || searchTerm) && (
+           {(selectedSubject || selectedTopic || selectedSubtopic || searchTerm) && (
             <Button 
               variant="outline" 
               onClick={() => {
+                setSelectedSubject(uniqueSubjects.includes("Anatomy") ? "Anatomy" : uniqueSubjects[0] || ""); // Reset to Anatomy or first subject
                 setSelectedTopic('');
                 setSelectedSubtopic('');
                 setSearchTerm('');
