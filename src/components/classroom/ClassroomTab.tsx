@@ -11,6 +11,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Input } from '@/components/ui/input';
 import { Search, ListFilter } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { ScrollArea } from '@/components/ui/scroll-area';
 
 interface ClassroomTabProps {
   presentations: Presentation[];
@@ -49,11 +50,10 @@ export function ClassroomTab({ presentations: initialPresentations }: ClassroomT
   useEffect(() => {
     setPresentations(initialPresentations);
     if (initialPresentations.length > 0 && !selectedSubject) {
-        // Default to the first subject if none is selected, e.g., "Anatomy"
         const defaultSubject = initialPresentations.find(p => p.subject === "Anatomy")?.subject || initialPresentations[0].subject;
         setSelectedSubject(defaultSubject);
     } else if (initialPresentations.length === 0) {
-        setSelectedSubject(''); // Clear subject if no presentations
+        setSelectedSubject(''); 
     }
   }, [initialPresentations, selectedSubject]);
 
@@ -117,40 +117,42 @@ export function ClassroomTab({ presentations: initialPresentations }: ClassroomT
     : selectedTopic ? `Content related to ${selectedTopic}.` : selectedSubject ? `Select a topic in ${selectedSubject}.` : 'Select a subject and topic to see presentations.';
 
   return (
-    <div className="flex flex-col md:flex-row gap-0 md:gap-8 min-h-[calc(100vh-var(--header-height,10rem))]"> {/* Adjust header height as needed */}
-      {/* Left Sidebar */}
+    <div className="flex flex-col md:flex-row gap-0 md:gap-8 min-h-[calc(100vh-var(--header-height,10rem))]">
       <aside className="w-full md:w-1/4 lg:w-1/5 p-4 md:p-0 bg-card md:bg-transparent rounded-lg md:rounded-none shadow-md md:shadow-none mb-6 md:mb-0">
-        <div className="sticky top-24"> {/* Adjust top offset based on your header height */}
-          <h2 className="text-lg font-headline font-semibold mb-3 text-primary flex items-center">
-            <ListFilter className="mr-2 h-5 w-5" />
-            Browse Content
-          </h2>
-          <div className="space-y-6">
-            <div>
-              <h3 className="text-sm font-medium text-muted-foreground mb-2">Medical Subjects</h3>
-              <SubjectList
-                subjects={uniqueSubjects}
-                selectedSubject={selectedSubject}
-                onSelectSubject={setSelectedSubject}
-              />
-            </div>
-            {selectedSubject && topicsForSelectedSubject.length > 0 && (
-              <div>
-                <h3 className="text-sm font-medium text-muted-foreground mb-2">Topics in {selectedSubject}</h3>
-                <TopicList
-                  topics={topicsForSelectedSubject}
-                  selectedTopic={selectedTopic}
-                  onSelectTopic={setSelectedTopic}
-                  subject={selectedSubject}
-                  topicDescriptions={topicDescriptions[selectedSubject] || {}}
-                />
+        <div className="sticky top-24 h-full"> {/* Header height (4rem) + sticky offset (6rem) = 10rem */}
+          <div className="flex flex-col h-full">
+            <h2 className="text-lg font-headline font-semibold mb-3 text-primary flex items-center px-0 md:px-0">
+              <ListFilter className="mr-2 h-5 w-5" />
+              Browse Content
+            </h2>
+            <ScrollArea className="flex-grow pr-2" style={{ maxHeight: 'calc(100vh - 12rem)' }}> {/* 10rem sticky offset + 2rem for header above */}
+              <div className="space-y-6">
+                <div>
+                  <h3 className="text-sm font-medium text-muted-foreground mb-2">Medical Subjects</h3>
+                  <SubjectList
+                    subjects={uniqueSubjects}
+                    selectedSubject={selectedSubject}
+                    onSelectSubject={setSelectedSubject}
+                  />
+                </div>
+                {selectedSubject && topicsForSelectedSubject.length > 0 && (
+                  <div>
+                    <h3 className="text-sm font-medium text-muted-foreground mb-2">Topics in {selectedSubject}</h3>
+                    <TopicList
+                      topics={topicsForSelectedSubject}
+                      selectedTopic={selectedTopic}
+                      onSelectTopic={setSelectedTopic}
+                      subject={selectedSubject}
+                      topicDescriptions={topicDescriptions[selectedSubject] || {}}
+                    />
+                  </div>
+                )}
               </div>
-            )}
+            </ScrollArea>
           </div>
         </div>
       </aside>
 
-      {/* Right Content Area */}
       <main className="flex-grow w-full md:w-3/4 lg:w-4/5 p-4 md:p-0">
         <div className="mb-6">
           <h1 className="font-headline text-3xl font-bold text-foreground">
@@ -191,7 +193,7 @@ export function ClassroomTab({ presentations: initialPresentations }: ClassroomT
             <Button 
               variant="outline" 
               onClick={() => {
-                setSelectedSubject(uniqueSubjects.includes("Anatomy") ? "Anatomy" : uniqueSubjects[0] || ""); // Reset to Anatomy or first subject
+                setSelectedSubject(uniqueSubjects.includes("Anatomy") ? "Anatomy" : uniqueSubjects[0] || ""); 
                 setSelectedTopic('');
                 setSelectedSubtopic('');
                 setSearchTerm('');
