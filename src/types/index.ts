@@ -11,4 +11,5 @@ export type Presentation = {
   generatedTextContent?: string;
   generatedImages?: string[];
   createdAt: number;
+  dataAiHint?: string;
 };

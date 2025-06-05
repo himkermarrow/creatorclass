@@ -1,7 +1,6 @@
-
 'use client';
 
-import { useState, type FormEvent } from 'react';
+import { useState } from 'react';
 import { useForm, type SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -22,20 +21,24 @@ const formSchema = z.object({
   presentationFile: z.any()
     .refine((files) => files?.length > 0, 'File is required.')
     .refine((files) => {
-        if (!files || files?.length === 0) return true; // Let previous rule handle empty
-        const fileType = files?.[0]?.type;
-        return ['application/pdf', 'application/vnd.ms-powerpoint', 'application/vnd.openxmlformats-officedocument.presentationml.presentation'].includes(fileType);
-      }, 'Only PDF or PPT/PPTX files are allowed.'),
+      if (!files || files.length === 0) return true;
+      const fileType = files[0]?.type;
+      return [
+        'application/pdf',
+        'application/vnd.ms-powerpoint',
+        'application/vnd.openxmlformats-officedocument.presentationml.presentation'
+      ].includes(fileType);
+    }, 'Only PDF or PPT/PPTX files are allowed.'),
 });
 
 type FormData = z.infer<typeof formSchema>;
 
 interface UploadPresentationFormProps {
-  addPresentation: (presentation: Presentation) => void;
+  onUpload: (presentation: Presentation) => void;
 }
 
-export function UploadPresentationForm({ addPresentation }: UploadPresentationFormProps) {
-  const [isLoading, setIsLoading] = useState(false); 
+export function UploadPresentationForm({ onUpload }: UploadPresentationFormProps) {
+  const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
   const { register, handleSubmit, formState: { errors }, reset } = useForm<FormData>({
     resolver: zodResolver(formSchema),
@@ -43,33 +46,41 @@ export function UploadPresentationForm({ addPresentation }: UploadPresentationFo
 
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     setIsLoading(true);
-    if (!data.presentationFile || data.presentationFile.length === 0) {
+
+    const file = data.presentationFile?.[0];
+    if (!file) {
       toast({ title: 'Error', description: 'Please select a file.', variant: 'destructive' });
       setIsLoading(false);
       return;
     }
 
-    const file = data.presentationFile[0];
-    
     try {
-      const newPresentation: Presentation = {
-        id: crypto.randomUUID(),
+      const payload = {
         title: data.title,
         subject: data.subject,
         topic: data.topic,
         subtopic: data.subtopic,
         fileType: file.type === 'application/pdf' ? 'pdf' : 'ppt',
         fileName: file.name,
-        fileUrl: URL.createObjectURL(file), 
+        fileUrl: `/uploads/${file.name}`, // Assumes static upload directory
         thumbnailUrl: `https://placehold.co/300x200.png?text=${encodeURIComponent(data.title)}`,
-        createdAt: Date.now(),
       };
-      addPresentation(newPresentation);
-      toast({ title: 'Success', description: `${file.name} uploaded and tagged successfully!` });
+
+      const res = await fetch('/api/presentations', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+
+      if (!res.ok) throw new Error('Failed to upload');
+      const saved = await res.json();
+      onUpload(saved);
+
+      toast({ title: 'Success', description: `${file.name} uploaded and saved!` });
       reset();
     } catch (error) {
-      console.error('Error "uploading" presentation:', error);
-      toast({ title: 'Error', description: 'Failed to process presentation.', variant: 'destructive' });
+      console.error('Upload error:', error);
+      toast({ title: 'Error', description: 'Failed to upload file.', variant: 'destructive' });
     } finally {
       setIsLoading(false);
     }
@@ -87,32 +98,32 @@ export function UploadPresentationForm({ addPresentation }: UploadPresentationFo
       <CardContent>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
           <div className="space-y-2">
-            <Label htmlFor="upload-title" className="font-medium">Presentation Title</Label>
+            <Label htmlFor="upload-title">Presentation Title</Label>
             <Input id="upload-title" {...register('title')} placeholder="e.g., Histology of Connective Tissues" />
             {errors.title && <p className="text-sm text-destructive">{errors.title.message}</p>}
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label htmlFor="upload-subject" className="font-medium">Subject</Label>
+              <Label htmlFor="upload-subject">Subject</Label>
               <Input id="upload-subject" {...register('subject')} placeholder="e.g., Anatomy" />
               {errors.subject && <p className="text-sm text-destructive">{errors.subject.message}</p>}
             </div>
             <div className="space-y-2">
-              <Label htmlFor="upload-topic" className="font-medium">Topic</Label>
+              <Label htmlFor="upload-topic">Topic</Label>
               <Input id="upload-topic" {...register('topic')} placeholder="e.g., Histology" />
               {errors.topic && <p className="text-sm text-destructive">{errors.topic.message}</p>}
             </div>
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="upload-subtopic" className="font-medium">Subtopic (Optional)</Label>
+            <Label htmlFor="upload-subtopic">Subtopic (Optional)</Label>
             <Input id="upload-subtopic" {...register('subtopic')} placeholder="e.g., Epithelial Tissue" />
           </div>
-          
+
           <div className="space-y-2">
-            <Label htmlFor="upload-presentationFile" className="font-medium">Upload File (PDF/PPT/PPTX)</Label>
-            <Input id="upload-presentationFile" type="file" accept=".pdf,.ppt,.pptx" {...register('presentationFile')} className="file:text-primary file:font-medium" />
+            <Label htmlFor="upload-presentationFile">Upload File (PDF/PPT/PPTX)</Label>
+            <Input id="upload-presentationFile" type="file" accept=".pdf,.ppt,.pptx" {...register('presentationFile')} />
             {errors.presentationFile && <p className="text-sm text-destructive">{(errors.presentationFile as any).message}</p>}
           </div>
 

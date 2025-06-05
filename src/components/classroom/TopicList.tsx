@@ -1,47 +1,48 @@
+"use client"
 
-'use client';
+import React from "react"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
 
-import { Button } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
-
-interface TopicListProps {
-  topics: string[];
-  selectedTopic: string;
-  onSelectTopic: (topic: string) => void;
-  subject: string;
-  topicDescriptions: Record<string, string>;
+type Topic = {
+  label: string
+  value: string
 }
 
-export function TopicList({ topics, selectedTopic, onSelectTopic, subject, topicDescriptions }: TopicListProps) {
-  if (topics.length === 0) {
-    return <p className="text-xs text-muted-foreground py-2">No topics found for {subject}.</p>;
-  }
+type TopicListProps = {
+  topics: Topic[]
+  selectedTopic: string
+  onSelectTopic: (value: string) => void
+}
 
+const TopicList: React.FC<TopicListProps> = ({
+  topics,
+  selectedTopic,
+  onSelectTopic,
+}) => {
   return (
-    <nav className={cn("space-y-1")}>
-      {topics.map(topic => (
-        <Button
-          key={topic}
-          variant={'ghost'}
-          className={cn(
-            "w-full justify-start text-left h-auto py-2.5 px-3 rounded-md text-foreground transition-colors duration-150 ease-in-out",
-            selectedTopic === topic
-              ? 'bg-primary/10 text-primary hover:bg-primary/20 dark:bg-primary/20 dark:text-primary-foreground dark:hover:bg-primary/30'
-              : 'hover:bg-muted/80'
-          )}
-          onClick={() => onSelectTopic(topic)}
-        >
-          <div className="overflow-hidden">
-            <span className="font-medium block truncate text-sm">{topic}</span>
-            {topicDescriptions[topic] && (
-              <span className={cn("text-xs block leading-tight line-clamp-2 mt-0.5", selectedTopic === topic ? 'opacity-80' : 'opacity-70')}>
-                {topicDescriptions[topic]}
-              </span>
-            )}
-          </div>
-        </Button>
-      ))}
-    </nav>
-  );
+    <div className="w-full max-w-sm">
+      <Select value={selectedTopic} onValueChange={onSelectTopic}>
+        <SelectTrigger>
+          <SelectValue placeholder="Select Topic" />
+        </SelectTrigger>
+        <SelectContent>
+          {topics
+            .filter((topic) => topic.value && topic.value !== "")
+            .map((topic) => (
+              <SelectItem key={topic.value} value={topic.value}>
+                {topic.label}
+              </SelectItem>
+            ))}
+        </SelectContent>
+      </Select>
+    </div>
+  )
 }
 
+export default TopicList

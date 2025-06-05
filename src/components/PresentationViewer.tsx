@@ -1,8 +1,14 @@
-
 'use client';
 
 import Image from 'next/image';
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogClose } from '@/components/ui/dialog';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogClose
+} from '@/components/ui/dialog';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import type { Presentation } from '@/types';
 import { Button } from './ui/button';
@@ -17,31 +23,31 @@ interface PresentationViewerProps {
 export function PresentationViewer({ presentation, isOpen, onClose }: PresentationViewerProps) {
   if (!presentation) return null;
 
-  const handleOpenFile = () => {
-    if (presentation.fileUrl) {
-      window.open(presentation.fileUrl, '_blank');
-    }
-  };
+  const isPDF = presentation.fileType === 'pdf';
+  const isPPT = presentation.fileType === 'ppt';
+
+  const isBlob = presentation.fileUrl?.startsWith('blob:');
+
+  const googleViewerUrl = !isBlob && presentation.fileUrl
+  ? `https://docs.google.com/gview?url=${encodeURIComponent(presentation.fileUrl)}&embedded=true`
+  : null;
 
   return (
     <Dialog
       open={isOpen}
       onOpenChange={(shouldBeOpen) => {
-        if (!shouldBeOpen) {
-          onClose(); // Call the passed onClose handler only when the dialog is meant to close.
-        }
-        // If shouldBeOpen is true, the 'isOpen' prop is already true,
-        // so no state change is needed from here to keep it open.
+        if (!shouldBeOpen) onClose();
       }}
     >
-      <DialogContent className="max-w-3xl w-full max-h-[90vh] flex flex-col p-0">
+      <DialogContent className="max-w-4xl w-full max-h-[90vh] flex flex-col p-0">
         <DialogHeader className="p-6 pb-0">
           <DialogTitle className="font-headline text-2xl">{presentation.title}</DialogTitle>
           <DialogDescription>
-            {presentation.subject} &gt; {presentation.topic} {presentation.subtopic && `> ${presentation.subtopic}`}
+          {presentation.subject} &gt; {presentation.topic}
+          {presentation.subtopic ? ` > ${presentation.subtopic}` : ''}
           </DialogDescription>
         </DialogHeader>
-        
+
         <ScrollArea className="flex-grow p-6 pt-2">
           {presentation.fileType === 'generated-pdf' && (
             <div className="space-y-4">
@@ -51,8 +57,8 @@ export function PresentationViewer({ presentation, isOpen, onClose }: Presentati
                   {presentation.generatedTextContent}
                 </div>
               ) : <p className="text-muted-foreground">No text content generated.</p>}
-              
-              {presentation.generatedImages && presentation.generatedImages.length > 0 && (
+
+                {Array.isArray(presentation.generatedImages) && presentation.generatedImages.length > 0 && (
                 <>
                   <h3 className="font-headline text-lg font-semibold mt-4">Extracted Images:</h3>
                   <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
@@ -67,27 +73,35 @@ export function PresentationViewer({ presentation, isOpen, onClose }: Presentati
             </div>
           )}
 
-          {(presentation.fileType === 'pdf' || presentation.fileType === 'ppt') && (
-            <div className="space-y-4 text-center py-10">
-              <p className="text-lg">File: <span className="font-semibold">{presentation.fileName}</span></p>
-              {presentation.fileUrl && (
-                <Button onClick={handleOpenFile}>
-                  {presentation.fileType === 'pdf' ? <ExternalLink className="mr-2 h-4 w-4" /> : <Download className="mr-2 h-4 w-4" /> }
-                  {presentation.fileType === 'pdf' ? 'Open PDF in New Tab' : 'Download PPT'}
-                </Button>
+          {(isPDF || isPPT) && (
+            <div className="w-full h-[70vh] bg-muted/20 rounded-md overflow-hidden border mt-4">
+              {isPDF && !isBlob ? (
+                <iframe src={presentation.fileUrl} className="w-full h-full" />
+              ) : isPPT && googleViewerUrl ? (
+                <iframe src={googleViewerUrl} className="w-full h-full" />
+              ) : (
+                <div className="flex flex-col justify-center items-center h-full text-center p-6">
+                  <p className="text-muted-foreground text-sm mb-4">
+                    Preview not available for this file type or source. Please open manually.
+                  </p>
+                  <a
+                    href={presentation.fileUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-blue-600 underline"
+                  >
+                    Open in a new tab
+                  </a>
+                </div>
               )}
-              <p className="text-sm text-muted-foreground mt-4">
-                {presentation.fileType === 'ppt' ? 
-                "PPT viewing is typically handled by local software. Click to download." : 
-                "Click to open the PDF in a new tab."}
-              </p>
             </div>
           )}
         </ScrollArea>
+
         <div className="p-6 pt-0 border-t">
-            <DialogClose asChild>
-                <Button variant="outline" className="w-full">Close</Button>
-            </DialogClose>
+          <DialogClose asChild>
+            <Button variant="outline" className="w-full">Close</Button>
+          </DialogClose>
         </div>
       </DialogContent>
     </Dialog>
