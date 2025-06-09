@@ -5,10 +5,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Header } from "@/components/Header";
 import { ContentCreatorTab } from "@/components/content-creator/ContentCreatorTab";
 import { ClassroomTab } from "@/components/classroom/ClassroomTab";
-import type { Presentation } from "@/types";
+import type { Presentation } from '@/types';
 import { BookOpen, LayoutGrid } from 'lucide-react';
-import { initialPresentationsData } from '@/lib/data';
-//import { initialPresentationsData } from '@/lib/data'; // Externalized seed data (optional but cleaner)
 
 export default function HomePage() {
   const [presentations, setPresentations] = useState<Presentation[]>([]);
@@ -16,16 +14,21 @@ export default function HomePage() {
   const [currentYear, setCurrentYear] = useState<number | null>(null);
 
   useEffect(() => {
-    setPresentations(initialPresentationsData);
-    setCurrentYear(new Date().getFullYear());
-    setIsMounted(true);
-  }, []);
+    const fetchData = async () => {
+      try {
+        const res = await fetch('/api/presentations');
+        const data = await res.json();
+        setPresentations(data.presentations);
+      } catch (error) {
+        console.error('Failed to load presentations:', error);
+      } finally {
+        setIsMounted(true);
+        setCurrentYear(new Date().getFullYear());
+      }
+    };
 
-  useEffect(() => {
-    if (isMounted && presentations.length > 0) {
-      localStorage.setItem('courseDeckPresentations', JSON.stringify(presentations));
-    }
-  }, [presentations, isMounted]);
+    fetchData();
+  }, []);
 
   const addPresentation = (newPresentation: Presentation) => {
     setPresentations(prev => [newPresentation, ...prev]);

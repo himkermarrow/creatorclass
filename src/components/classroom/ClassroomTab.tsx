@@ -92,7 +92,7 @@ export function ClassroomTab({ presentations: initialPresentations }: ClassroomT
   const totalPages = Math.ceil(filtered.length / CARDS_PER_PAGE);
 
   return (
-    <div className="flex min-h-screen w-full bg-[#f9f9fb]">
+    <div className="flex min-h-screen w-full bg-gray-50">
       {/* Sidebar */}
       <aside className="hidden md:block w-[260px] border-r bg-white shadow-sm p-6 space-y-6">
         <div className="space-y-4">
