@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useForm, type SubmitHandler } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -19,6 +19,14 @@ import { LoadingSpinner } from '@/components/LoadingSpinner';
 import { useToast } from '@/hooks/use-toast';
 import type { Presentation } from '@/types';
 import { v4 as uuidv4 } from 'uuid';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import { subjectHierarchy } from '@/lib/subjectHierarchy';
 
 const formSchema = z.object({
   title: z.string().min(3, 'Title must be at least 3 characters'),
@@ -42,19 +50,28 @@ interface UploadPresentationFormProps {
 export function UploadPresentationForm({ onUpload }: UploadPresentationFormProps) {
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
-
   const {
     register,
     handleSubmit,
     reset,
+    setValue,
+    watch,
     formState: { errors },
   } = useForm<FormData>({
     resolver: zodResolver(formSchema),
   });
 
+  const selectedSubject = watch('subject');
+  const selectedTopic = watch('topic');
+
+  const topics = selectedSubject ? Object.keys(subjectHierarchy[selectedSubject] || {}) : [];
+  const subtopics =
+    selectedSubject && selectedTopic
+      ? subjectHierarchy[selectedSubject]?.[selectedTopic] || []
+      : [];
+
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     setIsLoading(true);
-
     try {
       const file = data.presentationFile[0];
       const objectUrl = URL.createObjectURL(file);
@@ -109,23 +126,78 @@ export function UploadPresentationForm({ onUpload }: UploadPresentationFormProps
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {/* Subject */}
             <div className="space-y-2">
               <Label htmlFor="subject">Subject</Label>
-              <Input id="subject" {...register('subject')} placeholder="e.g., Anatomy" />
+              <Select
+                value={selectedSubject}
+                onValueChange={(value) => {
+                  setValue('subject', value);
+                  setValue('topic', '');
+                  setValue('subtopic', '');
+                }}
+              >
+                <SelectTrigger>
+                  <SelectValue placeholder="Select Subject" />
+                </SelectTrigger>
+                <SelectContent>
+                  {Object.keys(subjectHierarchy).map((subject) => (
+                    <SelectItem key={subject} value={subject}>
+                      {subject}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
               {errors.subject && <p className="text-sm text-destructive">{errors.subject.message}</p>}
             </div>
+
+            {/* Topic */}
             <div className="space-y-2">
               <Label htmlFor="topic">Topic</Label>
-              <Input id="topic" {...register('topic')} placeholder="e.g., Embryology" />
+              <Select
+                value={selectedTopic}
+                onValueChange={(value) => {
+                  setValue('topic', value);
+                  setValue('subtopic', '');
+                }}
+              >
+                <SelectTrigger>
+                  <SelectValue placeholder="Select Topic" />
+                </SelectTrigger>
+                <SelectContent>
+                  {topics.map((topic) => (
+                    <SelectItem key={topic} value={topic}>
+                      {topic}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
               {errors.topic && <p className="text-sm text-destructive">{errors.topic.message}</p>}
             </div>
           </div>
 
+          {/* Subtopic */}
           <div className="space-y-2">
             <Label htmlFor="subtopic">Subtopic (optional)</Label>
-            <Input id="subtopic" {...register('subtopic')} placeholder="e.g., Week 1-2" />
+            <Select
+              value={watch('subtopic') || ''}
+              onValueChange={(value) => setValue('subtopic', value)}
+              disabled={subtopics.length === 0}
+            >
+              <SelectTrigger>
+                <SelectValue placeholder="Select Subtopic" />
+              </SelectTrigger>
+              <SelectContent>
+                {subtopics.map((sub) => (
+                  <SelectItem key={sub} value={sub}>
+                    {sub}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           </div>
 
+          {/* File Upload */}
           <div className="space-y-2">
             <Label htmlFor="presentationFile">Upload File (PDF only)</Label>
             <Input

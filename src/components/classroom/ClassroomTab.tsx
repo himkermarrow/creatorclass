@@ -14,7 +14,7 @@ import {
 import { ChevronLeft, ChevronRight, Search } from 'lucide-react';
 import { PresentationViewer } from '@/components/PresentationViewer';
 import { PresentationGrid } from './PresentationGrid';
-import TopicList from './TopicList';
+import { subjectHierarchy } from '@/lib/subjectHierarchy';
 
 interface ClassroomTabProps {
   presentations: Presentation[];
@@ -31,47 +31,27 @@ export function ClassroomTab({ presentations: initialPresentations }: ClassroomT
 
   const CARDS_PER_PAGE = 8;
 
-  const subjects = useMemo(
-    () => Array.from(new Set(initialPresentations.map((p) => p.subject))).sort(),
-    [initialPresentations]
-  );
-
   useEffect(() => {
-    if (!selectedSubject && subjects.length > 0) {
-      setSelectedSubject(subjects[0]);
+    const allSubjects = Object.keys(subjectHierarchy);
+    if (!selectedSubject && allSubjects.length > 0) {
+      setSelectedSubject(allSubjects[0]);
     }
-  }, [subjects]);
+  }, []);
 
-  const topicOptions = useMemo(() => {
-    const rawTopics = Array.from(
-      new Set(
-        initialPresentations
-          .filter((p) => p.subject === selectedSubject)
-          .map((p) => p.topic)
-      )
-    ).sort();
-
-    return rawTopics.map((topic) => ({
-      label: topic,
-      value: topic,
-    }));
-  }, [initialPresentations, selectedSubject]);
+  const topics = useMemo(() => {
+    if (!selectedSubject || !subjectHierarchy[selectedSubject]) return [];
+    return Object.keys(subjectHierarchy[selectedSubject]);
+  }, [selectedSubject]);
 
   const subtopics = useMemo(() => {
-    return Array.from(
-      new Set(
-        initialPresentations
-          .filter(
-            (p) =>
-              p.subject === selectedSubject &&
-              p.topic === selectedTopic &&
-              p.subtopic &&
-              p.subtopic !== ''
-          )
-          .map((p) => p.subtopic!)
-      )
-    ).sort();
-  }, [initialPresentations, selectedSubject, selectedTopic]);
+    if (
+      !selectedSubject ||
+      !selectedTopic ||
+      !subjectHierarchy[selectedSubject]?.[selectedTopic]
+    )
+      return [];
+    return subjectHierarchy[selectedSubject][selectedTopic];
+  }, [selectedSubject, selectedTopic]);
 
   const filtered = useMemo(() => {
     return initialPresentations.filter((p) => {
@@ -97,12 +77,16 @@ export function ClassroomTab({ presentations: initialPresentations }: ClassroomT
       <aside className="hidden md:block w-[260px] border-r bg-white shadow-sm p-6 space-y-6">
         <div className="space-y-4">
           <h2 className="text-lg font-semibold">Subjects</h2>
-          <Select value={selectedSubject} onValueChange={setSelectedSubject}>
+          <Select value={selectedSubject} onValueChange={(value) => {
+            setSelectedSubject(value);
+            setSelectedTopic('');
+            setSelectedSubtopic('');
+          }}>
             <SelectTrigger>
               <SelectValue placeholder="Select Subject" />
             </SelectTrigger>
             <SelectContent>
-              {subjects.map((subject) => (
+              {Object.keys(subjectHierarchy).map((subject) => (
                 <SelectItem key={subject} value={subject}>
                   {subject}
                 </SelectItem>
@@ -111,18 +95,28 @@ export function ClassroomTab({ presentations: initialPresentations }: ClassroomT
           </Select>
         </div>
 
-        {topicOptions.length > 0 && (
+        {topics.length > 0 && (
           <div className="space-y-4">
             <h3 className="text-md font-medium">Topics</h3>
-            <TopicList
-              topics={topicOptions}
-              selectedTopic={selectedTopic}
-              onSelectTopic={setSelectedTopic}
-            />
+            <Select value={selectedTopic} onValueChange={(value) => {
+              setSelectedTopic(value);
+              setSelectedSubtopic('');
+            }}>
+              <SelectTrigger>
+                <SelectValue placeholder="Select Topic" />
+              </SelectTrigger>
+              <SelectContent>
+                {topics.map((topic) => (
+                  <SelectItem key={topic} value={topic}>
+                    {topic}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           </div>
         )}
 
-        {selectedTopic && subtopics.length > 0 && (
+        {subtopics.length > 0 && (
           <div className="space-y-4">
             <h3 className="text-md font-medium">Subtopics</h3>
             <Select value={selectedSubtopic} onValueChange={setSelectedSubtopic}>
