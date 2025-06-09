@@ -40,11 +40,11 @@ export default function HomePage() {
         <Header />
         <main className="flex-grow container mx-auto px-4 py-8">
           <div className="flex justify-center items-center h-64">
-            <p className="text-muted-foreground">Loading CourseDeck AI...</p>
+            <p className="text-muted-foreground">Loading Creator Class AI...</p>
           </div>
         </main>
         <footer className="py-6 text-center text-sm text-muted-foreground border-t">
-          © CourseDeck AI. All rights reserved.
+          © Creator Class AI. All rights reserved.
         </footer>
       </div>
     );
@@ -80,7 +80,7 @@ export default function HomePage() {
         </Tabs>
       </main>
       <footer className="py-6 text-center text-sm text-muted-foreground border-t">
-        {currentYear ? `© ${currentYear} CourseDeck AI. All rights reserved.` : '© CourseDeck AI. All rights reserved.'}
+        {currentYear ? `© ${currentYear} Creator Class AI. All rights reserved.` : '© Creator Class AI. All rights reserved.'}
       </footer>
     </div>
   );

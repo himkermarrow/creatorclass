@@ -3,7 +3,7 @@ import './globals.css';
 import { Toaster } from "@/components/ui/toaster";
 
 export const metadata: Metadata = {
-  title: 'CourseDeck AI',
+  title: 'Creator Class AI',
   description: 'AI-powered presentation generation and management for faculty.',
 };
 

@@ -1,49 +1,70 @@
-"use client"
+"use client";
 
-import React, { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select"
-import { toast } from "@/hooks/use-toast"
+import React, { useState, useMemo } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectTrigger,
+  SelectValue,
+  SelectContent,
+  SelectItem,
+} from "@/components/ui/select";
+import { toast } from "@/hooks/use-toast";
+import { subjectHierarchy } from "@/lib/subjectHierarchy";
 
 interface GeneratePdfFormProps {
-  subjects: string[]
-  topicsBySubject: Record<string, string[]>
-  onGenerate: (file: File, subject: string, topic?: string) => void
+  onGenerate: (file: File, subject: string, topic?: string, subtopic?: string) => void;
 }
 
-const GeneratePdfForm: React.FC<GeneratePdfFormProps> = ({
-  subjects,
-  topicsBySubject,
-  onGenerate,
-}) => {
-  const [selectedSubject, setSelectedSubject] = useState("")
-  const [selectedTopic, setSelectedTopic] = useState("")
-  const [file, setFile] = useState<File | null>(null)
+const GeneratePdfForm: React.FC<GeneratePdfFormProps> = ({ onGenerate }) => {
+  const [selectedSubject, setSelectedSubject] = useState("");
+  const [selectedTopic, setSelectedTopic] = useState("");
+  const [selectedSubtopic, setSelectedSubtopic] = useState("");
+  const [file, setFile] = useState<File | null>(null);
+
+  const subjects = useMemo(() => Object.keys(subjectHierarchy), []);
+
+  const topics = useMemo(() => {
+    if (!selectedSubject) return [];
+    return Object.keys(subjectHierarchy[selectedSubject] || {});
+  }, [selectedSubject]);
+
+  const subtopics = useMemo(() => {
+    if (!selectedSubject || !selectedTopic) return [];
+    return subjectHierarchy[selectedSubject]?.[selectedTopic] || [];
+  }, [selectedSubject, selectedTopic]);
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
+    e.preventDefault();
 
     if (!file || !selectedSubject) {
-      toast({ title: "Please select a subject and upload a file." })
-      return
+      toast({ title: "Please select a subject and upload a file." });
+      return;
     }
 
-    onGenerate(file, selectedSubject, selectedTopic || undefined)
-  }
+    onGenerate(file, selectedSubject, selectedTopic || undefined, selectedSubtopic || undefined);
+  };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files?.length) {
-      setFile(e.target.files[0])
+      setFile(e.target.files[0]);
     }
-  }
+  };
 
   return (
     <form className="space-y-6" onSubmit={handleSubmit}>
       <div className="space-y-2">
         <Label>Select Subject</Label>
-        <Select value={selectedSubject} onValueChange={setSelectedSubject}>
+        <Select
+          value={selectedSubject}
+          onValueChange={(value) => {
+            setSelectedSubject(value);
+            setSelectedTopic("");
+            setSelectedSubtopic("");
+          }}
+        >
           <SelectTrigger>
             <SelectValue placeholder="Select subject" />
           </SelectTrigger>
@@ -57,18 +78,46 @@ const GeneratePdfForm: React.FC<GeneratePdfFormProps> = ({
         </Select>
       </div>
 
-      {selectedSubject && topicsBySubject[selectedSubject]?.length > 0 && (
+      {topics.length > 0 && (
         <div className="space-y-2">
           <Label>Optional: Select Topic</Label>
-          <Select value={selectedTopic} onValueChange={setSelectedTopic}>
+          <Select
+            value={selectedTopic}
+            onValueChange={(value) => {
+              setSelectedTopic(value);
+              setSelectedSubtopic("");
+            }}
+          >
             <SelectTrigger>
               <SelectValue placeholder="Select topic (optional)" />
             </SelectTrigger>
             <SelectContent>
               <SelectItem value="">None</SelectItem>
-              {topicsBySubject[selectedSubject].map((topic) => (
+              {topics.map((topic) => (
                 <SelectItem key={topic} value={topic}>
                   {topic}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
+      )}
+
+      {subtopics.length > 0 && (
+        <div className="space-y-2">
+          <Label>Optional: Select Subtopic</Label>
+          <Select
+            value={selectedSubtopic}
+            onValueChange={(value) => setSelectedSubtopic(value)}
+          >
+            <SelectTrigger>
+              <SelectValue placeholder="Select subtopic (optional)" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="">None</SelectItem>
+              {subtopics.map((sub) => (
+                <SelectItem key={sub} value={sub}>
+                  {sub}
                 </SelectItem>
               ))}
             </SelectContent>
@@ -99,7 +148,7 @@ const GeneratePdfForm: React.FC<GeneratePdfFormProps> = ({
         Generate Presentation
       </Button>
     </form>
-  )
-}
+  );
+};
 
-export default GeneratePdfForm
+export default GeneratePdfForm;

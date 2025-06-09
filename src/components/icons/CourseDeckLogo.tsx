@@ -7,7 +7,7 @@ export function CourseDeckLogo(props: SVGProps<SVGSVGElement>) {
       viewBox="0 0 200 50"
       width="120"
       height="30"
-      aria-label="CourseDeck AI Logo"
+      aria-label="Creator Class AI Logo"
       {...props}
     >
       <rect width="200" height="50" rx="5" fill="hsl(var(--primary))" />
@@ -20,7 +20,7 @@ export function CourseDeckLogo(props: SVGProps<SVGSVGElement>) {
         fontSize="24"
         fill="hsl(var(--primary-foreground))"
       >
-        CourseDeck AI
+        Creator Class AI
       </text>
     </svg>
   );

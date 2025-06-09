@@ -19,13 +19,8 @@ export function ContentCreatorTab({ addPresentation }: ContentCreatorTabProps) {
       <div>
         <h2 className="text-xl font-semibold mb-4">Generate with AI from Reference Material</h2>
         <GeneratePdfForm
-          subjects={["Anatomy", "Physiology"]} // Replace with dynamic data if needed
-          topicsBySubject={{
-            Anatomy: ["Head", "Neck"],
-            Physiology: ["Heart", "Lungs"],
-          }}
-          onGenerate={(file, subject, topic) => {
-            console.log("AI generate requested:", { file, subject, topic });
+          onGenerate={(file, subject, topic, subtopic) => {
+            console.log("AI generate requested:", { file, subject, topic, subtopic });
             // Future: send to backend and call addPresentation() on success
           }}
         />

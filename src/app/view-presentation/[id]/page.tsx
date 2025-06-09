@@ -8,6 +8,7 @@ import type { Presentation } from '@/types';
 import { Header } from '@/components/Header';
 import Image from 'next/image';
 import { LoadingSpinner } from '@/components/LoadingSpinner';
+import { Button } from '@/components/ui/button';
 
 export default function ViewPresentationPage() {
   const params = useParams();
@@ -47,7 +48,7 @@ export default function ViewPresentationPage() {
           <LoadingSpinner size={48} />
         </main>
         <footer className="py-6 text-center text-sm text-muted-foreground border-t">
-          © {currentYear || 'CourseDeck AI'}. All rights reserved.
+          © {currentYear || 'Creator Class AI'}. All rights reserved.
         </footer>
       </div>
     );
@@ -67,7 +68,7 @@ export default function ViewPresentationPage() {
           </div>
         </main>
          <footer className="py-6 text-center text-sm text-muted-foreground border-t">
-            © {currentYear || 'CourseDeck AI'}. All rights reserved.
+            © {currentYear || 'Creator Class AI'}. All rights reserved.
         </footer>
       </div>
     );
@@ -97,7 +98,7 @@ export default function ViewPresentationPage() {
           </div>
         </main>
          <footer className="py-6 text-center text-sm text-muted-foreground border-t">
-            © {currentYear || 'CourseDeck AI'}. All rights reserved.
+            © {currentYear || 'Creator Class AI'}. All rights reserved.
         </footer>
       </div>
     );
@@ -145,7 +146,7 @@ export default function ViewPresentationPage() {
         </article>
       </main>
       <footer className="py-6 text-center text-sm text-muted-foreground border-t">
-        © {currentYear || 'CourseDeck AI'}. All rights reserved.
+        © {currentYear || 'Creator Class AI'}. All rights reserved.
       </footer>
     </div>
   );
