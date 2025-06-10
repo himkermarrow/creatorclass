@@ -34,10 +34,11 @@ const formSchema = z.object({
   subject: z.string().min(1, 'Subject is required'),
   topic: z.string().min(1, 'Topic is required'),
   subtopic: z.string().optional(),
-  presentationFile: z.any()
-    .refine((file) => file?.length > 0, 'File is required')
+  presentationFile: z
+    .any()
+    .refine((files) => files?.length > 0, 'File is required')
     .refine(
-      (file) => file?.[0] && file[0].type === 'application/pdf',
+      (files) => files?.[0]?.type === 'application/pdf',
       'Only PDF files are allowed'
     ),
 });
@@ -113,15 +114,15 @@ export function UploadPresentationForm({ onUpload }: UploadPresentationFormProps
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
           {/* Title */}
           <div className="space-y-2">
-            <Label>Presentation Title</Label>
-            <Input placeholder="e.g., Embryology Basics" {...register('title')} />
+            <Label htmlFor="title">Presentation Title</Label>
+            <Input id="title" placeholder="e.g., Embryology Basics" {...register('title')} />
             {errors.title && <p className="text-sm text-destructive">{errors.title.message}</p>}
           </div>
 
           {/* Subject & Topic */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label>Subject</Label>
+              <Label htmlFor="subject">Subject</Label>
               <Select
                 value={selectedSubject}
                 onValueChange={(value) => {
@@ -130,7 +131,7 @@ export function UploadPresentationForm({ onUpload }: UploadPresentationFormProps
                   setValue('subtopic', '');
                 }}
               >
-                <SelectTrigger>
+                <SelectTrigger id="subject">
                   <SelectValue placeholder="Select Subject" />
                 </SelectTrigger>
                 <SelectContent>
@@ -145,7 +146,7 @@ export function UploadPresentationForm({ onUpload }: UploadPresentationFormProps
             </div>
 
             <div className="space-y-2">
-              <Label>Topic</Label>
+              <Label htmlFor="topic">Topic</Label>
               <Select
                 value={selectedTopic}
                 onValueChange={(value) => {
@@ -153,7 +154,7 @@ export function UploadPresentationForm({ onUpload }: UploadPresentationFormProps
                   setValue('subtopic', '');
                 }}
               >
-                <SelectTrigger>
+                <SelectTrigger id="topic">
                   <SelectValue placeholder="Select Topic" />
                 </SelectTrigger>
                 <SelectContent>
@@ -170,13 +171,13 @@ export function UploadPresentationForm({ onUpload }: UploadPresentationFormProps
 
           {/* Subtopic */}
           <div className="space-y-2">
-            <Label>Subtopic (optional)</Label>
+            <Label htmlFor="subtopic">Subtopic (optional)</Label>
             <Select
               value={watch('subtopic') || ''}
               onValueChange={(value) => setValue('subtopic', value)}
               disabled={subtopics.length === 0}
             >
-              <SelectTrigger>
+              <SelectTrigger id="subtopic">
                 <SelectValue placeholder="Select Subtopic" />
               </SelectTrigger>
               <SelectContent>
@@ -191,27 +192,32 @@ export function UploadPresentationForm({ onUpload }: UploadPresentationFormProps
 
           {/* File Upload */}
           <div className="space-y-2">
-            <Label>Upload File (PDF only)</Label>
-            <div className="border-2 border-dashed border-gray-300 rounded-md p-6 text-center">
+            {/* The div is replaced with a Label and linked to the hidden input */}
+            <Label
+              htmlFor="presentationFile"
+              className="block cursor-pointer rounded-md border-2 border-dashed border-gray-300 p-6 text-center transition-colors hover:border-primary"
+            >
               <UploadCloud className="mx-auto h-10 w-10 text-muted-foreground mb-2" />
               <p>
-                <span className="text-primary font-medium cursor-pointer">Choose file</span> or drag and drop
+                <span className="text-primary font-medium">Choose file</span> or drag and drop
               </p>
               <p className="text-xs text-muted-foreground mt-1">PDF up to 10MB</p>
-              <Input
-                id="presentationFile"
-                type="file"
-                accept=".pdf"
-                {...register('presentationFile')}
-                className="hidden"
-              />
-              <p className="mt-2 text-sm text-muted-foreground">
-                {fileList?.[0]?.name || 'No file chosen'}
+            </Label>
+            <Input
+              id="presentationFile"
+              type="file"
+              accept=".pdf"
+              {...register('presentationFile')}
+              className="hidden" // This remains hidden
+            />
+            <p className="mt-2 text-sm text-muted-foreground text-center">
+              {fileList?.[0]?.name || 'No file chosen'}
+            </p>
+            {errors.presentationFile && (
+              <p className="text-sm text-destructive mt-1 text-center">
+                {(errors.presentationFile as any).message}
               </p>
-              {errors.presentationFile && (
-                <p className="text-sm text-destructive mt-1">{(errors.presentationFile as any).message}</p>
-              )}
-            </div>
+            )}
           </div>
 
           {/* Submit */}
