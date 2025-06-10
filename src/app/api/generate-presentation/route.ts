@@ -1,19 +1,43 @@
-// src/app/api/generate-presentation/route.ts
 import { NextResponse } from 'next/server';
 import { createPresentationPdfFlow } from '@/ai/flows/createPresentationPdf';
-import pdf from 'pdf-parse';
+import * as pdfjsLib from 'pdfjs-dist/legacy/build/pdf.mjs';
 
+// This is required for Node.js environments.
+// It tells pdfjs-dist where to find its necessary font files.
+const CMAP_URL = "./node_modules/pdfjs-dist/cmaps/";
+const CMAP_PACKED = true;
+
+
+/**
+ * Extracts text content from a PDF file using the pdfjs-dist library.
+ */
 async function extractTextFromFile(file: File): Promise<string> {
-  const arrayBuffer = await file.arrayBuffer();
-  const buffer = Buffer.from(arrayBuffer);
+  const fileBuffer = await file.arrayBuffer();
+  const pdfData = new Uint8Array(fileBuffer);
 
-  if (file.type === 'application/pdf') {
-    const data = await pdf(buffer);
-    return data.text;
+  const loadingTask = pdfjsLib.getDocument({
+    data: pdfData,
+    cMapUrl: CMAP_URL,
+    cMapPacked: CMAP_PACKED,
+  });
+
+  try {
+    const pdfDocument = await loadingTask.promise;
+    let fullText = '';
+
+    for (let i = 1; i <= pdfDocument.numPages; i++) {
+      const page = await pdfDocument.getPage(i);
+      const textContent = await page.getTextContent();
+      const pageText = textContent.items.map(item => ('str' in item ? item.str : '')).join(' ');
+      fullText += pageText + '\n';
+    }
+
+    return fullText;
+  } catch (error) {
+    console.error('Failed to parse PDF:', error);
+    // Return an empty string or re-throw if you want to handle it upstream
+    return '';
   }
-  // In a real-world scenario, you would add more parsers here
-  // for DOCX, PPTX, etc., using libraries like 'mammoth' or 'pptx-js'.
-  return buffer.toString('utf-8');
 }
 
 
@@ -29,12 +53,12 @@ export async function POST(request: Request) {
       return new NextResponse('Missing subject or files', { status: 400 });
     }
 
-    // 1. Extract text from all uploaded files
+    // 1. Extract text from all uploaded files using the new function
     const extractedTextPromises = files.map(extractTextFromFile);
     const extractedTexts = await Promise.all(extractedTextPromises);
     const combinedText = extractedTexts.join('\n\n---\n\n');
 
-    // 2. Call the flow directly, without the runFlow wrapper
+    // 2. Call the flow directly
     const pdfBase64 = await createPresentationPdfFlow({ combinedText, slideCount });
 
     // 3. Convert Base64 to a Buffer and send it back as a PDF
