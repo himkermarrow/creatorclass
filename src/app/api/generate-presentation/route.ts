@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { createPresentationPdfFlow } from '@/ai/flows/createPresentationPdf';
-import * as pdfjsLib from 'pdfjs-dist/legacy/build/pdf.mjs';
-
+//import * as pdfjsLib from 'pdfjs-dist/legacy/build/pdf.mjs';
+import pdf from "pdf-parse-debugging-disabled";
 // This is required for Node.js environments.
 // It tells pdfjs-dist where to find its necessary font files.
 const CMAP_URL = "./node_modules/pdfjs-dist/cmaps/";
@@ -15,24 +15,26 @@ async function extractTextFromFile(file: File): Promise<string> {
   const fileBuffer = await file.arrayBuffer();
   const pdfData = new Uint8Array(fileBuffer);
 
-  const loadingTask = pdfjsLib.getDocument({
-    data: pdfData,
-    cMapUrl: CMAP_URL,
-    cMapPacked: CMAP_PACKED,
-  });
+  const data = await pdf(pdfData);
+  console.log(data);
+//   const loadingTask = pdfjsLib.getDocument({
+//     data: pdfData,
+//     cMapUrl: CMAP_URL,
+//     cMapPacked: CMAP_PACKED,
+//   });
 
   try {
-    const pdfDocument = await loadingTask.promise;
-    let fullText = '';
+//     const pdfDocument = await loadingTask.promise;
+//     let fullText = '';
 
-    for (let i = 1; i <= pdfDocument.numPages; i++) {
-      const page = await pdfDocument.getPage(i);
-      const textContent = await page.getTextContent();
-      const pageText = textContent.items.map(item => ('str' in item ? item.str : '')).join(' ');
-      fullText += pageText + '\n';
-    }
+//     for (let i = 1; i <= pdfDocument.numPages; i++) {
+//       const page = await pdfDocument.getPage(i);
+//       const textContent = await page.getTextContent();
+//       const pageText = textContent.items.map(item => ('str' in item ? item.str : '')).join(' ');
+//       fullText += pageText + '\n';
+//     }
 
-    return fullText;
+    return data.text;
   } catch (error) {
     console.error('Failed to parse PDF:', error);
     // Return an empty string or re-throw if you want to handle it upstream
