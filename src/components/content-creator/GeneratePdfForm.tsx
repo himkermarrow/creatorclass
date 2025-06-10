@@ -11,18 +11,27 @@ import {
   SelectContent,
   SelectItem,
 } from "@/components/ui/select";
+import { UploadCloud } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
 import { subjectHierarchy } from "@/lib/subjectHierarchy";
+import { LoadingSpinner } from "../LoadingSpinner";
 
 interface GeneratePdfFormProps {
-  onGenerate: (file: File, subject: string, topic?: string, subtopic?: string) => void;
+  onGenerate: (
+    files: File[],
+    subject: string,
+    slideCount: number,
+    topic?: string,
+    subtopic?: string
+  ) => void;
 }
 
 const GeneratePdfForm: React.FC<GeneratePdfFormProps> = ({ onGenerate }) => {
   const [selectedSubject, setSelectedSubject] = useState("");
   const [selectedTopic, setSelectedTopic] = useState("");
   const [selectedSubtopic, setSelectedSubtopic] = useState("");
-  const [file, setFile] = useState<File | null>(null);
+  const [files, setFiles] = useState<File[]>([]);
+  const [slideCount, setSlideCount] = useState(10);
 
   const subjects = useMemo(() => Object.keys(subjectHierarchy), []);
 
@@ -39,24 +48,28 @@ const GeneratePdfForm: React.FC<GeneratePdfFormProps> = ({ onGenerate }) => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!file || !selectedSubject) {
-      toast({ title: "Please select a subject and upload a file." });
+    if (files.length === 0 || !selectedSubject) {
+      toast({ title: "Please select a subject and upload at least one file." });
+      return;
+    }
+    if (slideCount < 3 || slideCount > 20) {
+      toast({ title: "Number of slides must be between 3 and 20." });
       return;
     }
 
-    onGenerate(file, selectedSubject, selectedTopic || undefined, selectedSubtopic || undefined);
+    onGenerate(files, selectedSubject, slideCount, selectedTopic || undefined, selectedSubtopic || undefined);
   };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files?.length) {
-      setFile(e.target.files[0]);
+      setFiles(Array.from(e.target.files));
     }
   };
 
   return (
     <form className="space-y-6" onSubmit={handleSubmit}>
       <div className="space-y-2">
-        <Label>Select Subject</Label>
+        <Label htmlFor="gen-subject">Select Subject</Label>
         <Select
           value={selectedSubject}
           onValueChange={(value) => {
@@ -65,8 +78,8 @@ const GeneratePdfForm: React.FC<GeneratePdfFormProps> = ({ onGenerate }) => {
             setSelectedSubtopic("");
           }}
         >
-          <SelectTrigger>
-            <SelectValue placeholder="Select subject" />
+          <SelectTrigger id="gen-subject">
+            <SelectValue placeholder="Select Subject" />
           </SelectTrigger>
           <SelectContent>
             {subjects.map((subj) => (
@@ -78,74 +91,96 @@ const GeneratePdfForm: React.FC<GeneratePdfFormProps> = ({ onGenerate }) => {
         </Select>
       </div>
 
-      {topics.length > 0 && (
-        <div className="space-y-2">
-          <Label>Optional: Select Topic</Label>
-          <Select
-            value={selectedTopic}
-            onValueChange={(value) => {
-              setSelectedTopic(value);
-              setSelectedSubtopic("");
-            }}
-          >
-            <SelectTrigger>
-              <SelectValue placeholder="Select topic (optional)" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="">None</SelectItem>
-              {topics.map((topic) => (
-                <SelectItem key={topic} value={topic}>
-                  {topic}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>
-      )}
+      {/* MODIFICATION START: Always render Topic dropdown, but disable it */}
+      <div className="space-y-2">
+        <Label htmlFor="gen-topic">Optional: Select Topic</Label>
+        <Select
+          value={selectedTopic}
+          onValueChange={(value) => {
+            setSelectedTopic(value);
+            setSelectedSubtopic("");
+          }}
+          disabled={topics.length === 0}
+        >
+          <SelectTrigger id="gen-topic">
+            <SelectValue placeholder="Select Topic (optional)" />
+          </SelectTrigger>
+          <SelectContent>
+            {topics.map((topic) => (
+              <SelectItem key={topic} value={topic}>
+                {topic}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      </div>
+      {/* MODIFICATION END */}
 
-      {subtopics.length > 0 && (
-        <div className="space-y-2">
-          <Label>Optional: Select Subtopic</Label>
-          <Select
-            value={selectedSubtopic}
-            onValueChange={(value) => setSelectedSubtopic(value)}
-          >
-            <SelectTrigger>
-              <SelectValue placeholder="Select subtopic (optional)" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="">None</SelectItem>
-              {subtopics.map((sub) => (
-                <SelectItem key={sub} value={sub}>
-                  {sub}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>
-      )}
+      {/* MODIFICATION START: Always render Sub-topic dropdown, but disable it */}
+      <div className="space-y-2">
+        <Label htmlFor="gen-subtopic">Optional: Select Subtopic</Label>
+        <Select
+          value={selectedSubtopic}
+          onValueChange={setSelectedSubtopic}
+          disabled={subtopics.length === 0}
+        >
+          <SelectTrigger id="gen-subtopic">
+            <SelectValue placeholder="Select Subtopic (optional)" />
+          </SelectTrigger>
+          <SelectContent>
+            {subtopics.map((sub) => (
+              <SelectItem key={sub} value={sub}>
+                {sub}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      </div>
+      {/* MODIFICATION END */}
+      
+      <div className="space-y-2">
+        <Label htmlFor="slide-count">Number of Slides (3-20)</Label>
+        <Input
+          id="slide-count"
+          type="number"
+          value={slideCount}
+          onChange={(e) => setSlideCount(parseInt(e.target.value, 10))}
+          min="3"
+          max="20"
+          placeholder="e.g., 10"
+        />
+      </div>
 
       <div className="space-y-2">
-        <Label>Upload Reference Document</Label>
+        <Label
+          htmlFor="generate-files"
+          className="block cursor-pointer rounded-md border-2 border-dashed border-gray-300 p-6 text-center transition-colors hover:border-primary"
+        >
+          <UploadCloud className="mx-auto h-10 w-10 text-muted-foreground mb-2" />
+          <p>
+            <span className="text-primary font-medium">Choose files</span> or drag and drop
+          </p>
+          <p className="text-xs text-muted-foreground mt-1">
+            PDF, PPT, DOC, DOCX, TXT
+          </p>
+        </Label>
         <Input
+          id="generate-files"
           type="file"
-          accept="
-            application/pdf,
-            application/vnd.openxmlformats-officedocument.wordprocessingml.document,
-            application/msword,
-            application/vnd.openxmlformats-officedocument.presentationml.presentation,
-            application/vnd.ms-powerpoint,
-            text/plain
-          "
+          accept=".pdf,.doc,.docx,.ppt,.pptx,.txt"
+          multiple
           onChange={handleFileChange}
+          className="hidden"
         />
-        <p className="text-sm text-muted-foreground">
-          Accepted formats: PDF, PPT, DOC, DOCX, TXT
-        </p>
+        <ul className="mt-2 text-sm text-muted-foreground text-center space-y-1">
+          {files.length > 0
+            ? files.map((f) => <li key={f.name}>{f.name}</li>)
+            : <li>No files selected</li>}
+        </ul>
       </div>
 
       <Button type="submit" className="w-full">
-        Generate Presentation
+        Generate PDF Presentation
       </Button>
     </form>
   );

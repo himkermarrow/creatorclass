@@ -1,12 +1,21 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useForm, type SubmitHandler } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { v4 as uuidv4 } from 'uuid';
+
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import {
+  Select,
+  SelectTrigger,
+  SelectValue,
+  SelectContent,
+  SelectItem,
+} from '@/components/ui/select';
 import {
   Card,
   CardHeader,
@@ -14,18 +23,10 @@ import {
   CardDescription,
   CardContent,
 } from '@/components/ui/card';
-import { FileUp } from 'lucide-react';
+import { FileUp, UploadCloud } from 'lucide-react';
 import { LoadingSpinner } from '@/components/LoadingSpinner';
 import { useToast } from '@/hooks/use-toast';
 import type { Presentation } from '@/types';
-import { v4 as uuidv4 } from 'uuid';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
 import { subjectHierarchy } from '@/lib/subjectHierarchy';
 
 const formSchema = z.object({
@@ -33,10 +34,11 @@ const formSchema = z.object({
   subject: z.string().min(1, 'Subject is required'),
   topic: z.string().min(1, 'Topic is required'),
   subtopic: z.string().optional(),
-  presentationFile: z.any()
-    .refine((file) => file?.length > 0, 'File is required')
+  presentationFile: z
+    .any()
+    .refine((files) => files?.length > 0, 'File is required')
     .refine(
-      (file) => file?.[0] && file[0].type === 'application/pdf',
+      (files) => files?.[0]?.type === 'application/pdf',
       'Only PDF files are allowed'
     ),
 });
@@ -50,6 +52,7 @@ interface UploadPresentationFormProps {
 export function UploadPresentationForm({ onUpload }: UploadPresentationFormProps) {
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
+
   const {
     register,
     handleSubmit,
@@ -57,12 +60,11 @@ export function UploadPresentationForm({ onUpload }: UploadPresentationFormProps
     setValue,
     watch,
     formState: { errors },
-  } = useForm<FormData>({
-    resolver: zodResolver(formSchema),
-  });
+  } = useForm<FormData>({ resolver: zodResolver(formSchema) });
 
   const selectedSubject = watch('subject');
   const selectedTopic = watch('topic');
+  const fileList = watch('presentationFile');
 
   const topics = selectedSubject ? Object.keys(subjectHierarchy[selectedSubject] || {}) : [];
   const subtopics =
@@ -89,44 +91,36 @@ export function UploadPresentationForm({ onUpload }: UploadPresentationFormProps
       };
 
       onUpload(newPresentation);
-
-      toast({
-        title: 'Upload successful!',
-        description: `${file.name} was uploaded.`,
-      });
-
+      toast({ title: 'Upload successful!', description: `${file.name} was uploaded.` });
       reset();
-    } catch (error) {
-      console.error('Upload failed', error);
-      toast({
-        title: 'Upload failed',
-        description: 'Please try again.',
-        variant: 'destructive',
-      });
+    } catch (err) {
+      console.error(err);
+      toast({ title: 'Upload failed', description: 'Please try again.', variant: 'destructive' });
     } finally {
       setIsLoading(false);
     }
   };
 
   return (
-    <Card className="shadow-lg">
+    <Card className="shadow">
       <CardHeader>
-        <CardTitle className="font-headline text-2xl flex items-center">
-          <FileUp className="mr-2 h-6 w-6 text-primary" />
-          Upload Existing Presentation
+        <CardTitle className="text-xl font-bold flex items-center gap-2">
+          <FileUp className="text-primary" /> Upload Existing Presentation
         </CardTitle>
         <CardDescription>Upload your PDF and tag it properly.</CardDescription>
       </CardHeader>
+
       <CardContent>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+          {/* Title */}
           <div className="space-y-2">
             <Label htmlFor="title">Presentation Title</Label>
-            <Input id="title" {...register('title')} placeholder="e.g., Embryology Basics" />
+            <Input id="title" placeholder="e.g., Embryology Basics" {...register('title')} />
             {errors.title && <p className="text-sm text-destructive">{errors.title.message}</p>}
           </div>
 
+          {/* Subject & Topic */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {/* Subject */}
             <div className="space-y-2">
               <Label htmlFor="subject">Subject</Label>
               <Select
@@ -137,7 +131,7 @@ export function UploadPresentationForm({ onUpload }: UploadPresentationFormProps
                   setValue('subtopic', '');
                 }}
               >
-                <SelectTrigger>
+                <SelectTrigger id="subject">
                   <SelectValue placeholder="Select Subject" />
                 </SelectTrigger>
                 <SelectContent>
@@ -151,7 +145,6 @@ export function UploadPresentationForm({ onUpload }: UploadPresentationFormProps
               {errors.subject && <p className="text-sm text-destructive">{errors.subject.message}</p>}
             </div>
 
-            {/* Topic */}
             <div className="space-y-2">
               <Label htmlFor="topic">Topic</Label>
               <Select
@@ -161,7 +154,7 @@ export function UploadPresentationForm({ onUpload }: UploadPresentationFormProps
                   setValue('subtopic', '');
                 }}
               >
-                <SelectTrigger>
+                <SelectTrigger id="topic">
                   <SelectValue placeholder="Select Topic" />
                 </SelectTrigger>
                 <SelectContent>
@@ -184,7 +177,7 @@ export function UploadPresentationForm({ onUpload }: UploadPresentationFormProps
               onValueChange={(value) => setValue('subtopic', value)}
               disabled={subtopics.length === 0}
             >
-              <SelectTrigger>
+              <SelectTrigger id="subtopic">
                 <SelectValue placeholder="Select Subtopic" />
               </SelectTrigger>
               <SelectContent>
@@ -199,19 +192,35 @@ export function UploadPresentationForm({ onUpload }: UploadPresentationFormProps
 
           {/* File Upload */}
           <div className="space-y-2">
-            <Label htmlFor="presentationFile">Upload File (PDF only)</Label>
+            {/* The div is replaced with a Label and linked to the hidden input */}
+            <Label
+              htmlFor="presentationFile"
+              className="block cursor-pointer rounded-md border-2 border-dashed border-gray-300 p-6 text-center transition-colors hover:border-primary"
+            >
+              <UploadCloud className="mx-auto h-10 w-10 text-muted-foreground mb-2" />
+              <p>
+                <span className="text-primary font-medium">Choose file</span> or drag and drop
+              </p>
+              <p className="text-xs text-muted-foreground mt-1">PDF up to 10MB</p>
+            </Label>
             <Input
               id="presentationFile"
               type="file"
               accept=".pdf"
               {...register('presentationFile')}
-              className="file:text-primary"
+              className="hidden" // This remains hidden
             />
+            <p className="mt-2 text-sm text-muted-foreground text-center">
+              {fileList?.[0]?.name || 'No file chosen'}
+            </p>
             {errors.presentationFile && (
-              <p className="text-sm text-destructive">{(errors.presentationFile as any).message}</p>
+              <p className="text-sm text-destructive mt-1 text-center">
+                {(errors.presentationFile as any).message}
+              </p>
             )}
           </div>
 
+          {/* Submit */}
           <Button type="submit" disabled={isLoading} className="w-full">
             {isLoading ? <LoadingSpinner size={20} /> : <FileUp className="mr-2 h-5 w-5" />}
             Upload and Tag
