@@ -57,7 +57,13 @@ const GeneratePdfForm: React.FC<GeneratePdfFormProps> = ({ onGenerate }) => {
       return;
     }
 
-    onGenerate(files, selectedSubject, slideCount, selectedTopic || undefined, selectedSubtopic || undefined);
+    onGenerate(
+      files,
+      selectedSubject,
+      slideCount,
+      selectedTopic || undefined,
+      selectedSubtopic || undefined
+    );
   };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -91,7 +97,6 @@ const GeneratePdfForm: React.FC<GeneratePdfFormProps> = ({ onGenerate }) => {
         </Select>
       </div>
 
-      {/* MODIFICATION START: Always render Topic dropdown, but disable it */}
       <div className="space-y-2">
         <Label htmlFor="gen-topic">Optional: Select Topic</Label>
         <Select
@@ -114,9 +119,7 @@ const GeneratePdfForm: React.FC<GeneratePdfFormProps> = ({ onGenerate }) => {
           </SelectContent>
         </Select>
       </div>
-      {/* MODIFICATION END */}
 
-      {/* MODIFICATION START: Always render Sub-topic dropdown, but disable it */}
       <div className="space-y-2">
         <Label htmlFor="gen-subtopic">Optional: Select Subtopic</Label>
         <Select
@@ -136,8 +139,7 @@ const GeneratePdfForm: React.FC<GeneratePdfFormProps> = ({ onGenerate }) => {
           </SelectContent>
         </Select>
       </div>
-      {/* MODIFICATION END */}
-      
+
       <div className="space-y-2">
         <Label htmlFor="slide-count">Number of Slides (3-20)</Label>
         <Input
