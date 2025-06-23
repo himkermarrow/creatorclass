@@ -1,0 +1,47 @@
+---
+categorize_and_prepare_uploads:
+  description: Accept and categorize uploaded files as PDFs, images, or text documents
+    using {PDF_path}, {TXT_path}, or {DOCX_path}.
+  expected_output: Categorized and prepared files ready for further processing.
+  async_execution: false
+  agent: ingestion_specialist
+extract_text_and_diagrams:
+  description: Extract text and diagrams from PDFs using {PDF_path}.
+  expected_output: Extracted text and diagrams from PDFs.
+  async_execution: false
+  agent: ingestion_specialist
+  context:
+  - categorize_and_prepare_uploads
+process_text_documents:
+  description: Process text documents using {TXT_path} or {DOCX_path}.
+  expected_output: Processed text documents ready for summarization.
+  async_execution: false
+  agent: ingestion_specialist
+  context:
+  - categorize_and_prepare_uploads
+generate_section_summaries:
+  description: Generate section-wise summaries and highlight key content using extracted
+    text.
+  expected_output: Section-wise summaries with highlighted key content.
+  async_execution: false
+  agent: summarization_expert
+  context:
+  - extract_text_and_diagrams
+  - process_text_documents
+extract_and_enhance_diagrams:
+  description: Detect, extract, and enhance diagrams using {VisionTool} and {DallETool}
+    if necessary.
+  expected_output: Enhanced diagrams matched to summarized content.
+  async_execution: false
+  agent: diagram_specialist
+  context:
+  - extract_text_and_diagrams
+compile_pdf:
+  description: Compile summaries and diagrams into a PDF with headers, footers, page
+    numbers, and a table of contents.
+  expected_output: A well-formatted PDF containing summaries and diagrams.
+  async_execution: false
+  agent: pdf_generation_expert
+  context:
+  - generate_section_summaries
+  - extract_and_enhance_diagrams

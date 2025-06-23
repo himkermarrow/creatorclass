@@ -1,0 +1,23 @@
+[project]
+name = "multimodal_ai_agent_for_educational_content_summarization"
+version = "0.1.0"
+description = "multimodal_ai_agent_for_educational_content_summarization using crewAI"
+authors = [{ name = "Your Name", email = "you@example.com" }]
+requires-python = ">=3.10,<3.13"
+dependencies = [
+    "crewai[tools]>=0.119.0,<1.0.0"
+]
+
+[project.scripts]
+multimodal_ai_agent_for_educational_content_summarization = "multimodal_ai_agent_for_educational_content_summarization.main:run"
+run_crew = "multimodal_ai_agent_for_educational_content_summarization.main:run"
+train = "multimodal_ai_agent_for_educational_content_summarization.main:train"
+replay = "multimodal_ai_agent_for_educational_content_summarization.main:replay"
+test = "multimodal_ai_agent_for_educational_content_summarization.main:test"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.crewai]
+type = "crew"
