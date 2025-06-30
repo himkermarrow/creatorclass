@@ -1,31 +1,30 @@
-import type { Presentation } from '@/types';
 import { PresentationCard } from './PresentationCard';
+
+interface Presentation {
+  id: string;
+  title: string;
+  subject: string;
+  topic: string;
+  subtopic: string;
+  fileUrl: string;
+}
 
 interface PresentationGridProps {
   presentations: Presentation[];
-  onViewPresentation: (presentation: Presentation) => void;
 }
 
-export function PresentationGrid({ presentations, onViewPresentation }: PresentationGridProps) {
-  if (presentations.length === 0) return null;
-
+export function PresentationGrid({ presentations }: PresentationGridProps) {
   return (
-    <div
-      className="
-        grid
-        grid-cols-1
-        sm:grid-cols-2
-        gap-x-6
-        gap-y-8
-        py-6
-        animate-fade-in
-      "
-    >
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {presentations.map((presentation) => (
         <PresentationCard
           key={presentation.id}
-          presentation={presentation}
-          onView={onViewPresentation}
+          id={presentation.id}
+          title={presentation.title}
+          subject={presentation.subject}
+          topic={presentation.topic}
+          subtopic={presentation.subtopic || 'General'} // Provide default value
+          fileUrl={presentation.fileUrl}
         />
       ))}
     </div>

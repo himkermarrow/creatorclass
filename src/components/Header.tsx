@@ -1,15 +1,22 @@
+import React from "react";
 import { CourseDeckLogo } from '@/components/icons/CourseDeckLogo';
 import Link from 'next/link';
+//import Header from "@/components/Header";
 
-export function Header() {
+export default function Header() {
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex h-16 max-w-screen-2xl items-center">
-        <Link href="/" className="mr-6 flex items-center space-x-2">
-          <CourseDeckLogo className="h-6 w-auto" />
-        </Link>
-        {/* Future navigation items can go here */}
+    <div className="flex w-full h-16">
+      {/* Sidebar */}
+      <div className="bg-[#15333B] w-48 flex flex-col justify-center items-center h-16 shadow-md">
+        <div className="flex flex-col items-center">
+          <span className="text-white text-xl font-semibold">Creator<span className="text-blue-400">+</span></span>
+          <span className="text-xs text-gray-300 mt-1">Powered by Marrow</span>
+        </div>
       </div>
-    </header>
+      {/* Header Content */}
+      <div className="flex-1 flex items-center bg-[#15333B] pl-8">
+        <span className="text-lg font-medium text-white">Welcome Dr. Himker Jain</span>
+      </div>
+    </div>
   );
 }

@@ -1,21 +1,11 @@
 'use client';
 
-import { useState } from 'react';
-import { useForm, type SubmitHandler } from 'react-hook-form';
-import { z } from 'zod';
-import { zodResolver } from '@hookform/resolvers/zod';
+import { useState, useRef } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import {
-  Select,
-  SelectTrigger,
-  SelectValue,
-  SelectContent,
-  SelectItem,
-} from '@/components/ui/select';
 import {
   Card,
   CardHeader,
@@ -23,27 +13,10 @@ import {
   CardDescription,
   CardContent,
 } from '@/components/ui/card';
-import { FileUp, UploadCloud } from 'lucide-react';
-import { LoadingSpinner } from '@/components/LoadingSpinner';
+import { FileUp } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import type { Presentation } from '@/types';
 import { subjectHierarchy } from '@/lib/subjectHierarchy';
-
-const formSchema = z.object({
-  title: z.string().min(3, 'Title must be at least 3 characters'),
-  subject: z.string().min(1, 'Subject is required'),
-  topic: z.string().min(1, 'Topic is required'),
-  subtopic: z.string().optional(),
-  presentationFile: z
-    .any()
-    .refine((files) => files?.length > 0, 'File is required')
-    .refine(
-      (files) => files?.[0]?.type === 'application/pdf',
-      'Only PDF files are allowed'
-    ),
-});
-
-type FormData = z.infer<typeof formSchema>;
 
 interface UploadPresentationFormProps {
   onUpload: (presentation: Presentation) => void;
@@ -51,54 +24,122 @@ interface UploadPresentationFormProps {
 
 export function UploadPresentationForm({ onUpload }: UploadPresentationFormProps) {
   const [isLoading, setIsLoading] = useState(false);
+  const [file, setFile] = useState<File | null>(null);
+  const [title, setTitle] = useState('');
+  const [selectedSubject, setSelectedSubject] = useState('');
+  const [selectedTopic, setSelectedTopic] = useState('');
+  const [selectedSubtopic, setSelectedSubtopic] = useState('');
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const { toast } = useToast();
 
-  const {
-    register,
-    handleSubmit,
-    reset,
-    setValue,
-    watch,
-    formState: { errors },
-  } = useForm<FormData>({ resolver: zodResolver(formSchema) });
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      const selectedFile = e.target.files[0];
+      if (selectedFile.type !== 'application/pdf') {
+        toast({
+          title: 'Invalid file type',
+          description: 'Please upload a PDF file',
+          variant: 'destructive',
+        });
+        return;
+      }
+      setFile(selectedFile);
+      // Set default title from filename if title is empty
+      if (!title) {
+        setTitle(selectedFile.name.replace(/\.[^/.]+$/, ''));
+      }
+    }
+  };
 
-  const selectedSubject = watch('subject');
-  const selectedTopic = watch('topic');
-  const fileList = watch('presentationFile');
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
 
-  const topics = selectedSubject ? Object.keys(subjectHierarchy[selectedSubject] || {}) : [];
-  const subtopics =
-    selectedSubject && selectedTopic
-      ? subjectHierarchy[selectedSubject]?.[selectedTopic] || []
-      : [];
+    // Validate required fields
+    if (!file) {
+      toast({
+        title: 'No file selected',
+        description: 'Please select a PDF file to upload',
+        variant: 'destructive',
+      });
+      return;
+    }
 
-  const onSubmit: SubmitHandler<FormData> = async (data) => {
-    setIsLoading(true);
+    if (!title.trim()) {
+      toast({
+        title: 'Title required',
+        description: 'Please enter a title for the presentation',
+        variant: 'destructive',
+      });
+      return;
+    }
+
+    if (!selectedSubject) {
+      toast({
+        title: 'Subject required',
+        description: 'Please select a subject',
+        variant: 'destructive',
+      });
+      return;
+    }
+
     try {
-      const file = data.presentationFile[0];
-      const objectUrl = URL.createObjectURL(file);
+      setIsLoading(true);
+      const formData = new FormData();
+      formData.append('file', file);
+      formData.append('title', title);
+      formData.append('subject', selectedSubject);
+      formData.append('topic', selectedTopic);
+      formData.append('subtopic', selectedSubtopic);
 
-      const newPresentation: Presentation = {
-        id: uuidv4(),
-        title: data.title,
-        subject: data.subject,
-        topic: data.topic,
-        subtopic: data.subtopic || '',
-        fileType: 'pdf',
-        fileName: file.name,
-        fileUrl: objectUrl,
-        createdAt: Date.now(),
-      };
+      const response = await fetch('/api/upload-presentation', {
+        method: 'POST',
+        body: formData,
+      });
 
-      onUpload(newPresentation);
-      toast({ title: 'Upload successful!', description: `${file.name} was uploaded.` });
-      reset();
-    } catch (err) {
-      console.error(err);
-      toast({ title: 'Upload failed', description: 'Please try again.', variant: 'destructive' });
+      if (!response.ok) {
+        const data = await response.json();
+        throw new Error(data.error || 'Upload failed');
+      }
+
+      const { presentation } = await response.json();
+
+      onUpload({
+        ...presentation,
+        createdAt: Date.now()
+      });
+
+      toast({
+        title: 'Success',
+        description: 'Presentation uploaded successfully',
+      });
+
+      // Reset form
+      setFile(null);
+      setTitle('');
+      setSelectedSubject('');
+      setSelectedTopic('');
+      setSelectedSubtopic('');
+      if (fileInputRef.current) {
+        fileInputRef.current.value = '';
+      }
+    } catch (error) {
+      console.error('Upload error:', error);
+      toast({
+        title: 'Upload failed',
+        description: 'There was an error uploading your presentation',
+        variant: 'destructive',
+      });
     } finally {
       setIsLoading(false);
     }
+  };
+
+  const getTopicsForSubject = (subject: string) => {
+    return Object.keys(subjectHierarchy[subject] || {});
+  };
+
+  const getSubtopicsForTopic = (subject: string, topic: string) => {
+    return subjectHierarchy[subject]?.[topic] || [];
   };
 
   return (
@@ -111,119 +152,105 @@ export function UploadPresentationForm({ onUpload }: UploadPresentationFormProps
       </CardHeader>
 
       <CardContent>
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+        <form onSubmit={handleSubmit} className="space-y-6">
           {/* Title */}
           <div className="space-y-2">
             <Label htmlFor="title">Presentation Title</Label>
-            <Input id="title" placeholder="e.g., Embryology Basics" {...register('title')} />
-            {errors.title && <p className="text-sm text-destructive">{errors.title.message}</p>}
-          </div>
-
-          {/* Subject & Topic */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="space-y-2">
-              <Label htmlFor="subject">Subject</Label>
-              <Select
-                value={selectedSubject}
-                onValueChange={(value) => {
-                  setValue('subject', value);
-                  setValue('topic', '');
-                  setValue('subtopic', '');
-                }}
-              >
-                <SelectTrigger id="subject">
-                  <SelectValue placeholder="Select Subject" />
-                </SelectTrigger>
-                <SelectContent>
-                  {Object.keys(subjectHierarchy).map((subject) => (
-                    <SelectItem key={subject} value={subject}>
-                      {subject}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-              {errors.subject && <p className="text-sm text-destructive">{errors.subject.message}</p>}
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="topic">Topic</Label>
-              <Select
-                value={selectedTopic}
-                onValueChange={(value) => {
-                  setValue('topic', value);
-                  setValue('subtopic', '');
-                }}
-              >
-                <SelectTrigger id="topic">
-                  <SelectValue placeholder="Select Topic" />
-                </SelectTrigger>
-                <SelectContent>
-                  {topics.map((topic) => (
-                    <SelectItem key={topic} value={topic}>
-                      {topic}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-              {errors.topic && <p className="text-sm text-destructive">{errors.topic.message}</p>}
-            </div>
-          </div>
-
-          {/* Subtopic */}
-          <div className="space-y-2">
-            <Label htmlFor="subtopic">Subtopic (optional)</Label>
-            <Select
-              value={watch('subtopic') || ''}
-              onValueChange={(value) => setValue('subtopic', value)}
-              disabled={subtopics.length === 0}
-            >
-              <SelectTrigger id="subtopic">
-                <SelectValue placeholder="Select Subtopic" />
-              </SelectTrigger>
-              <SelectContent>
-                {subtopics.map((sub) => (
-                  <SelectItem key={sub} value={sub}>
-                    {sub}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+            <Input
+              id="title"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              placeholder="e.g., Embryology Basics"
+            />
           </div>
 
           {/* File Upload */}
           <div className="space-y-2">
-            {/* The div is replaced with a Label and linked to the hidden input */}
-            <Label
-              htmlFor="presentationFile"
-              className="block cursor-pointer rounded-md border-2 border-dashed border-gray-300 p-6 text-center transition-colors hover:border-primary"
-            >
-              <UploadCloud className="mx-auto h-10 w-10 text-muted-foreground mb-2" />
-              <p>
-                <span className="text-primary font-medium">Choose file</span> or drag and drop
-              </p>
-              <p className="text-xs text-muted-foreground mt-1">PDF up to 10MB</p>
-            </Label>
+            <Label htmlFor="file">Upload PDF</Label>
             <Input
-              id="presentationFile"
+              id="file"
+              ref={fileInputRef}
               type="file"
               accept=".pdf"
-              {...register('presentationFile')}
-              className="hidden" // This remains hidden
+              onChange={handleFileChange}
+              className="w-full"
             />
-            <p className="mt-2 text-sm text-muted-foreground text-center">
-              {fileList?.[0]?.name || 'No file chosen'}
-            </p>
-            {errors.presentationFile && (
-              <p className="text-sm text-destructive mt-1 text-center">
-                {(errors.presentationFile as any).message}
+            {file && (
+              <p className="mt-2 text-sm text-muted-foreground">
+                Selected file: {file.name}
               </p>
             )}
           </div>
 
-          {/* Submit */}
+          {/* Subject & Topic */}
+          <div className="space-y-4">
+            <div className="space-y-2">
+              <Label htmlFor="subject">Subject</Label>
+              <select
+                id="subject"
+                value={selectedSubject}
+                onChange={(e) => {
+                  setSelectedSubject(e.target.value);
+                  setSelectedTopic('');
+                  setSelectedSubtopic('');
+                }}
+                className="w-full p-2 border rounded"
+              >
+                <option value="">Select a subject</option>
+                {Object.keys(subjectHierarchy).map((subject) => (
+                  <option key={subject} value={subject}>
+                    {subject}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            {selectedSubject && (
+              <div className="space-y-2">
+                <Label htmlFor="topic">Topic</Label>
+                <select
+                  id="topic"
+                  value={selectedTopic}
+                  onChange={(e) => {
+                    setSelectedTopic(e.target.value);
+                    setSelectedSubtopic('');
+                  }}
+                  className="w-full p-2 border rounded"
+                >
+                  <option value="">Select a topic</option>
+                  {getTopicsForSubject(selectedSubject).map((topic) => (
+                    <option key={topic} value={topic}>
+                      {topic}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            )}
+
+            {selectedTopic && (
+              <div className="space-y-2">
+                <Label htmlFor="subtopic">Subtopic (Optional)</Label>
+                <select
+                  id="subtopic"
+                  value={selectedSubtopic}
+                  onChange={(e) => setSelectedSubtopic(e.target.value)}
+                  className="w-full p-2 border rounded"
+                >
+                  <option value="">Select a subtopic</option>
+                  {getSubtopicsForTopic(selectedSubject, selectedTopic).map(
+                    (subtopic) => (
+                      <option key={subtopic} value={subtopic}>
+                        {subtopic}
+                      </option>
+                    )
+                  )}
+                </select>
+              </div>
+            )}
+          </div>
+
           <Button type="submit" disabled={isLoading} className="w-full">
-            {isLoading ? <LoadingSpinner size={20} /> : <FileUp className="mr-2 h-5 w-5" />}
-            Upload and Tag
+            {isLoading ? 'Uploading...' : 'Upload Presentation'}
           </Button>
         </form>
       </CardContent>

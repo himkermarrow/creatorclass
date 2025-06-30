@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Header } from "@/components/Header";
+import Header from "@/components/Header";
 import { ContentCreatorTab } from "@/components/content-creator/ContentCreatorTab";
 import { ClassroomTab } from "@/components/classroom/ClassroomTab";
 import type { Presentation } from '@/types';
@@ -18,9 +18,10 @@ export default function HomePage() {
       try {
         const res = await fetch('/api/presentations');
         const data = await res.json();
-        setPresentations(data.presentations);
+        setPresentations(data.presentations || []);
       } catch (error) {
         console.error('Failed to load presentations:', error);
+        setPresentations([]);
       } finally {
         setIsMounted(true);
         setCurrentYear(new Date().getFullYear());

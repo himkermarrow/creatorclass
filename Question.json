@@ -1,0 +1,647 @@
+[
+    {
+        "id": "GAM001",
+        "question": "What are the site and the timing of the origin of the primordial germ cells?",
+        "options": [
+            "Gonads, 4th week of embryonic development",
+            "Epiblast, 2nd week of embryonic development",
+            "Gonads, 2nd month of embryonic development",
+            "Yolk sac, 4th week of embryonic development"
+        ],
+        "correct_answer": "Epiblast, 2nd week of embryonic development",
+        "subject": "Anatomy",
+        "lesson": "Gametogenesis (Live)",
+        "subtopic": "Stem Cells",
+        "explanation": "Primordial germ cells originate in the epiblast, during the 2nd week of development. They pass through the primitive streak during gastrulation and reach the wall of the yolk sac. They migrate from the yolk sac in the 4th week and reach the developing gonads by the end of the 5th week."
+    },
+    {
+        "id": "GAM001",
+        "question": "What are the site and the timing of the origin of the primordial germ cells?",
+        "options": [
+            "Gonads, 4th week of embryonic development",
+            "Epiblast, 2nd week of embryonic development",
+            "Gonads, 2nd month of embryonic development",
+            "Yolk sac, 4th week of embryonic development"
+        ],
+        "correct_answer": "Epiblast, 2nd week of embryonic development",
+        "subject": "Anatomy",
+        "lesson": "Gametogenesis (Live)",
+        "subtopic": "Stem Cells",
+        "explanation": "Primordial germ cells originate in the epiblast, during the 2nd week of development. They pass through the primitive streak during gastrulation and reach the wall of the yolk sac. They migrate from the yolk sac in the 4th week and reach the developing gonads by the end of the 5th week."
+    },
+    {
+        "id": "GAM002",
+        "question": "What is the correct sequence of stem cell potency based on their ability to differentiate?",
+        "options": [
+            "Pluripotent > Totipotent > Multipotent > Oligopotent > Unipotent",
+            "Totipotent > Pluripotent > Multipotent > Oligopotent > Unipotent",
+            "Totipotent > Pluripotent > Oligopotent > Multipotent > Unipotent",
+            "Pluripotent > Totipotent > Oligopotent > Multipotent > Unipotent"
+        ],
+        "correct_answer": "Totipotent > Pluripotent > Multipotent > Oligopotent > Unipotent",
+        "subject": "Anatomy",
+        "lesson": "Gametogenesis (Live)",
+        "subtopic": "Stem Cells",
+        "explanation": "The correct order of arrangement of stem cells, based on their potency to differentiate into different cells (highest to lowest) is totipotent > pluripotent > multipotent > oligopotent > unipotent."
+    },
+    {
+        "id": "GAM003",
+        "question": "What is a part of the embryo that exerts morphogenetic stimulus on its adjacent part called?",
+        "options": [
+            "Differentiator",
+            "Organizer",
+            "Stem cell",
+            "Inducer"
+        ],
+        "correct_answer": "Organizer",
+        "subject": "Anatomy",
+        "lesson": "Gametogenesis (Live)",
+        "subtopic": "Germ Layers and its Derivatives",
+        "explanation": "Any part of the embryo that exerts a morphogenetic stimulus on adjacent parts is known as the organizer. There is a sequence of primary, secondary, and tertiary organizers, each inducing the next stage."
+    },
+    {
+        "id": "GAM004",
+        "question": "During which phase of meiotic division are leptotene and zygotene stages seen?",
+        "options": [
+            "Metaphase 1",
+            "Prophase 1",
+            "Metaphase 2",
+            "Prophase 2"
+        ],
+        "correct_answer": "Prophase 1",
+        "subject": "Anatomy",
+        "lesson": "Gametogenesis (Live)",
+        "subtopic": "Cell Cycle and Cell Division",
+        "explanation": "Leptotene and zygotene are stages of prophase 1 of meiosis I."
+    },
+    {
+        "id": "GAM005",
+        "question": "Which of the following represents the embryonic period of development?",
+        "options": [
+            "0-2 weeks",
+            "3-8 weeks",
+            "8-10 weeks",
+            "10-12 weeks"
+        ],
+        "correct_answer": "3-8 weeks",
+        "subject": "Anatomy",
+        "lesson": "Gametogenesis (Live)",
+        "subtopic": "Germ Layers and its Derivatives",
+        "explanation": "The embryonic period extends from the 3rd week of intrauterine life to the 8th week of intrauterine life."
+    },
+    {
+        "id": "GAM006",
+        "question": "During which stage of prenatal development does gastrulation occur?",
+        "options": [
+            "Embryonic period",
+            "Pre-embryonic period",
+            "Gametogenesis",
+            "Fetal period"
+        ],
+        "correct_answer": "Embryonic period",
+        "subject": "Anatomy",
+        "lesson": "Gametogenesis (Live)",
+        "subtopic": "Germ Layers and its Derivatives",
+        "explanation": "Gastrulation occurs during the embryonic period at the 3rd week of gestation, forming the three definitive germ layers."
+    },
+    {
+        "id": "GAM007",
+        "question": "When does spermatogenesis begin?",
+        "options": [
+            "Fetal life",
+            "Birth",
+            "Puberty",
+            "After 18 years"
+        ],
+        "correct_answer": "Puberty",
+        "subject": "Anatomy",
+        "lesson": "Gametogenesis (Live)",
+        "subtopic": "Spermatogenesis",
+        "explanation": "Spermatogenesis starts at puberty. Spermatogonia are transformed into spermatozoa in seminiferous tubules."
+    },
+    {
+        "id": "GAM008",
+        "question": "Which of the following cells remain dormant in the testis until puberty?",
+        "options": [
+            "Primordial germ cells",
+            "Primary spermatocytes",
+            "Secondary spermatocytes",
+            "Spermatids"
+        ],
+        "correct_answer": "Primordial germ cells",
+        "subject": "Anatomy",
+        "lesson": "Gametogenesis (Live)",
+        "subtopic": "Stem Cells",
+        "explanation": "Primordial germ cells remain dormant in the testis until puberty, when they differentiate into spermatogonial stem cells."
+    },
+    {
+        "id": "GAM009",
+        "question": "Which of the following cells have haploid number of chromosomes?",
+        "options": [
+            "Type A spermatogonia",
+            "Type B spermatogonia",
+            "Primary spermatocyte",
+            "Secondary spermatocyte"
+        ],
+        "correct_answer": "Secondary spermatocyte",
+        "subject": "Anatomy",
+        "lesson": "Gametogenesis (Live)",
+        "subtopic": "Spermatogenesis",
+        "explanation": "Secondary spermatocytes have haploid number of chromosomes, formed during spermatogenesis."
+    },
+    {
+        "id": "GAM010",
+        "question": "Which stage of spermatogenesis is characterized by an independent assortment of maternal and paternal chromosomes?",
+        "options": [
+            "Spermatogonia to primary spermatocyte",
+            "Primary spermatocyte to secondary spermatocyte",
+            "Secondary spermatocyte to spermatid",
+            "Spermatid to spermatozoa"
+        ],
+        "correct_answer": "Primary spermatocyte to secondary spermatocyte",
+        "subject": "Anatomy",
+        "lesson": "Gametogenesis (Live)",
+        "subtopic": "Spermatogenesis",
+        "explanation": "Independent assortment occurs during meiosis I where there is division from primary spermatocyte to secondary spermatocyte."
+    },
+    {
+        "id": "GAM011",
+        "question": "Which of the following transformations is seen in spermiogenesis?",
+        "options": [
+            "Primordial germ cells to spermatogonia",
+            "Spermatogonia to primary spermatocytes",
+            "Primary spermatocytes to secondary spermatocytes",
+            "Spermatids to spermatozoa"
+        ],
+        "correct_answer": "Spermatids to spermatozoa",
+        "subject": "Anatomy",
+        "lesson": "Gametogenesis (Live)",
+        "subtopic": "Spermatogenesis",
+        "explanation": "Spermiogenesis is the maturation of spermatids to spermatozoa."
+    },
+    {
+        "id": "GAM012",
+        "question": "Spermatogenesis is completed in approximately how many days?",
+        "options": [
+            "54",
+            "94",
+            "24",
+            "74"
+        ],
+        "correct_answer": "74",
+        "subject": "Anatomy",
+        "lesson": "Gametogenesis (Live)",
+        "subtopic": "Spermatogenesis",
+        "explanation": "Spermatogenesis is completed in approximately 74 days."
+    },
+    {
+        "id": "GAM013",
+        "question": "Which organelle gives rise to the acrosomal cap of the sperm?",
+        "options": [
+            "Nucleus",
+            "Golgi apparatus",
+            "Centrosome",
+            "Mitochondria"
+        ],
+        "correct_answer": "Golgi apparatus",
+        "subject": "Anatomy",
+        "lesson": "Gametogenesis (Live)",
+        "subtopic": "Spermatogenesis",
+        "explanation": "The acrosomal cap of the sperm is derived from the Golgi apparatus."
+    },
+    {
+        "id": "GAM014",
+        "question": "Spermatozoa attain motility in _________",
+        "options": [
+            "Seminiferous tubules",
+            "Vas deferens",
+            "Epididymis",
+            "Ejaculatory duct"
+        ],
+        "correct_answer": "Epididymis",
+        "subject": "Anatomy",
+        "lesson": "Gametogenesis (Live)",
+        "subtopic": "Spermatogenesis",
+        "explanation": "Spermatozoa attain full motility during their passage through the epididymis."
+    },
+    {
+        "id": "GAM015",
+        "question": "Which of the following cells are responsible for secreting the hormone responsible for normal descent of testis?",
+        "options": [
+            "Primordial germ cells",
+            "Spermatogenic cells",
+            "Sertoli cells",
+            "Leydig cells"
+        ],
+        "correct_answer": "Leydig cells",
+        "subject": "Anatomy",
+        "lesson": "Gametogenesis (Live)",
+        "subtopic": "Spermatogenesis",
+        "explanation": "Testosterone is secreted by Leydig cells and is involved in testicular descent."
+    },
+    {
+        "id": "GAM016",
+        "question": "Which of the following cells remain dormant in the ovary until puberty?",
+        "options": [
+            "Primordial germ cell",
+            "Primary oocyte",
+            "Secondary oocyte",
+            "First polar body"
+        ],
+        "correct_answer": "Primary oocyte",
+        "subject": "Anatomy",
+        "lesson": "Gametogenesis (Live)",
+        "subtopic": "Oogenesis",
+        "explanation": "Primary oocytes remain dormant in the ovary until puberty, arrested in prophase of meiosis I."
+    },
+    {
+        "id": "GAM017",
+        "question": "The oocyte retrieved after final maturation is arrested at which of the following stages?",
+        "options": [
+            "Prophase of meiosis I",
+            "Prophase of meiosis II",
+            "Metaphase of meiosis I",
+            "Metaphase of meiosis II"
+        ],
+        "correct_answer": "Metaphase of meiosis II",
+        "subject": "Anatomy",
+        "lesson": "Gametogenesis (Live)",
+        "subtopic": "Oogenesis",
+        "explanation": "The oocyte retrieved is a secondary oocyte arrested in metaphase of meiosis II."
+    },
+    {
+        "id": "GAM018",
+        "question": "If the ovum is not fertilized, the corpus luteum may persist for about ______",
+        "options": [
+            "48 hours",
+            "1 week",
+            "2 weeks",
+            "3 weeks"
+        ],
+        "correct_answer": "2 weeks",
+        "subject": "Anatomy",
+        "lesson": "Gametogenesis (Live)",
+        "subtopic": "Oogenesis",
+        "explanation": "If the ovum is not fertilized, the corpus luteum persists for about 14 days (2 weeks)."
+    },
+    {
+        "id": "GAM019",
+        "question": "Meiosis occurs in:",
+        "options": [
+            "Adrenal",
+            "Adult ovary",
+            "Prepubertal testis",
+            "Hypothalamus"
+        ],
+        "correct_answer": "Adult ovary",
+        "subject": "Anatomy",
+        "lesson": "Gametogenesis (Live)",
+        "subtopic": "Cell Cycle and Cell Division",
+        "explanation": "Meiosis takes place in germ cells of the adult ovary, forming haploid gametes."
+    },
+    {
+        "id": "CVR001",
+        "question": "The cardiogenic area is formed in which of the following structures?",
+        "options": [
+            "Extraembryonic mesoderm",
+            "Somatopleuric mesoderm",
+            "Splanchnopleuric mesoderm",
+            "Paraxial mesoderm"
+        ],
+        "correct_answer": "Splanchnopleuric mesoderm",
+        "subject": "Anatomy",
+        "lesson": "1. Cardiovascular and Respiratory Systems (Live)",
+        "subtopic": "Cardiovascular System - Embryology",
+        "explanation": "The heart develops from angioblastic tissue in the splanchnopleuric mesoderm. Progenitor heart cells form a horseshoe-shaped cluster of cells cranial to the neural fold, known as the cardiogenic area."
+    },
+    {
+        "id": "CVR002",
+        "question": "Arrange the following structures of the primitive heart tube in cranial to caudal order.",
+        "options": [
+            "2-3-4-1",
+            "4-1-2-3",
+            "1-4-2-3",
+            "1-4-3-2"
+        ],
+        "correct_answer": "1-4-3-2",
+        "subject": "Anatomy",
+        "lesson": "1. Cardiovascular and Respiratory Systems (Live)",
+        "subtopic": "Cardiovascular System - Embryology",
+        "explanation": "The correct order is bulbus cordis, primitive ventricle, primitive atrium, sinus venosus."
+    },
+    {
+        "id": "CVR003",
+        "question": "Which of the following forms the trabeculated part of the right ventricle?",
+        "options": [
+            "Primitive ventricle",
+            "Distal 1/3 of bulbus cordis",
+            "Middle 1/3 of bulbus cordis",
+            "Proximal 1/3 of bulbus cordis"
+        ],
+        "correct_answer": "Proximal 1/3 of bulbus cordis",
+        "subject": "Anatomy",
+        "lesson": "1. Cardiovascular and Respiratory Systems (Live)",
+        "subtopic": "Cardiovascular System - Embryology",
+        "explanation": "The trabeculated part of the right ventricle is formed from the proximal 1/3 of the bulbus cordis."
+    },
+    {
+        "id": "CVR004",
+        "question": "Sinus venosus does not receive blood from which of the following veins?",
+        "options": [
+            "Vitelline vein",
+            "Umbilical vein",
+            "Common cardinal vein",
+            "Subcardinal vein"
+        ],
+        "correct_answer": "Subcardinal vein",
+        "subject": "Anatomy",
+        "lesson": "1. Cardiovascular and Respiratory Systems (Live)",
+        "subtopic": "Heart - Blood Supply",
+        "explanation": "Sinus venosus does not receive blood from the subcardinal veins, which drain the developing kidney."
+    },
+    {
+        "id": "CVR005",
+        "question": "Failure in the development of which of the following structures will most likely lead to absence of coronary sinus?",
+        "options": [
+            "Right umbilical vein",
+            "Right horn of sinus venosus",
+            "Left horn of sinus venosus",
+            "Left vitelline vein"
+        ],
+        "correct_answer": "Left horn of sinus venosus",
+        "subject": "Anatomy",
+        "lesson": "1. Cardiovascular and Respiratory Systems (Live)",
+        "subtopic": "Heart - Blood Supply",
+        "explanation": "The coronary sinus develops from the left horn of the sinus venosus."
+    },
+    {
+        "id": "CVR006",
+        "question": "Failure of regression of which structure leads to persistent left superior vena cava?",
+        "options": [
+            "Left anterior cardinal vein",
+            "Right anterior cardinal vein",
+            "Left common cardinal vein",
+            "Right posterior cardinal vein"
+        ],
+        "correct_answer": "Left anterior cardinal vein",
+        "subject": "Anatomy",
+        "lesson": "1. Cardiovascular and Respiratory Systems (Live)",
+        "subtopic": "Heart - Blood Supply",
+        "explanation": "Persistent left superior vena cava occurs due to failure of regression of the left anterior cardinal vein."
+    },
+    {
+        "id": "CVR007",
+        "question": "A major part of the post-renal segment of the inferior vena cava develops from which structure?",
+        "options": [
+            "Supracardinal vein",
+            "Umbilical vein",
+            "Anterior cardinal vein",
+            "Hepato-cardiac channel"
+        ],
+        "correct_answer": "Supracardinal vein",
+        "subject": "Anatomy",
+        "lesson": "1. Cardiovascular and Respiratory Systems (Live)",
+        "subtopic": "Cardiovascular System - Embryology",
+        "explanation": "The post-renal segment of the IVC mainly develops from the right supracardinal vein."
+    },
+    {
+        "id": "CVR008",
+        "question": "The posterior cardinal vein contributes to the development of which adult structure?",
+        "options": [
+            "Common iliac vein",
+            "Superior vena cava",
+            "Internal jugular vein",
+            "External jugular vein"
+        ],
+        "correct_answer": "Common iliac vein",
+        "subject": "Anatomy",
+        "lesson": "1. Cardiovascular and Respiratory Systems (Live)",
+        "subtopic": "Cardiovascular System - Embryology",
+        "explanation": "The posterior cardinal vein contributes to the development of the right common iliac vein."
+    },
+    {
+        "id": "CVR009",
+        "question": "Which of the following veins is not derived from the vitelline vein?",
+        "options": [
+            "Hepatic vein",
+            "Superior vena cava",
+            "Inferior vena cava",
+            "Superior mesenteric vein"
+        ],
+        "correct_answer": "Superior vena cava",
+        "subject": "Anatomy",
+        "lesson": "1. Cardiovascular and Respiratory Systems (Live)",
+        "subtopic": "Cardiovascular System - Embryology",
+        "explanation": "The superior vena cava is not derived from the vitelline vein."
+    },
+    {
+        "id": "CVR010",
+        "question": "What is the location of the foramen secundum?",
+        "options": [
+            "Upper part of septum secundum",
+            "Lower part of septum primum",
+            "Upper part of septum primum",
+            "Lower part of septum secundum"
+        ],
+        "correct_answer": "Upper part of septum primum",
+        "subject": "Anatomy",
+        "lesson": "1. Cardiovascular and Respiratory Systems (Live)",
+        "subtopic": "Cardiovascular System - Embryology",
+        "explanation": "The foramen secundum is present at the upper part of the septum primum."
+    },
+    {
+        "id": "CVR011",
+        "question": "The limbus fossa ovalis is the remnant of _________",
+        "options": [
+            "Septum primum",
+            "Septum secundum",
+            "Both a and b",
+            "None of the above"
+        ],
+        "correct_answer": "Septum secundum",
+        "subject": "Anatomy",
+        "lesson": "1. Cardiovascular and Respiratory Systems (Live)",
+        "subtopic": "Cardiovascular System - Embryology",
+        "explanation": "The limbus fossa ovalis is the remnant of the lower free edge of the septum secundum."
+    },
+    {
+        "id": "CVR012",
+        "question": "Marked structure is derived from the______",
+        "options": [
+            "Endocardial cushions",
+            "Septum primum",
+            "Left venous valve",
+            "Bulbous venosus"
+        ],
+        "correct_answer": "Endocardial cushions",
+        "subject": "Anatomy",
+        "lesson": "1. Cardiovascular and Respiratory Systems (Live)",
+        "subtopic": "Cardiovascular System - Embryology",
+        "explanation": "The membranous part of the interventricular septum is derived from endocardial cushions."
+    },
+    {
+        "id": "CVR013",
+        "question": "Which of the following structures does not contribute to the formation of the arch of the aorta?",
+        "options": [
+            "Left horn of aortic sac",
+            "Left 4th arch artery",
+            "Aortic sac",
+            "Left 2nd arch artery"
+        ],
+        "correct_answer": "Left 2nd arch artery",
+        "subject": "Anatomy",
+        "lesson": "1. Cardiovascular and Respiratory Systems (Live)",
+        "subtopic": "Aortic Arches",
+        "explanation": "The left 2nd arch artery does not contribute towards the formation of the arch of the aorta."
+    },
+    {
+        "id": "CVR014",
+        "question": "Which of the following structures is derived from the right 4th aortic arch?",
+        "options": [
+            "Right common carotid artery",
+            "Right subclavian artery",
+            "Aortic arch",
+            "None as it regresses completely"
+        ],
+        "correct_answer": "Right subclavian artery",
+        "subject": "Anatomy",
+        "lesson": "1. Cardiovascular and Respiratory Systems (Live)",
+        "subtopic": "Aortic Arches",
+        "explanation": "The proximal part of the right subclavian artery is derived from the right 4th aortic arch."
+    },
+    {
+        "id": "CVR015",
+        "question": "When does the ductus arteriosus normally begin to close?",
+        "options": [
+            "1-2 months",
+            "1-2 weeks",
+            "1-2 days",
+            "Immediately"
+        ],
+        "correct_answer": "Immediately",
+        "subject": "Anatomy",
+        "lesson": "1. Cardiovascular and Respiratory Systems (Live)",
+        "subtopic": "Patent Ductus Arteriosus / PDA",
+        "explanation": "The ductus arteriosus functionally closes almost immediately after birth through contraction of its muscular wall."
+    },
+    {
+        "id": "CVR016",
+        "question": "What is the embryological defect in persistent truncus arteriosus?",
+        "options": [
+            "Abnormal spiraling of conotruncal septum",
+            "Failure in formation of conotruncal ridges",
+            "Anterior displacement of conotruncal septum",
+            "Total anomalous pulmonary venous connection"
+        ],
+        "correct_answer": "Failure in formation of conotruncal ridges",
+        "subject": "Anatomy",
+        "lesson": "1. Cardiovascular and Respiratory Systems (Live)",
+        "subtopic": "Patent Truncus Arteriosus / PTA",
+        "explanation": "Failure in formation of the conotruncal ridges leads to persistent truncus arteriosus."
+    },
+    {
+        "id": "CVR017",
+        "question": "Which embryological mechanism leads to transposition of the great arteries (TGA)?",
+        "options": [
+            "Failure of cono-truncal ridge to fuse and descend",
+            "Aortico-pulmonary septum not following its spiral course",
+            "Anterior displacement of aortico-pulmonary septum",
+            "Non-fusion of aortico-pulmonary septum with truncus arteriosus"
+        ],
+        "correct_answer": "Aortico-pulmonary septum not following its spiral course",
+        "subject": "Anatomy",
+        "lesson": "1. Cardiovascular and Respiratory Systems (Live)",
+        "subtopic": "Transposition of Great Arteries / TGA",
+        "explanation": "TGA arises when the aortopulmonary septum fails to follow the normal spiral course."
+    },
+    {
+        "id": "CVR018",
+        "question": "The medial umbilical ligament is the remnant of which structure?",
+        "options": [
+            "Ligamentum arteriosum",
+            "Ligamentum teres",
+            "Median umbilical ligament",
+            "Medial umbilical ligament"
+        ],
+        "correct_answer": "Medial umbilical ligament",
+        "subject": "Anatomy",
+        "lesson": "1. Cardiovascular and Respiratory Systems (Live)",
+        "subtopic": "Umbilical Artery",
+        "explanation": "The medial umbilical ligament is the remnant of the distal part of the umbilical artery."
+    },
+    {
+        "id": "CVR019",
+        "question": "The heart starts to beat in the ______ week of development.",
+        "options": [
+            "2nd week",
+            "4th week",
+            "6th week",
+            "10th week"
+        ],
+        "correct_answer": "4th week",
+        "subject": "Anatomy",
+        "lesson": "1. Cardiovascular and Respiratory Systems (Live)",
+        "subtopic": "Cardiovascular System - Embryology",
+        "explanation": "The heart starts to beat in the 4th week of development."
+    },
+    {
+        "id": "CVR020",
+        "question": "The false statement about fetal circulation is:",
+        "options": [
+            "Anatomical closure of foramen ovale is by 3 to 5 days",
+            "Anatomical closure of ductus venosus is by 3 to 7 days",
+            "Right umbilical vein is absent",
+            "Anatomical closure of ductus arteriosus is by 2 to 3 weeks"
+        ],
+        "correct_answer": "Anatomical closure of foramen ovale is by 3 to 5 days",
+        "subject": "Anatomy",
+        "lesson": "1. Cardiovascular and Respiratory Systems (Live)",
+        "subtopic": "Fetal Circulation",
+        "explanation": "Anatomical closure of the foramen ovale takes months to years."
+    },
+    {
+        "id": "CVR021",
+        "question": "Which of the following contributes to the membranous part of interventricular septum?",
+        "options": [
+            "Endocardial cushions",
+            "Neural crest cells",
+            "Bulbus cordis",
+            "Septum primum"
+        ],
+        "correct_answer": "Endocardial cushions",
+        "subject": "Anatomy",
+        "lesson": "1. Cardiovascular and Respiratory Systems (Live)",
+        "subtopic": "Cardiovascular System - Embryology",
+        "explanation": "Endocardial cushions contribute to the membranous part of the interventricular septum."
+    },
+    {
+        "id": "CVR022",
+        "question": "Which artery forms from the left 4th aortic arch?",
+        "options": [
+            "Left subclavian artery",
+            "Arch of aorta",
+            "Left common carotid artery",
+            "Right subclavian artery"
+        ],
+        "correct_answer": "Arch of aorta",
+        "subject": "Anatomy",
+        "lesson": "1. Cardiovascular and Respiratory Systems (Live)",
+        "subtopic": "Aortic Arches",
+        "explanation": "The arch of the aorta is formed in part by the left 4th aortic arch."
+    },
+    {
+        "id": "CVR023",
+        "question": "Which embryological structure gives rise to the superior vena cava?",
+        "options": [
+            "Right common cardinal vein + proximal right anterior cardinal vein",
+            "Right vitelline vein",
+            "Left anterior cardinal vein",
+            "Supracardinal vein"
+        ],
+        "correct_answer": "Right common cardinal vein + proximal right anterior cardinal vein",
+        "subject": "Anatomy",
+        "lesson": "1. Cardiovascular and Respiratory Systems (Live)",
+        "subtopic": "Cardiovascular System - Embryology",
+        "explanation": "The superior vena cava forms from the right common cardinal vein and proximal part of the right anterior cardinal vein."
+    }
+]

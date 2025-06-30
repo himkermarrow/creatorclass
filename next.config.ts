@@ -1,4 +1,4 @@
-import type {NextConfig} from 'next';
+import { type NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
   /* config options here */
@@ -17,6 +17,28 @@ const nextConfig: NextConfig = {
         pathname: '/**',
       },
     ],
+  },
+  webpack: (config) => {
+    config.resolve.alias.canvas = false;
+    config.resolve.alias['pdfjs-dist'] = 'pdfjs-dist/legacy/build/pdf';
+    return config;
+  },
+  async headers() {
+    return [
+      {
+        source: '/:path*',
+        headers: [
+          {
+            key: 'Cross-Origin-Opener-Policy',
+            value: 'same-origin',
+          },
+          {
+            key: 'Cross-Origin-Embedder-Policy',
+            value: 'require-corp',
+          },
+        ],
+      },
+    ];
   },
 };
 
