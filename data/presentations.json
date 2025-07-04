@@ -177,5 +177,25 @@
     "id": "0eff8d7c-1bba-4b7e-9bd2-f94205be5dbf",
     "createdAt": "2025-06-30T17:40:43.270Z",
     "updatedAt": "2025-06-30T17:40:43.270Z"
+  },
+  {
+    "title": "Test 1",
+    "subject": "Anatomy",
+    "topic": "Embryology",
+    "subtopic": "Gametogenesis",
+    "filePath": "/Users/himkerjain/creatorclass/creatorclass-2/public/uploads/ada5e8ab-ee6e-4ed0-8212-3627ad660bf6.pdf",
+    "fileUrl": "/uploads/ada5e8ab-ee6e-4ed0-8212-3627ad660bf6.pdf",
+    "fileType": "pdf",
+    "content": "\n\nUR/S\n2\nG/2020 \nGAMETOGENESIS \nGametogenesis  is the  process occurs in  the  sexually  reproducing  organisms.  It  is  the \nprocess  of  formation  of  gamets.    When  it  occurs  in  the  female  animal  for  the  synthesis  of \novum  or  egg,  the  process  is  known  as Oogenesis and  when occurs  in  male  to  produce \nspermatozoa, the process is called Spermatogenesis,  ie. oogenesis and spermatogenesis both \nthe process  combinely called gametogenesis. \nSpermatogenesis- This process occurs in the testes. In human being a pair of testes is located \nbelow the abdominal cavity inside the muscular scrotum. Inside the testes there are numerous \ntubular structures, called seminiferous tubule. The inner surface of these tubules are lined by \ngerminal  cells, which  are  the  raw  material  for  the  formation  of spermatozoa.  The  process \noccur in two steps- \na) Formation of Spermatid- \nb) Spermeiogenesis- \nNote:- Each testes covered with a tough connective tissue capsule called Tunica albuginea. \nTestes contain three main types of cells- Germ cells- present inside  the seminiferous tubules,  \nwhich are the primordial cell for spermatogenesis, the interstitial cell  or Sartoli cells, which \nprovide nutrition to the developing spermatozoa and the Leydig cells which secret hormone \ntestosterone.  \n \nFormation of spermatid- this step can be further divided into three phases- \ni) Multiplication  phase- In  this  phase  the  germ  cells  present  on  the  basement \nlayer  of inner  side  of  the  seminiferous  tubule undergo  repeated  mitotic \ndivision.  These  newly  formed  cells are  called   spermatogonia or  sperm \nmother cells.  \nii) Growth  phase- The  spermatogonia  formed  as  a  result  of repeated  mitotic \ndivision,  stops division  and  grows  in  size  by  accumulating  nutrient  and \nprepare  for  next  phase.  These  cells  are  now  called primary  spermatocytes. \nDuring the growth phase the entire cell with the nucleus enlarges in size. \niii) Maturation  division phase- In  this  phase  the  diploid  primary spermatocytes \nundergo   first   reduction   division   and   produce two   haploid secondary \nspermatocytes. Then  the secondary  spermatocytes with  half  the  number  of \nchromosome undergo second maturation division and form four haploid cells. \nThese are called spermatids.  \nSpermeiogenesis- The  haploid  spermatides, which  are  formed  as  a  result  of  maturation \ndivision, attain locomotion  power  at  the  end  of  this phase.  For  that  it  undergoes \nseveral modifications, which are-  \n\n \n \nFig- Spermatogenesis, showing the four phases  \n \n• The cell reduces its weight by losing excess water from the cytoplasm as well as from \nthe nuclear sap. \n• The nucleus undergoes shrinkage through closely packed DNA.  \n• Even the RNA and other accessory materials are removed from the cell. \n• The Golgi complex move to one side of the cell and ultimately form the acrosome at \nthe tip. \n• The centrsome divide to form a proximal centriol and a distal centriol. \n• The microtubules orient to form a long flagella  and the distal centriol form the basal \ngranule for the flagella. \n• All the mitochondria of the cell are arranged spirally around the base of the flagella. \nWith  these  changes of  spermeiogenesis,  a non motile  spermatid changes to \nspermatozoa, which is an active swimmer with a  long flagella. \nPoints to be memorise-  \n• Spermatogenesis occurs in testes. \n• From one diploid primary spermatocyte four haploid spermatozoa are formed. \n• The acrosome of sperm is formed from the Golgi complex. \n• The mitochondrial sheath form at the base of the flagella is called Nebenkern. \n• A typical sperm has three part- Head, neck and tail  \n ",
+    "metadata": {
+      "creator": "Microsoft® Word for Office 365",
+      "producer": "pdf-lib (https://github.com/Hopding/pdf-lib)",
+      "creationDate": "2020-05-11T12:17:07.000Z",
+      "modificationDate": "2025-07-04T08:51:57.000Z",
+      "numPages": 2
+    },
+    "id": "a3ffe815-ed3b-4eb7-9b71-2677d1d23c3d",
+    "createdAt": "2025-07-04T08:51:57.203Z",
+    "updatedAt": "2025-07-04T08:51:57.203Z"
   }
 ]
